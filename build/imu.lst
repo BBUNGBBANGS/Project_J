@@ -1,0 +1,118 @@
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cct0scVk.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"imu.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.IMU_Read_Data,"ax",%progbits
+  17              		.align	1
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv5-d16
+  24              	IMU_Read_Data:
+  25              	.LFB145:
+  26              		.file 1 "Core/Src/imu.c"
+   1:Core/Src/imu.c **** #include "imu.h"
+   2:Core/Src/imu.c **** 
+   3:Core/Src/imu.c **** static void IMU_Read_Data(void);
+   4:Core/Src/imu.c **** IMU_BANK0_t IMU_BANK0;
+   5:Core/Src/imu.c **** void IMU_Control(void)
+   6:Core/Src/imu.c **** {
+   7:Core/Src/imu.c ****     IMU_Read_Data();
+   8:Core/Src/imu.c **** }
+   9:Core/Src/imu.c **** 
+  10:Core/Src/imu.c **** static void IMU_Read_Data(void)
+  11:Core/Src/imu.c **** {
+  27              		.loc 1 11 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  12:Core/Src/imu.c ****     IMU_BANK0.ACCEL_XOUT_H.ACCEL_XOUT_H = 0;
+  32              		.loc 1 12 5 view .LVU1
+  33              		.loc 1 12 41 is_stmt 0 view .LVU2
+  34 0000 014B     		ldr	r3, .L2
+  35 0002 0022     		movs	r2, #0
+  36 0004 5A74     		strb	r2, [r3, #17]
+  13:Core/Src/imu.c **** }...
+  37              		.loc 1 13 1 view .LVU3
+  38 0006 7047     		bx	lr
+  39              	.L3:
+  40              		.align	2
+  41              	.L2:
+  42 0008 00000000 		.word	.LANCHOR0
+  43              		.cfi_endproc
+  44              	.LFE145:
+  46              		.section	.text.IMU_Control,"ax",%progbits
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cct0scVk.s 			page 2
+
+
+  47              		.align	1
+  48              		.global	IMU_Control
+  49              		.syntax unified
+  50              		.thumb
+  51              		.thumb_func
+  52              		.fpu fpv5-d16
+  54              	IMU_Control:
+  55              	.LFB144:
+   6:Core/Src/imu.c **** {
+  56              		.loc 1 6 1 is_stmt 1 view -0
+  57              		.cfi_startproc
+  58              		@ args = 0, pretend = 0, frame = 0
+  59              		@ frame_needed = 0, uses_anonymous_args = 0
+  60 0000 08B5     		push	{r3, lr}
+  61              	.LCFI0:
+  62              		.cfi_def_cfa_offset 8
+  63              		.cfi_offset 3, -8
+  64              		.cfi_offset 14, -4
+   7:Core/Src/imu.c ****     IMU_Read_Data();
+  65              		.loc 1 7 5 view .LVU5
+  66 0002 FFF7FEFF 		bl	IMU_Read_Data
+  67              	.LVL0:
+   8:Core/Src/imu.c **** }
+  68              		.loc 1 8 1 is_stmt 0 view .LVU6
+  69 0006 08BD     		pop	{r3, pc}
+  70              		.cfi_endproc
+  71              	.LFE144:
+  73              		.global	IMU_BANK0
+  74              		.section	.bss.IMU_BANK0,"aw",%nobits
+  75              		.align	2
+  76              		.set	.LANCHOR0,. + 0
+  79              	IMU_BANK0:
+  80 0000 00000000 		.space	65
+  80      00000000 
+  80      00000000 
+  80      00000000 
+  80      00000000 
+  81              		.text
+  82              	.Letext0:
+  83              		.file 2 "Core/Inc/vardef.h"
+  84              		.file 3 "Core/Inc/imu.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\cct0scVk.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 imu.c
+C:\Users\jisu8\AppData\Local\Temp\cct0scVk.s:17     .text.IMU_Read_Data:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cct0scVk.s:24     .text.IMU_Read_Data:00000000 IMU_Read_Data
+C:\Users\jisu8\AppData\Local\Temp\cct0scVk.s:42     .text.IMU_Read_Data:00000008 $d
+C:\Users\jisu8\AppData\Local\Temp\cct0scVk.s:47     .text.IMU_Control:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\cct0scVk.s:54     .text.IMU_Control:00000000 IMU_Control
+C:\Users\jisu8\AppData\Local\Temp\cct0scVk.s:79     .bss.IMU_BANK0:00000000 IMU_BANK0
+C:\Users\jisu8\AppData\Local\Temp\cct0scVk.s:75     .bss.IMU_BANK0:00000000 $d
+
+NO UNDEFINED SYMBOLS

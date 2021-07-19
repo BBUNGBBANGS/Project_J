@@ -32,6 +32,7 @@ extern "C" {
 #include "vardef.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+extern I2C_HandleTypeDef hi2c1;
 extern TIM_HandleTypeDef htim17;
 extern TIM_HandleTypeDef htim16;
 /* USER CODE END Includes */

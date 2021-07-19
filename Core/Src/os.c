@@ -1,5 +1,6 @@
 #include "os.h"
 #include "led.h"
+#include "imu.h"
 
 Os_Counter_t Os_Counter;
 void Os_Handler(void)
@@ -41,6 +42,7 @@ void Os_Init_Task(void)
 void Os_1ms_Task(void)
 {
 	LED_Control();
+	IMU_Control();
 }
 
 void Os_5ms_Task(void)
@@ -50,7 +52,7 @@ void Os_5ms_Task(void)
 
 void Os_10ms_Task(void)
 {
-	
+
 }
 
 void Os_100ms_Task(void)
