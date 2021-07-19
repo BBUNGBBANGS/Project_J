@@ -1,0 +1,9 @@
+{
+    "cortex-debug.armToolchainPath": "D:\\3.TOOLS\\ARM_GCC_TOOLCHAIN\\20_Q4_MAJOR\\BIN",
+    "cortex-debug.openocdPath": "C:\\USERS\\JISU8\\APPDATA\\ROAMING\\CODE\\USER\\GLOBALSTORAGE\\BMD.STM32-FOR-VSCODE\\@XPACK-DEV-TOOLS\\OPENOCD\\0.11.0-1.1\\.CONTENT\\BIN\\OPENOCD.EXE",
+    "files.associations": {
+        "main.h": "c",
+        "stm32h7xx_hal.h": "c",
+        "stm32h7xx_hal_conf.h": "c"
+    }
+}

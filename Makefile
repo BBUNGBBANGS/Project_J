@@ -39,6 +39,7 @@ C_SOURCES =  \
 Core/Src/main.c \
 Core/Src/stm32h7xx_it.c \
 Core/Src/stm32h7xx_hal_msp.c \
+Core/Src/os.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c \
@@ -57,11 +58,11 @@ Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c \
-Core/Src/system_stm32h7xx.c
+Core/Src/system_stm32h7xx.c \
+startup_stm32h743xx.c
 
 # ASM sources
-ASM_SOURCES =  \
-startup_stm32h743xx.s
+ASM_SOURCES = 
 
 
 #######################################

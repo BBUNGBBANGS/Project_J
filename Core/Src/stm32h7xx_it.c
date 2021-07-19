@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32h7xx_it.h"
+#include "os.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -199,21 +200,10 @@ void SysTick_Handler(void)
 /* please refer to the startup file (startup_stm32h7xx.s).                    */
 /******************************************************************************/
 
-/**
-  * @brief This function handles TIM17 global interrupt.
-  */
-void TIM17_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM17_IRQn 0 */
-
-  /* USER CODE END TIM17_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim17);
-  /* USER CODE BEGIN TIM17_IRQn 1 */
-
-  /* USER CODE END TIM17_IRQn 1 */
-}
-
 /* USER CODE BEGIN 1 */
-
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+    Os_Handler();
+}
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -29,10 +29,11 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
-
+#include "vardef.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+extern TIM_HandleTypeDef htim17;
+extern TIM_HandleTypeDef htim16;
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
