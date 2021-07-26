@@ -1,5 +1,6 @@
 #include "stdint.h"
 #include "main.h"
+#include "os.h"
 
 extern uint32_t _sidata;
 extern uint32_t _sdata;
@@ -42,6 +43,21 @@ void TIM16_Handler(void)
     HAL_TIM_IRQHandler(&htim16);
 }
 
+void TIM17_Handler(void)
+{
+    HAL_TIM_IRQHandler(&htim17);
+}
+
+void SystemTick_Handler(void)
+{
+    /* USER CODE BEGIN SysTick_IRQn 0 */
+
+    /* USER CODE END SysTick_IRQn 0 */
+    HAL_IncTick();
+    /* USER CODE BEGIN SysTick_IRQn 1 */
+    //Os_Handler();
+    /* USER CODE END SysTick_IRQn 1 */
+}
 __weak void NMI_Handler(void)                                             {Default_Handler();}
 __weak void HardFault_Handler(void)                                       {Default_Handler();}
 __weak void MemManage_Handler(void)                                       {Default_Handler();}
@@ -50,7 +66,7 @@ __weak void UsageFault_Handler(void)                                      {Defau
 __weak void SVC_Handler(void)                                             {Default_Handler();}
 __weak void DebugMon_Handler(void)                                        {Default_Handler();}
 __weak void PendSV_Handler(void)                                          {Default_Handler();}
-__weak void SysTick_Handler(void)                                         {Default_Handler();}
+__weak void SysTick_Handler(void)                                         {SystemTick_Handler();}
 __weak void WWDG_IRQHandler(void)                                         {Default_Handler();}
 __weak void PVD_AVD_IRQHandler(void)                                      {Default_Handler();}
 __weak void TAMP_STAMP_IRQHandler(void)                                   {Default_Handler();}
@@ -163,7 +179,7 @@ __weak void SAI3_IRQHandler(void)                                         {Defau
 __weak void SWPMI1_IRQHandler(void)                                       {Default_Handler();}
 __weak void TIM15_IRQHandler(void)                                        {Default_Handler();}
 __weak void TIM16_IRQHandler(void)                                        {TIM16_Handler();}
-__weak void TIM17_IRQHandler(void)                                        {Default_Handler();}
+__weak void TIM17_IRQHandler(void)                                        {TIM17_Handler();}
 __weak void MDIOS_WKUP_IRQHandler(void)                                   {Default_Handler();}
 __weak void MDIOS_IRQHandler(void)                                        {Default_Handler();}
 __weak void JPEG_IRQHandler(void)                                         {Default_Handler();}

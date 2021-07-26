@@ -6,7 +6,7 @@
             "name": "Cortex Debug",
             "cwd": "${workspaceRoot}",
             "executable": "./build/Project_J.elf",
-            "request": "attach",
+            "request": "launch",
             "type": "cortex-debug",
             "servertype": "openocd",
             "device": "STM32H743xx",

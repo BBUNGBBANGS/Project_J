@@ -27,7 +27,7 @@ build/startup_stm32h743xx.o: startup_stm32h743xx.c Core/Inc/main.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
- Core/Inc/vardef.h
+ Core/Inc/vardef.h Core/Inc/os.h
 Core/Inc/main.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 Core/Inc/stm32h7xx_hal_conf.h:
@@ -60,3 +60,4 @@ Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h:
 Core/Inc/vardef.h:
+Core/Inc/os.h:
