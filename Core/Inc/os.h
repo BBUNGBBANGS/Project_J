@@ -23,8 +23,6 @@ typedef struct
 	uint32 Os_100ms_Tick_Runtime_Stop;
 	uint32 Os_1000ms_Tick_Runtime_Start;
 	uint32 Os_1000ms_Tick_Runtime_Stop;
-	uint32 Os_1000ms_Tick_Runtime_Start;
-	uint32 Os_1000ms_Tick_Runtime_Stop;
 }Os_Tick_Runtime_t;
 
 typedef struct
