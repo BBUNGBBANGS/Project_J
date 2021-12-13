@@ -596,6 +596,5 @@ typedef struct
     REG_BANK_SEL_t REG_BANK_SEL;
 }IMU_BANK0_t;
 
-
-
 extern void IMU_Control(void);
+extern void IMU_FindAddress(void);

@@ -38,6 +38,11 @@ void Default_Handler(void)
     while (1);
 }
 
+void TIM15_Handler(void)
+{
+    HAL_TIM_IRQHandler(&htim15);
+}
+
 void TIM16_Handler(void)
 {
     HAL_TIM_IRQHandler(&htim16);
@@ -46,6 +51,11 @@ void TIM16_Handler(void)
 void TIM17_Handler(void)
 {
     HAL_TIM_IRQHandler(&htim17);
+}
+
+void USART1_Handler(void)
+{
+    HAL_UART_IRQHandler(&huart1);
 }
 
 void SystemTick_Handler(void)
@@ -104,7 +114,7 @@ __weak void I2C2_EV_IRQHandler(void)                                      {Defau
 __weak void I2C2_ER_IRQHandler(void)                                      {Default_Handler();}
 __weak void SPI1_IRQHandler(void)                                         {Default_Handler();}
 __weak void SPI2_IRQHandler(void)                                         {Default_Handler();}
-__weak void USART1_IRQHandler(void)                                       {Default_Handler();}
+__weak void USART1_IRQHandler(void)                                       {USART1_Handler();}
 __weak void USART2_IRQHandler(void)                                       {Default_Handler();}
 __weak void USART3_IRQHandler(void)                                       {Default_Handler();}
 __weak void EXTI15_10_IRQHandler(void)                                    {Default_Handler();}
@@ -177,7 +187,7 @@ __weak void DFSDM1_FLT2_IRQHandler(void)                                  {Defau
 __weak void DFSDM1_FLT3_IRQHandler(void)                                  {Default_Handler();}
 __weak void SAI3_IRQHandler(void)                                         {Default_Handler();}
 __weak void SWPMI1_IRQHandler(void)                                       {Default_Handler();}
-__weak void TIM15_IRQHandler(void)                                        {Default_Handler();}
+__weak void TIM15_IRQHandler(void)                                        {TIM15_Handler();}
 __weak void TIM16_IRQHandler(void)                                        {TIM16_Handler();}
 __weak void TIM17_IRQHandler(void)                                        {TIM17_Handler();}
 __weak void MDIOS_WKUP_IRQHandler(void)                                   {Default_Handler();}

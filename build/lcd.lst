@@ -1,0 +1,703 @@
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-d16
+   4              		.eabi_attribute 28, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"lcd.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.LCD_Power_Control,"ax",%progbits
+  19              		.align	1
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	LCD_Power_Control:
+  25              	.LVL0:
+  26              	.LFB332:
+  27              		.file 1 "Core/Src/lcd.c"
+   1:Core/Src/lcd.c **** #include "lcd.h"
+   2:Core/Src/lcd.c **** static void LCD_Power_Control(uint8 status, uint8 duty);
+   3:Core/Src/lcd.c **** static void LCD_Output_Red(uint8 data);
+   4:Core/Src/lcd.c **** static void LCD_Output_Green(uint8 data);
+   5:Core/Src/lcd.c **** static void LCD_Output_Blue(uint8 data);
+   6:Core/Src/lcd.c **** 
+   7:Core/Src/lcd.c **** void LCD_Init(void)
+   8:Core/Src/lcd.c **** {
+   9:Core/Src/lcd.c ****     LCD_Power_Control(LCD_POWER_ON,100);
+  10:Core/Src/lcd.c **** }
+  11:Core/Src/lcd.c **** 
+  12:Core/Src/lcd.c **** static void LCD_Power_Control(uint8 status, uint8 duty)
+  13:Core/Src/lcd.c **** {
+  28              		.loc 1 13 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 13 1 is_stmt 0 view .LVU1
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  38 0002 0246     		mov	r2, r0
+  14:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_POWER_MODULE,LCD_POWER_PIN,status);
+  39              		.loc 1 14 5 is_stmt 1 view .LVU2
+  40 0004 4FF48071 		mov	r1, #256
+  41              	.LVL1:
+  42              		.loc 1 14 5 is_stmt 0 view .LVU3
+  43 0008 0148     		ldr	r0, .L3
+  44              	.LVL2:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 2
+
+
+  45              		.loc 1 14 5 view .LVU4
+  46 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  47              	.LVL3:
+  15:Core/Src/lcd.c **** 
+  16:Core/Src/lcd.c ****     return;
+  48              		.loc 1 16 5 is_stmt 1 view .LVU5
+  17:Core/Src/lcd.c **** }
+  49              		.loc 1 17 1 is_stmt 0 view .LVU6
+  50 000e 08BD     		pop	{r3, pc}
+  51              	.L4:
+  52              		.align	2
+  53              	.L3:
+  54 0010 00200258 		.word	1476534272
+  55              		.cfi_endproc
+  56              	.LFE332:
+  58              		.section	.text.LCD_Output_Red,"ax",%progbits
+  59              		.align	1
+  60              		.syntax unified
+  61              		.thumb
+  62              		.thumb_func
+  64              	LCD_Output_Red:
+  65              	.LVL4:
+  66              	.LFB335:
+  18:Core/Src/lcd.c **** 
+  19:Core/Src/lcd.c **** void LCD_Set_Clock(void)
+  20:Core/Src/lcd.c **** {
+  21:Core/Src/lcd.c ****     static uint8 state;
+  22:Core/Src/lcd.c ****     static uint8 counter;
+  23:Core/Src/lcd.c ****     state = (~state)&0x01;
+  24:Core/Src/lcd.c **** 
+  25:Core/Src/lcd.c ****     if(counter<16)
+  26:Core/Src/lcd.c ****     {
+  27:Core/Src/lcd.c ****         HAL_GPIO_WritePin(LCD_DE_MODULE,LCD_DE_PIN,LCD_DE_ON);
+  28:Core/Src/lcd.c ****     }
+  29:Core/Src/lcd.c ****     else
+  30:Core/Src/lcd.c ****     {
+  31:Core/Src/lcd.c ****         HAL_GPIO_WritePin(LCD_DE_MODULE,LCD_DE_PIN,LCD_DE_OFF);
+  32:Core/Src/lcd.c ****         if(counter == 17)
+  33:Core/Src/lcd.c ****         {
+  34:Core/Src/lcd.c ****             HAL_GPIO_WritePin(LCD_HSYNC_MODULE,LCD_HSYNC_PIN,LCD_HSYNC_OFF);
+  35:Core/Src/lcd.c ****         }
+  36:Core/Src/lcd.c ****         if(counter == 18)
+  37:Core/Src/lcd.c ****         {
+  38:Core/Src/lcd.c ****             HAL_GPIO_WritePin(LCD_HSYNC_MODULE,LCD_HSYNC_PIN,LCD_HSYNC_ON);
+  39:Core/Src/lcd.c ****         }
+  40:Core/Src/lcd.c ****         if(counter == 19)
+  41:Core/Src/lcd.c ****         {
+  42:Core/Src/lcd.c ****             counter = 0;
+  43:Core/Src/lcd.c ****         }
+  44:Core/Src/lcd.c ****     }
+  45:Core/Src/lcd.c ****     counter++;
+  46:Core/Src/lcd.c **** 
+  47:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_CLK_MODULE,LCD_CLK_PIN,state);
+  48:Core/Src/lcd.c ****     return;
+  49:Core/Src/lcd.c **** }
+  50:Core/Src/lcd.c **** 
+  51:Core/Src/lcd.c **** void LCD_Set_Color(void)
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 3
+
+
+  52:Core/Src/lcd.c **** {
+  53:Core/Src/lcd.c ****     LCD_Output_Red(255);
+  54:Core/Src/lcd.c ****     LCD_Output_Green(255);
+  55:Core/Src/lcd.c ****     LCD_Output_Blue(255);
+  56:Core/Src/lcd.c **** 
+  57:Core/Src/lcd.c ****     return;
+  58:Core/Src/lcd.c **** }
+  59:Core/Src/lcd.c **** 
+  60:Core/Src/lcd.c **** static void LCD_Output_Red(uint8 data)
+  61:Core/Src/lcd.c **** {
+  67              		.loc 1 61 1 is_stmt 1 view -0
+  68              		.cfi_startproc
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71              		.loc 1 61 1 is_stmt 0 view .LVU8
+  72 0000 38B5     		push	{r3, r4, r5, lr}
+  73              	.LCFI1:
+  74              		.cfi_def_cfa_offset 16
+  75              		.cfi_offset 3, -16
+  76              		.cfi_offset 4, -12
+  77              		.cfi_offset 5, -8
+  78              		.cfi_offset 14, -4
+  79 0002 0446     		mov	r4, r0
+  62:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_R0_MODULE,LCD_R0_PIN,((data)&0x01));
+  80              		.loc 1 62 5 is_stmt 1 view .LVU9
+  81 0004 194D     		ldr	r5, .L7
+  82 0006 00F00102 		and	r2, r0, #1
+  83 000a 0421     		movs	r1, #4
+  84 000c 2846     		mov	r0, r5
+  85              	.LVL5:
+  86              		.loc 1 62 5 is_stmt 0 view .LVU10
+  87 000e FFF7FEFF 		bl	HAL_GPIO_WritePin
+  88              	.LVL6:
+  63:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_R1_MODULE,LCD_R1_PIN,((data>>1)&0x01));
+  89              		.loc 1 63 5 is_stmt 1 view .LVU11
+  90 0012 C4F34002 		ubfx	r2, r4, #1, #1
+  91 0016 0821     		movs	r1, #8
+  92 0018 2846     		mov	r0, r5
+  93 001a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  94              	.LVL7:
+  64:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_R2_MODULE,LCD_R2_PIN,((data>>2)&0x01));
+  95              		.loc 1 64 5 view .LVU12
+  96 001e C4F38002 		ubfx	r2, r4, #2, #1
+  97 0022 4FF48071 		mov	r1, #256
+  98 0026 2846     		mov	r0, r5
+  99 0028 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 100              	.LVL8:
+  65:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_R3_MODULE,LCD_R3_PIN,((data>>3)&0x01));
+ 101              		.loc 1 65 5 view .LVU13
+ 102 002c C4F3C002 		ubfx	r2, r4, #3, #1
+ 103 0030 4FF40071 		mov	r1, #512
+ 104 0034 2846     		mov	r0, r5
+ 105 0036 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 106              	.LVL9:
+  66:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_R4_MODULE,LCD_R4_PIN,((data>>4)&0x01));
+ 107              		.loc 1 66 5 view .LVU14
+ 108 003a C4F30012 		ubfx	r2, r4, #4, #1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 4
+
+
+ 109 003e 4FF48061 		mov	r1, #1024
+ 110 0042 2846     		mov	r0, r5
+ 111 0044 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 112              	.LVL10:
+  67:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_R5_MODULE,LCD_R5_PIN,((data>>5)&0x01));
+ 113              		.loc 1 67 5 view .LVU15
+ 114 0048 C4F34012 		ubfx	r2, r4, #5, #1
+ 115 004c 0121     		movs	r1, #1
+ 116 004e 0848     		ldr	r0, .L7+4
+ 117 0050 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 118              	.LVL11:
+  68:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_R6_MODULE,LCD_R6_PIN,((data>>6)&0x01));
+ 119              		.loc 1 68 5 view .LVU16
+ 120 0054 C4F38012 		ubfx	r2, r4, #6, #1
+ 121 0058 0221     		movs	r1, #2
+ 122 005a 0648     		ldr	r0, .L7+8
+ 123 005c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 124              	.LVL12:
+  69:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_R7_MODULE,LCD_R7_PIN,((data>>7)&0x01));
+ 125              		.loc 1 69 5 view .LVU17
+ 126 0060 E209     		lsrs	r2, r4, #7
+ 127 0062 4021     		movs	r1, #64
+ 128 0064 0448     		ldr	r0, .L7+12
+ 129 0066 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 130              	.LVL13:
+  70:Core/Src/lcd.c ****     return;
+ 131              		.loc 1 70 5 view .LVU18
+  71:Core/Src/lcd.c **** }
+ 132              		.loc 1 71 1 is_stmt 0 view .LVU19
+ 133 006a 38BD     		pop	{r3, r4, r5, pc}
+ 134              	.L8:
+ 135              		.align	2
+ 136              	.L7:
+ 137 006c 001C0258 		.word	1476533248
+ 138 0070 00080258 		.word	1476528128
+ 139 0074 00040258 		.word	1476527104
+ 140 0078 00180258 		.word	1476532224
+ 141              		.cfi_endproc
+ 142              	.LFE335:
+ 144              		.section	.text.LCD_Output_Green,"ax",%progbits
+ 145              		.align	1
+ 146              		.syntax unified
+ 147              		.thumb
+ 148              		.thumb_func
+ 150              	LCD_Output_Green:
+ 151              	.LVL14:
+ 152              	.LFB336:
+  72:Core/Src/lcd.c **** 
+  73:Core/Src/lcd.c **** static void LCD_Output_Green(uint8 data)
+  74:Core/Src/lcd.c **** {
+ 153              		.loc 1 74 1 is_stmt 1 view -0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 0
+ 156              		@ frame_needed = 0, uses_anonymous_args = 0
+ 157              		.loc 1 74 1 is_stmt 0 view .LVU21
+ 158 0000 38B5     		push	{r3, r4, r5, lr}
+ 159              	.LCFI2:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 5
+
+
+ 160              		.cfi_def_cfa_offset 16
+ 161              		.cfi_offset 3, -16
+ 162              		.cfi_offset 4, -12
+ 163              		.cfi_offset 5, -8
+ 164              		.cfi_offset 14, -4
+ 165 0002 0446     		mov	r4, r0
+  75:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_G0_MODULE,LCD_G0_PIN,((data)&0x01));
+ 166              		.loc 1 75 5 is_stmt 1 view .LVU22
+ 167 0004 1B4D     		ldr	r5, .L11
+ 168 0006 00F00102 		and	r2, r0, #1
+ 169 000a 2021     		movs	r1, #32
+ 170 000c 2846     		mov	r0, r5
+ 171              	.LVL15:
+ 172              		.loc 1 75 5 is_stmt 0 view .LVU23
+ 173 000e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 174              	.LVL16:
+  76:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_G1_MODULE,LCD_G1_PIN,((data>>1)&0x01));
+ 175              		.loc 1 76 5 is_stmt 1 view .LVU24
+ 176 0012 C4F34002 		ubfx	r2, r4, #1, #1
+ 177 0016 4021     		movs	r1, #64
+ 178 0018 2846     		mov	r0, r5
+ 179 001a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 180              	.LVL17:
+  77:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_G2_MODULE,LCD_G2_PIN,((data>>2)&0x01));
+ 181              		.loc 1 77 5 view .LVU25
+ 182 001e 05F54065 		add	r5, r5, #3072
+ 183 0022 C4F38002 		ubfx	r2, r4, #2, #1
+ 184 0026 4FF40051 		mov	r1, #8192
+ 185 002a 2846     		mov	r0, r5
+ 186 002c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 187              	.LVL18:
+  78:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_G3_MODULE,LCD_G3_PIN,((data>>3)&0x01));
+ 188              		.loc 1 78 5 view .LVU26
+ 189 0030 C4F3C002 		ubfx	r2, r4, #3, #1
+ 190 0034 4FF48061 		mov	r1, #1024
+ 191 0038 0F48     		ldr	r0, .L11+4
+ 192 003a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 193              	.LVL19:
+  79:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_G4_MODULE,LCD_G4_PIN,((data>>4)&0x01));
+ 194              		.loc 1 79 5 view .LVU27
+ 195 003e C4F30012 		ubfx	r2, r4, #4, #1
+ 196 0042 4FF40041 		mov	r1, #32768
+ 197 0046 2846     		mov	r0, r5
+ 198 0048 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 199              	.LVL20:
+  80:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_G5_MODULE,LCD_G5_PIN,((data>>5)&0x01));
+ 200              		.loc 1 80 5 view .LVU28
+ 201 004c 05F58065 		add	r5, r5, #1024
+ 202 0050 C4F34012 		ubfx	r2, r4, #5, #1
+ 203 0054 0121     		movs	r1, #1
+ 204 0056 2846     		mov	r0, r5
+ 205 0058 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 206              	.LVL21:
+  81:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_G6_MODULE,LCD_G6_PIN,((data>>6)&0x01));
+ 207              		.loc 1 81 5 view .LVU29
+ 208 005c C4F38012 		ubfx	r2, r4, #6, #1
+ 209 0060 0221     		movs	r1, #2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 6
+
+
+ 210 0062 2846     		mov	r0, r5
+ 211 0064 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 212              	.LVL22:
+  82:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_G7_MODULE,LCD_G7_PIN,((data>>7)&0x01));
+ 213              		.loc 1 82 5 view .LVU30
+ 214 0068 E209     		lsrs	r2, r4, #7
+ 215 006a 0421     		movs	r1, #4
+ 216 006c 2846     		mov	r0, r5
+ 217 006e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 218              	.LVL23:
+  83:Core/Src/lcd.c ****     return;
+ 219              		.loc 1 83 5 view .LVU31
+  84:Core/Src/lcd.c **** }
+ 220              		.loc 1 84 1 is_stmt 0 view .LVU32
+ 221 0072 38BD     		pop	{r3, r4, r5, pc}
+ 222              	.L12:
+ 223              		.align	2
+ 224              	.L11:
+ 225 0074 00100258 		.word	1476530176
+ 226 0078 00180258 		.word	1476532224
+ 227              		.cfi_endproc
+ 228              	.LFE336:
+ 230              		.section	.text.LCD_Output_Blue,"ax",%progbits
+ 231              		.align	1
+ 232              		.syntax unified
+ 233              		.thumb
+ 234              		.thumb_func
+ 236              	LCD_Output_Blue:
+ 237              	.LVL24:
+ 238              	.LFB337:
+  85:Core/Src/lcd.c **** 
+  86:Core/Src/lcd.c **** static void LCD_Output_Blue(uint8 data)
+  87:Core/Src/lcd.c **** {
+ 239              		.loc 1 87 1 is_stmt 1 view -0
+ 240              		.cfi_startproc
+ 241              		@ args = 0, pretend = 0, frame = 0
+ 242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 243              		.loc 1 87 1 is_stmt 0 view .LVU34
+ 244 0000 38B5     		push	{r3, r4, r5, lr}
+ 245              	.LCFI3:
+ 246              		.cfi_def_cfa_offset 16
+ 247              		.cfi_offset 3, -16
+ 248              		.cfi_offset 4, -12
+ 249              		.cfi_offset 5, -8
+ 250              		.cfi_offset 14, -4
+ 251 0002 0446     		mov	r4, r0
+  88:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_B0_MODULE,LCD_B0_PIN,((data)&0x01));
+ 252              		.loc 1 88 5 is_stmt 1 view .LVU35
+ 253 0004 00F00102 		and	r2, r0, #1
+ 254 0008 1021     		movs	r1, #16
+ 255 000a 1948     		ldr	r0, .L15
+ 256              	.LVL25:
+ 257              		.loc 1 88 5 is_stmt 0 view .LVU36
+ 258 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 259              	.LVL26:
+  89:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_B1_MODULE,LCD_B1_PIN,((data>>1)&0x01));
+ 260              		.loc 1 89 5 is_stmt 1 view .LVU37
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 7
+
+
+ 261 0010 184D     		ldr	r5, .L15+4
+ 262 0012 C4F34002 		ubfx	r2, r4, #1, #1
+ 263 0016 4FF48051 		mov	r1, #4096
+ 264 001a 2846     		mov	r0, r5
+ 265 001c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 266              	.LVL27:
+  90:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_B2_MODULE,LCD_B2_PIN,((data>>2)&0x01));
+ 267              		.loc 1 90 5 view .LVU38
+ 268 0020 C4F38002 		ubfx	r2, r4, #2, #1
+ 269 0024 4021     		movs	r1, #64
+ 270 0026 1448     		ldr	r0, .L15+8
+ 271 0028 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 272              	.LVL28:
+  91:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_B3_MODULE,LCD_B3_PIN,((data>>3)&0x01));
+ 273              		.loc 1 91 5 view .LVU39
+ 274 002c C4F3C002 		ubfx	r2, r4, #3, #1
+ 275 0030 4FF40061 		mov	r1, #2048
+ 276 0034 2846     		mov	r0, r5
+ 277 0036 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 278              	.LVL29:
+  92:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_B4_MODULE,LCD_B4_PIN,((data>>4)&0x01));
+ 279              		.loc 1 92 5 view .LVU40
+ 280 003a 05F50065 		add	r5, r5, #2048
+ 281 003e C4F30012 		ubfx	r2, r4, #4, #1
+ 282 0042 1021     		movs	r1, #16
+ 283 0044 2846     		mov	r0, r5
+ 284 0046 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 285              	.LVL30:
+  93:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_B5_MODULE,LCD_B5_PIN,((data>>5)&0x01));
+ 286              		.loc 1 93 5 view .LVU41
+ 287 004a C4F34012 		ubfx	r2, r4, #5, #1
+ 288 004e 2021     		movs	r1, #32
+ 289 0050 2846     		mov	r0, r5
+ 290 0052 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 291              	.LVL31:
+  94:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_B6_MODULE,LCD_B6_PIN,((data>>6)&0x01));
+ 292              		.loc 1 94 5 view .LVU42
+ 293 0056 C4F38012 		ubfx	r2, r4, #6, #1
+ 294 005a 4021     		movs	r1, #64
+ 295 005c 2846     		mov	r0, r5
+ 296 005e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 297              	.LVL32:
+  95:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_B7_MODULE,LCD_B7_PIN,((data>>7)&0x01));
+ 298              		.loc 1 95 5 view .LVU43
+ 299 0062 E209     		lsrs	r2, r4, #7
+ 300 0064 8021     		movs	r1, #128
+ 301 0066 2846     		mov	r0, r5
+ 302 0068 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 303              	.LVL33:
+  96:Core/Src/lcd.c ****     return;
+ 304              		.loc 1 96 5 view .LVU44
+  97:Core/Src/lcd.c **** }...
+ 305              		.loc 1 97 1 is_stmt 0 view .LVU45
+ 306 006c 38BD     		pop	{r3, r4, r5, pc}
+ 307              	.L16:
+ 308 006e 00BF     		.align	2
+ 309              	.L15:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 8
+
+
+ 310 0070 00100258 		.word	1476530176
+ 311 0074 00180258 		.word	1476532224
+ 312 0078 000C0258 		.word	1476529152
+ 313              		.cfi_endproc
+ 314              	.LFE337:
+ 316              		.section	.text.LCD_Init,"ax",%progbits
+ 317              		.align	1
+ 318              		.global	LCD_Init
+ 319              		.syntax unified
+ 320              		.thumb
+ 321              		.thumb_func
+ 323              	LCD_Init:
+ 324              	.LFB331:
+   8:Core/Src/lcd.c **** {
+ 325              		.loc 1 8 1 is_stmt 1 view -0
+ 326              		.cfi_startproc
+ 327              		@ args = 0, pretend = 0, frame = 0
+ 328              		@ frame_needed = 0, uses_anonymous_args = 0
+ 329 0000 08B5     		push	{r3, lr}
+ 330              	.LCFI4:
+ 331              		.cfi_def_cfa_offset 8
+ 332              		.cfi_offset 3, -8
+ 333              		.cfi_offset 14, -4
+   9:Core/Src/lcd.c ****     LCD_Power_Control(LCD_POWER_ON,100);
+ 334              		.loc 1 9 5 view .LVU47
+ 335 0002 6421     		movs	r1, #100
+ 336 0004 0120     		movs	r0, #1
+ 337 0006 FFF7FEFF 		bl	LCD_Power_Control
+ 338              	.LVL34:
+  10:Core/Src/lcd.c **** }
+ 339              		.loc 1 10 1 is_stmt 0 view .LVU48
+ 340 000a 08BD     		pop	{r3, pc}
+ 341              		.cfi_endproc
+ 342              	.LFE331:
+ 344              		.section	.text.LCD_Set_Clock,"ax",%progbits
+ 345              		.align	1
+ 346              		.global	LCD_Set_Clock
+ 347              		.syntax unified
+ 348              		.thumb
+ 349              		.thumb_func
+ 351              	LCD_Set_Clock:
+ 352              	.LFB333:
+  20:Core/Src/lcd.c **** {
+ 353              		.loc 1 20 1 is_stmt 1 view -0
+ 354              		.cfi_startproc
+ 355              		@ args = 0, pretend = 0, frame = 0
+ 356              		@ frame_needed = 0, uses_anonymous_args = 0
+ 357 0000 08B5     		push	{r3, lr}
+ 358              	.LCFI5:
+ 359              		.cfi_def_cfa_offset 8
+ 360              		.cfi_offset 3, -8
+ 361              		.cfi_offset 14, -4
+  21:Core/Src/lcd.c ****     static uint8 state;
+ 362              		.loc 1 21 5 view .LVU50
+  22:Core/Src/lcd.c ****     static uint8 counter;
+ 363              		.loc 1 22 5 view .LVU51
+  23:Core/Src/lcd.c ****     state = (~state)&0x01;
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 9
+
+
+ 364              		.loc 1 23 5 view .LVU52
+  23:Core/Src/lcd.c ****     state = (~state)&0x01;
+ 365              		.loc 1 23 21 is_stmt 0 view .LVU53
+ 366 0002 204A     		ldr	r2, .L27
+ 367 0004 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 368 0006 83F00103 		eor	r3, r3, #1
+ 369 000a 03F00103 		and	r3, r3, #1
+  23:Core/Src/lcd.c ****     state = (~state)&0x01;
+ 370              		.loc 1 23 11 view .LVU54
+ 371 000e 1370     		strb	r3, [r2]
+  25:Core/Src/lcd.c ****     if(counter<16)
+ 372              		.loc 1 25 5 is_stmt 1 view .LVU55
+  25:Core/Src/lcd.c ****     if(counter<16)
+ 373              		.loc 1 25 15 is_stmt 0 view .LVU56
+ 374 0010 1D4B     		ldr	r3, .L27+4
+ 375 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  25:Core/Src/lcd.c ****     if(counter<16)
+ 376              		.loc 1 25 7 view .LVU57
+ 377 0014 0F2B     		cmp	r3, #15
+ 378 0016 10D8     		bhi	.L20
+  27:Core/Src/lcd.c ****         HAL_GPIO_WritePin(LCD_DE_MODULE,LCD_DE_PIN,LCD_DE_ON);
+ 379              		.loc 1 27 9 is_stmt 1 view .LVU58
+ 380 0018 0122     		movs	r2, #1
+ 381 001a 4FF48061 		mov	r1, #1024
+ 382 001e 1B48     		ldr	r0, .L27+8
+ 383 0020 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 384              	.LVL35:
+ 385              	.L21:
+  45:Core/Src/lcd.c ****     counter++;
+ 386              		.loc 1 45 5 view .LVU59
+  45:Core/Src/lcd.c ****     counter++;
+ 387              		.loc 1 45 12 is_stmt 0 view .LVU60
+ 388 0024 184A     		ldr	r2, .L27+4
+ 389 0026 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 390 0028 0133     		adds	r3, r3, #1
+ 391 002a 1370     		strb	r3, [r2]
+  47:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_CLK_MODULE,LCD_CLK_PIN,state);
+ 392              		.loc 1 47 5 is_stmt 1 view .LVU61
+ 393 002c 154B     		ldr	r3, .L27
+ 394 002e 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 395 0030 8021     		movs	r1, #128
+ 396 0032 1748     		ldr	r0, .L27+12
+ 397 0034 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 398              	.LVL36:
+  48:Core/Src/lcd.c ****     return;
+ 399              		.loc 1 48 5 view .LVU62
+  49:Core/Src/lcd.c **** }
+ 400              		.loc 1 49 1 is_stmt 0 view .LVU63
+ 401 0038 08BD     		pop	{r3, pc}
+ 402              	.L20:
+  31:Core/Src/lcd.c ****         HAL_GPIO_WritePin(LCD_DE_MODULE,LCD_DE_PIN,LCD_DE_OFF);
+ 403              		.loc 1 31 9 is_stmt 1 view .LVU64
+ 404 003a 0022     		movs	r2, #0
+ 405 003c 4FF48061 		mov	r1, #1024
+ 406 0040 1248     		ldr	r0, .L27+8
+ 407 0042 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 408              	.LVL37:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 10
+
+
+  32:Core/Src/lcd.c ****         if(counter == 17)
+ 409              		.loc 1 32 9 view .LVU65
+  32:Core/Src/lcd.c ****         if(counter == 17)
+ 410              		.loc 1 32 20 is_stmt 0 view .LVU66
+ 411 0046 104B     		ldr	r3, .L27+4
+ 412 0048 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  32:Core/Src/lcd.c ****         if(counter == 17)
+ 413              		.loc 1 32 11 view .LVU67
+ 414 004a 112B     		cmp	r3, #17
+ 415 004c 0BD0     		beq	.L25
+ 416              	.L22:
+  36:Core/Src/lcd.c ****         if(counter == 18)
+ 417              		.loc 1 36 9 is_stmt 1 view .LVU68
+  36:Core/Src/lcd.c ****         if(counter == 18)
+ 418              		.loc 1 36 20 is_stmt 0 view .LVU69
+ 419 004e 0E4B     		ldr	r3, .L27+4
+ 420 0050 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  36:Core/Src/lcd.c ****         if(counter == 18)
+ 421              		.loc 1 36 11 view .LVU70
+ 422 0052 122B     		cmp	r3, #18
+ 423 0054 0ED0     		beq	.L26
+ 424              	.L23:
+  40:Core/Src/lcd.c ****         if(counter == 19)
+ 425              		.loc 1 40 9 is_stmt 1 view .LVU71
+  40:Core/Src/lcd.c ****         if(counter == 19)
+ 426              		.loc 1 40 20 is_stmt 0 view .LVU72
+ 427 0056 0C4B     		ldr	r3, .L27+4
+ 428 0058 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  40:Core/Src/lcd.c ****         if(counter == 19)
+ 429              		.loc 1 40 11 view .LVU73
+ 430 005a 132B     		cmp	r3, #19
+ 431 005c E2D1     		bne	.L21
+  42:Core/Src/lcd.c ****             counter = 0;
+ 432              		.loc 1 42 13 is_stmt 1 view .LVU74
+  42:Core/Src/lcd.c ****             counter = 0;
+ 433              		.loc 1 42 21 is_stmt 0 view .LVU75
+ 434 005e 0A4B     		ldr	r3, .L27+4
+ 435 0060 0022     		movs	r2, #0
+ 436 0062 1A70     		strb	r2, [r3]
+ 437 0064 DEE7     		b	.L21
+ 438              	.L25:
+  34:Core/Src/lcd.c ****             HAL_GPIO_WritePin(LCD_HSYNC_MODULE,LCD_HSYNC_PIN,LCD_HSYNC_OFF);
+ 439              		.loc 1 34 13 is_stmt 1 view .LVU76
+ 440 0066 0022     		movs	r2, #0
+ 441 0068 4FF48061 		mov	r1, #1024
+ 442 006c 0948     		ldr	r0, .L27+16
+ 443 006e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 444              	.LVL38:
+ 445 0072 ECE7     		b	.L22
+ 446              	.L26:
+  38:Core/Src/lcd.c ****             HAL_GPIO_WritePin(LCD_HSYNC_MODULE,LCD_HSYNC_PIN,LCD_HSYNC_ON);
+ 447              		.loc 1 38 13 view .LVU77
+ 448 0074 0122     		movs	r2, #1
+ 449 0076 4FF48061 		mov	r1, #1024
+ 450 007a 0648     		ldr	r0, .L27+16
+ 451 007c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 452              	.LVL39:
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 11
+
+
+ 453 0080 E9E7     		b	.L23
+ 454              	.L28:
+ 455 0082 00BF     		.align	2
+ 456              	.L27:
+ 457 0084 00000000 		.word	.LANCHOR0
+ 458 0088 00000000 		.word	.LANCHOR1
+ 459 008c 00140258 		.word	1476531200
+ 460 0090 00180258 		.word	1476532224
+ 461 0094 00200258 		.word	1476534272
+ 462              		.cfi_endproc
+ 463              	.LFE333:
+ 465              		.section	.text.LCD_Set_Color,"ax",%progbits
+ 466              		.align	1
+ 467              		.global	LCD_Set_Color
+ 468              		.syntax unified
+ 469              		.thumb
+ 470              		.thumb_func
+ 472              	LCD_Set_Color:
+ 473              	.LFB334:
+  52:Core/Src/lcd.c **** {
+ 474              		.loc 1 52 1 view -0
+ 475              		.cfi_startproc
+ 476              		@ args = 0, pretend = 0, frame = 0
+ 477              		@ frame_needed = 0, uses_anonymous_args = 0
+ 478 0000 08B5     		push	{r3, lr}
+ 479              	.LCFI6:
+ 480              		.cfi_def_cfa_offset 8
+ 481              		.cfi_offset 3, -8
+ 482              		.cfi_offset 14, -4
+  53:Core/Src/lcd.c ****     LCD_Output_Red(255);
+ 483              		.loc 1 53 5 view .LVU79
+ 484 0002 FF20     		movs	r0, #255
+ 485 0004 FFF7FEFF 		bl	LCD_Output_Red
+ 486              	.LVL40:
+  54:Core/Src/lcd.c ****     LCD_Output_Green(255);
+ 487              		.loc 1 54 5 view .LVU80
+ 488 0008 FF20     		movs	r0, #255
+ 489 000a FFF7FEFF 		bl	LCD_Output_Green
+ 490              	.LVL41:
+  55:Core/Src/lcd.c ****     LCD_Output_Blue(255);
+ 491              		.loc 1 55 5 view .LVU81
+ 492 000e FF20     		movs	r0, #255
+ 493 0010 FFF7FEFF 		bl	LCD_Output_Blue
+ 494              	.LVL42:
+  57:Core/Src/lcd.c ****     return;
+ 495              		.loc 1 57 5 view .LVU82
+  58:Core/Src/lcd.c **** }
+ 496              		.loc 1 58 1 is_stmt 0 view .LVU83
+ 497 0014 08BD     		pop	{r3, pc}
+ 498              		.cfi_endproc
+ 499              	.LFE334:
+ 501              		.section	.bss.counter.0,"aw",%nobits
+ 502              		.set	.LANCHOR1,. + 0
+ 505              	counter.0:
+ 506 0000 00       		.space	1
+ 507              		.section	.bss.state.1,"aw",%nobits
+ 508              		.set	.LANCHOR0,. + 0
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 12
+
+
+ 511              	state.1:
+ 512 0000 00       		.space	1
+ 513              		.text
+ 514              	.Letext0:
+ 515              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 516              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 517              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h"
+ 518              		.file 5 "Core/Inc/vardef.h"
+ 519              		.file 6 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 lcd.c
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:19     .text.LCD_Power_Control:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:24     .text.LCD_Power_Control:00000000 LCD_Power_Control
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:54     .text.LCD_Power_Control:00000010 $d
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:59     .text.LCD_Output_Red:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:64     .text.LCD_Output_Red:00000000 LCD_Output_Red
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:137    .text.LCD_Output_Red:0000006c $d
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:145    .text.LCD_Output_Green:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:150    .text.LCD_Output_Green:00000000 LCD_Output_Green
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:225    .text.LCD_Output_Green:00000074 $d
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:231    .text.LCD_Output_Blue:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:236    .text.LCD_Output_Blue:00000000 LCD_Output_Blue
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:310    .text.LCD_Output_Blue:00000070 $d
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:317    .text.LCD_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:323    .text.LCD_Init:00000000 LCD_Init
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:345    .text.LCD_Set_Clock:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:351    .text.LCD_Set_Clock:00000000 LCD_Set_Clock
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:457    .text.LCD_Set_Clock:00000084 $d
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:466    .text.LCD_Set_Color:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:472    .text.LCD_Set_Color:00000000 LCD_Set_Color
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:505    .bss.counter.0:00000000 counter.0
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:506    .bss.counter.0:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:511    .bss.state.1:00000000 state.1
+C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:512    .bss.state.1:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin

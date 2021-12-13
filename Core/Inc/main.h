@@ -32,9 +32,20 @@ extern "C" {
 #include "vardef.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+extern ADC_HandleTypeDef hadc1;
+extern ADC_HandleTypeDef hadc3;
+
 extern I2C_HandleTypeDef hi2c1;
-extern TIM_HandleTypeDef htim17;
+extern I2C_HandleTypeDef hi2c4;
+
+extern SPI_HandleTypeDef hspi5;
+
+extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim15;
 extern TIM_HandleTypeDef htim16;
+extern TIM_HandleTypeDef htim17;
+
+extern UART_HandleTypeDef huart1;
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -51,6 +62,8 @@ extern TIM_HandleTypeDef htim16;
 /* USER CODE BEGIN EM */
 
 /* USER CODE END EM */
+
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);

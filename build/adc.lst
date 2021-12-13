@@ -1,0 +1,405 @@
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-d16
+   4              		.eabi_attribute 28, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"adc.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.Adc_Read,"ax",%progbits
+  19              		.align	1
+  20              		.global	Adc_Read
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  25              	Adc_Read:
+  26              	.LFB331:
+  27              		.file 1 "Core/Src/adc.c"
+   1:Core/Src/adc.c **** #include "adc.h"
+   2:Core/Src/adc.c **** 
+   3:Core/Src/adc.c **** uint16 ADC_CH6_Raw;
+   4:Core/Src/adc.c **** uint16 ADC_CH7_Raw;
+   5:Core/Src/adc.c **** uint16 ADC_BATT_Raw;
+   6:Core/Src/adc.c **** uint16 ADC_CPU_Raw;
+   7:Core/Src/adc.c **** uint16 ADC_CH6_Volt;
+   8:Core/Src/adc.c **** uint16 ADC_CH7_Volt;
+   9:Core/Src/adc.c **** uint16 ADC_BATT_Volt;
+  10:Core/Src/adc.c **** uint16 ADC_CPU_Volt;
+  11:Core/Src/adc.c **** 
+  12:Core/Src/adc.c **** void Adc_Read(void)
+  13:Core/Src/adc.c **** {
+  28              		.loc 1 13 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 4, -8
+  36              		.cfi_offset 14, -4
+  14:Core/Src/adc.c ****     HAL_ADC_Start(&hadc1);
+  37              		.loc 1 14 5 view .LVU1
+  38 0002 1E4C     		ldr	r4, .L11
+  39 0004 2046     		mov	r0, r4
+  40 0006 FFF7FEFF 		bl	HAL_ADC_Start
+  41              	.LVL0:
+  15:Core/Src/adc.c ****     if(HAL_OK == HAL_ADC_PollForConversion(&hadc1,10))
+  42              		.loc 1 15 5 view .LVU2
+  43              		.loc 1 15 18 is_stmt 0 view .LVU3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s 			page 2
+
+
+  44 000a 0A21     		movs	r1, #10
+  45 000c 2046     		mov	r0, r4
+  46 000e FFF7FEFF 		bl	HAL_ADC_PollForConversion
+  47              	.LVL1:
+  48              		.loc 1 15 7 view .LVU4
+  49 0012 D8B1     		cbz	r0, .L7
+  50              	.L2:
+  16:Core/Src/adc.c ****     {
+  17:Core/Src/adc.c ****         ADC_CH6_Raw = HAL_ADC_GetValue(&hadc1);
+  18:Core/Src/adc.c ****     }
+  19:Core/Src/adc.c ****     HAL_ADC_Start(&hadc1);
+  51              		.loc 1 19 5 is_stmt 1 view .LVU5
+  52 0014 194C     		ldr	r4, .L11
+  53 0016 2046     		mov	r0, r4
+  54 0018 FFF7FEFF 		bl	HAL_ADC_Start
+  55              	.LVL2:
+  20:Core/Src/adc.c ****     if(HAL_OK == HAL_ADC_PollForConversion(&hadc1,10))
+  56              		.loc 1 20 5 view .LVU6
+  57              		.loc 1 20 18 is_stmt 0 view .LVU7
+  58 001c 0A21     		movs	r1, #10
+  59 001e 2046     		mov	r0, r4
+  60 0020 FFF7FEFF 		bl	HAL_ADC_PollForConversion
+  61              	.LVL3:
+  62              		.loc 1 20 7 view .LVU8
+  63 0024 C0B1     		cbz	r0, .L8
+  64              	.L3:
+  21:Core/Src/adc.c ****     {
+  22:Core/Src/adc.c ****         ADC_CH7_Raw = HAL_ADC_GetValue(&hadc1);
+  23:Core/Src/adc.c ****     }
+  24:Core/Src/adc.c ****     HAL_ADC_Start(&hadc3);
+  65              		.loc 1 24 5 is_stmt 1 view .LVU9
+  66 0026 164C     		ldr	r4, .L11+4
+  67 0028 2046     		mov	r0, r4
+  68 002a FFF7FEFF 		bl	HAL_ADC_Start
+  69              	.LVL4:
+  25:Core/Src/adc.c ****     if(HAL_OK == HAL_ADC_PollForConversion(&hadc3,10))
+  70              		.loc 1 25 5 view .LVU10
+  71              		.loc 1 25 18 is_stmt 0 view .LVU11
+  72 002e 0A21     		movs	r1, #10
+  73 0030 2046     		mov	r0, r4
+  74 0032 FFF7FEFF 		bl	HAL_ADC_PollForConversion
+  75              	.LVL5:
+  76              		.loc 1 25 7 view .LVU12
+  77 0036 A8B1     		cbz	r0, .L9
+  78              	.L4:
+  26:Core/Src/adc.c ****     {
+  27:Core/Src/adc.c ****         ADC_BATT_Raw = HAL_ADC_GetValue(&hadc3);
+  28:Core/Src/adc.c ****     }
+  29:Core/Src/adc.c ****     HAL_ADC_Start(&hadc3);
+  79              		.loc 1 29 5 is_stmt 1 view .LVU13
+  80 0038 114C     		ldr	r4, .L11+4
+  81 003a 2046     		mov	r0, r4
+  82 003c FFF7FEFF 		bl	HAL_ADC_Start
+  83              	.LVL6:
+  30:Core/Src/adc.c ****     if(HAL_OK == HAL_ADC_PollForConversion(&hadc3,10))
+  84              		.loc 1 30 5 view .LVU14
+  85              		.loc 1 30 18 is_stmt 0 view .LVU15
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s 			page 3
+
+
+  86 0040 0A21     		movs	r1, #10
+  87 0042 2046     		mov	r0, r4
+  88 0044 FFF7FEFF 		bl	HAL_ADC_PollForConversion
+  89              	.LVL7:
+  90              		.loc 1 30 7 view .LVU16
+  91 0048 90B1     		cbz	r0, .L10
+  92              	.L1:
+  31:Core/Src/adc.c ****     {
+  32:Core/Src/adc.c ****         ADC_CPU_Raw = HAL_ADC_GetValue(&hadc3);
+  33:Core/Src/adc.c ****     }
+  34:Core/Src/adc.c ****     return;
+  35:Core/Src/adc.c **** }
+  93              		.loc 1 35 1 view .LVU17
+  94 004a 10BD     		pop	{r4, pc}
+  95              	.L7:
+  17:Core/Src/adc.c ****     }
+  96              		.loc 1 17 9 is_stmt 1 view .LVU18
+  17:Core/Src/adc.c ****     }
+  97              		.loc 1 17 23 is_stmt 0 view .LVU19
+  98 004c 2046     		mov	r0, r4
+  99 004e FFF7FEFF 		bl	HAL_ADC_GetValue
+ 100              	.LVL8:
+  17:Core/Src/adc.c ****     }
+ 101              		.loc 1 17 21 view .LVU20
+ 102 0052 0C4B     		ldr	r3, .L11+8
+ 103 0054 1860     		str	r0, [r3]
+ 104 0056 DDE7     		b	.L2
+ 105              	.L8:
+  22:Core/Src/adc.c ****     }
+ 106              		.loc 1 22 9 is_stmt 1 view .LVU21
+  22:Core/Src/adc.c ****     }
+ 107              		.loc 1 22 23 is_stmt 0 view .LVU22
+ 108 0058 2046     		mov	r0, r4
+ 109 005a FFF7FEFF 		bl	HAL_ADC_GetValue
+ 110              	.LVL9:
+  22:Core/Src/adc.c ****     }
+ 111              		.loc 1 22 21 view .LVU23
+ 112 005e 0A4B     		ldr	r3, .L11+12
+ 113 0060 1860     		str	r0, [r3]
+ 114 0062 E0E7     		b	.L3
+ 115              	.L9:
+  27:Core/Src/adc.c ****     }
+ 116              		.loc 1 27 9 is_stmt 1 view .LVU24
+  27:Core/Src/adc.c ****     }
+ 117              		.loc 1 27 24 is_stmt 0 view .LVU25
+ 118 0064 2046     		mov	r0, r4
+ 119 0066 FFF7FEFF 		bl	HAL_ADC_GetValue
+ 120              	.LVL10:
+  27:Core/Src/adc.c ****     }
+ 121              		.loc 1 27 22 view .LVU26
+ 122 006a 084B     		ldr	r3, .L11+16
+ 123 006c 1860     		str	r0, [r3]
+ 124 006e E3E7     		b	.L4
+ 125              	.L10:
+  32:Core/Src/adc.c ****     }
+ 126              		.loc 1 32 9 is_stmt 1 view .LVU27
+  32:Core/Src/adc.c ****     }
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s 			page 4
+
+
+ 127              		.loc 1 32 23 is_stmt 0 view .LVU28
+ 128 0070 2046     		mov	r0, r4
+ 129 0072 FFF7FEFF 		bl	HAL_ADC_GetValue
+ 130              	.LVL11:
+  32:Core/Src/adc.c ****     }
+ 131              		.loc 1 32 21 view .LVU29
+ 132 0076 064B     		ldr	r3, .L11+20
+ 133 0078 1860     		str	r0, [r3]
+  34:Core/Src/adc.c **** }
+ 134              		.loc 1 34 5 is_stmt 1 view .LVU30
+ 135 007a E6E7     		b	.L1
+ 136              	.L12:
+ 137              		.align	2
+ 138              	.L11:
+ 139 007c 00000000 		.word	hadc1
+ 140 0080 00000000 		.word	hadc3
+ 141 0084 00000000 		.word	.LANCHOR0
+ 142 0088 00000000 		.word	.LANCHOR1
+ 143 008c 00000000 		.word	.LANCHOR2
+ 144 0090 00000000 		.word	.LANCHOR3
+ 145              		.cfi_endproc
+ 146              	.LFE331:
+ 148              		.section	.text.Adc_Calc,"ax",%progbits
+ 149              		.align	1
+ 150              		.global	Adc_Calc
+ 151              		.syntax unified
+ 152              		.thumb
+ 153              		.thumb_func
+ 155              	Adc_Calc:
+ 156              	.LFB332:
+  36:Core/Src/adc.c **** 
+  37:Core/Src/adc.c **** void Adc_Calc(void)
+  38:Core/Src/adc.c **** {
+ 157              		.loc 1 38 1 view -0
+ 158              		.cfi_startproc
+ 159              		@ args = 0, pretend = 0, frame = 0
+ 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161              		@ link register save eliminated.
+  39:Core/Src/adc.c ****     ADC_CH6_Volt = (uint16)((float)ADC_CH6_Raw*5000.0f/65535.0f);
+ 162              		.loc 1 39 5 view .LVU32
+ 163              		.loc 1 39 29 is_stmt 0 view .LVU33
+ 164 0000 1F4B     		ldr	r3, .L14
+ 165 0002 93ED007A 		vldr.32	s14, [r3]	@ int
+ 166 0006 B8EE477A 		vcvt.f32.u32	s14, s14
+ 167              		.loc 1 39 47 view .LVU34
+ 168 000a DFED1E5A 		vldr.32	s11, .L14+4
+ 169 000e 27EE257A 		vmul.f32	s14, s14, s11
+ 170              		.loc 1 39 55 view .LVU35
+ 171 0012 DFED1D6A 		vldr.32	s13, .L14+8
+ 172 0016 87EE266A 		vdiv.f32	s12, s14, s13
+ 173              		.loc 1 39 20 view .LVU36
+ 174 001a BCEEC66A 		vcvt.u32.f32	s12, s12
+ 175              		.loc 1 39 18 view .LVU37
+ 176 001e 1B4B     		ldr	r3, .L14+12
+ 177 0020 83ED006A 		vstr.32	s12, [r3]	@ int
+  40:Core/Src/adc.c ****     ADC_CH7_Volt = (uint16)((float)ADC_CH7_Raw*5000.0f/65535.0f);
+ 178              		.loc 1 40 5 is_stmt 1 view .LVU38
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s 			page 5
+
+
+ 179              		.loc 1 40 29 is_stmt 0 view .LVU39
+ 180 0024 1A4B     		ldr	r3, .L14+16
+ 181 0026 D3ED007A 		vldr.32	s15, [r3]	@ int
+ 182 002a F8EE677A 		vcvt.f32.u32	s15, s15
+ 183              		.loc 1 40 47 view .LVU40
+ 184 002e 67EEA57A 		vmul.f32	s15, s15, s11
+ 185              		.loc 1 40 55 view .LVU41
+ 186 0032 87EEA67A 		vdiv.f32	s14, s15, s13
+ 187              		.loc 1 40 20 view .LVU42
+ 188 0036 BCEEC77A 		vcvt.u32.f32	s14, s14
+ 189              		.loc 1 40 18 view .LVU43
+ 190 003a 164B     		ldr	r3, .L14+20
+ 191 003c 83ED007A 		vstr.32	s14, [r3]	@ int
+  41:Core/Src/adc.c ****     ADC_BATT_Volt = (uint16)((float)ADC_BATT_Raw*3300.0f/65535.0f);
+ 192              		.loc 1 41 5 is_stmt 1 view .LVU44
+ 193              		.loc 1 41 30 is_stmt 0 view .LVU45
+ 194 0040 154B     		ldr	r3, .L14+24
+ 195 0042 93ED007A 		vldr.32	s14, [r3]	@ int
+ 196 0046 B8EE477A 		vcvt.f32.u32	s14, s14
+ 197              		.loc 1 41 49 view .LVU46
+ 198 004a DFED145A 		vldr.32	s11, .L14+28
+ 199 004e 27EE257A 		vmul.f32	s14, s14, s11
+ 200              		.loc 1 41 57 view .LVU47
+ 201 0052 87EE266A 		vdiv.f32	s12, s14, s13
+ 202              		.loc 1 41 21 view .LVU48
+ 203 0056 BCEEC66A 		vcvt.u32.f32	s12, s12
+ 204              		.loc 1 41 19 view .LVU49
+ 205 005a 114B     		ldr	r3, .L14+32
+ 206 005c 83ED006A 		vstr.32	s12, [r3]	@ int
+  42:Core/Src/adc.c ****     ADC_CPU_Volt = (uint16)((float)ADC_CPU_Raw*3300.0f/65535.0f);
+ 207              		.loc 1 42 5 is_stmt 1 view .LVU50
+ 208              		.loc 1 42 29 is_stmt 0 view .LVU51
+ 209 0060 104B     		ldr	r3, .L14+36
+ 210 0062 D3ED007A 		vldr.32	s15, [r3]	@ int
+ 211 0066 F8EE677A 		vcvt.f32.u32	s15, s15
+ 212              		.loc 1 42 47 view .LVU52
+ 213 006a 67EEA57A 		vmul.f32	s15, s15, s11
+ 214              		.loc 1 42 55 view .LVU53
+ 215 006e 87EEA67A 		vdiv.f32	s14, s15, s13
+ 216              		.loc 1 42 20 view .LVU54
+ 217 0072 BCEEC77A 		vcvt.u32.f32	s14, s14
+ 218              		.loc 1 42 18 view .LVU55
+ 219 0076 0C4B     		ldr	r3, .L14+40
+ 220 0078 83ED007A 		vstr.32	s14, [r3]	@ int
+  43:Core/Src/adc.c **** }...
+ 221              		.loc 1 43 1 view .LVU56
+ 222 007c 7047     		bx	lr
+ 223              	.L15:
+ 224 007e 00BF     		.align	2
+ 225              	.L14:
+ 226 0080 00000000 		.word	.LANCHOR0
+ 227 0084 00409C45 		.word	1167867904
+ 228 0088 00FF7F47 		.word	1199570688
+ 229 008c 00000000 		.word	.LANCHOR4
+ 230 0090 00000000 		.word	.LANCHOR1
+ 231 0094 00000000 		.word	.LANCHOR5
+ 232 0098 00000000 		.word	.LANCHOR2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s 			page 6
+
+
+ 233 009c 00404E45 		.word	1162756096
+ 234 00a0 00000000 		.word	.LANCHOR6
+ 235 00a4 00000000 		.word	.LANCHOR3
+ 236 00a8 00000000 		.word	.LANCHOR7
+ 237              		.cfi_endproc
+ 238              	.LFE332:
+ 240              		.global	ADC_CPU_Volt
+ 241              		.global	ADC_BATT_Volt
+ 242              		.global	ADC_CH7_Volt
+ 243              		.global	ADC_CH6_Volt
+ 244              		.global	ADC_CPU_Raw
+ 245              		.global	ADC_BATT_Raw
+ 246              		.global	ADC_CH7_Raw
+ 247              		.global	ADC_CH6_Raw
+ 248              		.section	.bss.ADC_BATT_Raw,"aw",%nobits
+ 249              		.align	2
+ 250              		.set	.LANCHOR2,. + 0
+ 253              	ADC_BATT_Raw:
+ 254 0000 00000000 		.space	4
+ 255              		.section	.bss.ADC_BATT_Volt,"aw",%nobits
+ 256              		.align	2
+ 257              		.set	.LANCHOR6,. + 0
+ 260              	ADC_BATT_Volt:
+ 261 0000 00000000 		.space	4
+ 262              		.section	.bss.ADC_CH6_Raw,"aw",%nobits
+ 263              		.align	2
+ 264              		.set	.LANCHOR0,. + 0
+ 267              	ADC_CH6_Raw:
+ 268 0000 00000000 		.space	4
+ 269              		.section	.bss.ADC_CH6_Volt,"aw",%nobits
+ 270              		.align	2
+ 271              		.set	.LANCHOR4,. + 0
+ 274              	ADC_CH6_Volt:
+ 275 0000 00000000 		.space	4
+ 276              		.section	.bss.ADC_CH7_Raw,"aw",%nobits
+ 277              		.align	2
+ 278              		.set	.LANCHOR1,. + 0
+ 281              	ADC_CH7_Raw:
+ 282 0000 00000000 		.space	4
+ 283              		.section	.bss.ADC_CH7_Volt,"aw",%nobits
+ 284              		.align	2
+ 285              		.set	.LANCHOR5,. + 0
+ 288              	ADC_CH7_Volt:
+ 289 0000 00000000 		.space	4
+ 290              		.section	.bss.ADC_CPU_Raw,"aw",%nobits
+ 291              		.align	2
+ 292              		.set	.LANCHOR3,. + 0
+ 295              	ADC_CPU_Raw:
+ 296 0000 00000000 		.space	4
+ 297              		.section	.bss.ADC_CPU_Volt,"aw",%nobits
+ 298              		.align	2
+ 299              		.set	.LANCHOR7,. + 0
+ 302              	ADC_CPU_Volt:
+ 303 0000 00000000 		.space	4
+ 304              		.text
+ 305              	.Letext0:
+ 306              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s 			page 7
+
+
+ 307              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 308              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h"
+ 309              		.file 5 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h"
+ 310              		.file 6 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 311              		.file 7 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h"
+ 312              		.file 8 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_adc.h"
+ 313              		.file 9 "Core/Inc/vardef.h"
+ 314              		.file 10 "Core/Inc/main.h"
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 adc.c
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:19     .text.Adc_Read:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:25     .text.Adc_Read:00000000 Adc_Read
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:139    .text.Adc_Read:0000007c $d
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:149    .text.Adc_Calc:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:155    .text.Adc_Calc:00000000 Adc_Calc
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:226    .text.Adc_Calc:00000080 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:302    .bss.ADC_CPU_Volt:00000000 ADC_CPU_Volt
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:260    .bss.ADC_BATT_Volt:00000000 ADC_BATT_Volt
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:288    .bss.ADC_CH7_Volt:00000000 ADC_CH7_Volt
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:274    .bss.ADC_CH6_Volt:00000000 ADC_CH6_Volt
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:295    .bss.ADC_CPU_Raw:00000000 ADC_CPU_Raw
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:253    .bss.ADC_BATT_Raw:00000000 ADC_BATT_Raw
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:281    .bss.ADC_CH7_Raw:00000000 ADC_CH7_Raw
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:267    .bss.ADC_CH6_Raw:00000000 ADC_CH6_Raw
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:249    .bss.ADC_BATT_Raw:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:256    .bss.ADC_BATT_Volt:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:263    .bss.ADC_CH6_Raw:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:270    .bss.ADC_CH6_Volt:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:277    .bss.ADC_CH7_Raw:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:284    .bss.ADC_CH7_Volt:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:291    .bss.ADC_CPU_Raw:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccH8hF6v.s:298    .bss.ADC_CPU_Volt:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_ADC_Start
+HAL_ADC_PollForConversion
+HAL_ADC_GetValue
+hadc1
+hadc3
