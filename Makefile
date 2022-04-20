@@ -44,7 +44,8 @@ Core/Src/led.c \
 Core/Src/imu.c \
 Core/Src/adc.c \
 Core/Src/lcd.c \
-Core/Src/uart.c \
+Core/Src/can.c \
+Core/Src/motor_driver.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c \
@@ -70,6 +71,7 @@ Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi_ex.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c \
+Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_fdcan.c \
 startup_stm32h743xx.c
 
 # ASM sources

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
   29:Core/Src/uart.c ****             Uart_Main_Menu();
   30:Core/Src/uart.c ****         break;    
   31:Core/Src/uart.c ****         case MENU_WATCH:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 2
 
 
   32:Core/Src/uart.c ****             Uart_Watch_Menu();
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
   75:Core/Src/uart.c **** 
   76:Core/Src/uart.c ****     if(Menu_status == MENU_MAIN)
   39              		.loc 1 76 5 is_stmt 1 view .LVU3
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 3
 
 
   40              		.loc 1 76 7 is_stmt 0 view .LVU4
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  124:Core/Src/uart.c ****                 Menu_status = MENU_MAIN;
  125:Core/Src/uart.c ****                 print_lock_Main = PRINT_OUT_LOCK_OFF;           
  126:Core/Src/uart.c ****             break;     
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 4
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 4
 
 
  127:Core/Src/uart.c ****             default:
@@ -206,7 +206,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  145:Core/Src/uart.c **** 
  146:Core/Src/uart.c ****             break;
  147:Core/Src/uart.c ****             case THERMO_DISPLAY_CURRENT_ASCII :
- 148:Core/Src/uart.c ****                 Menu_status = MENU_WATCH;
+ 148:Core/Src/uart.c ****                 Menu_status = MENU_THERMOMETER;
  149:Core/Src/uart.c ****                 print_lock_Watch = PRINT_OUT_LOCK_OFF;         
  150:Core/Src/uart.c ****             break;                 
  151:Core/Src/uart.c ****             case THERMO_GOTO_MAIN_ASCII :
@@ -238,10 +238,10 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  171:Core/Src/uart.c **** 
  172:Core/Src/uart.c ****             break;
  173:Core/Src/uart.c ****             case GAME_DISPLAY_CURRENT_ASCII :
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 5
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 5
 
 
- 174:Core/Src/uart.c ****                 Menu_status = MENU_WATCH;
+ 174:Core/Src/uart.c ****                 Menu_status = MENU_GAME;
  175:Core/Src/uart.c ****                 print_lock_Watch = PRINT_OUT_LOCK_OFF;         
  176:Core/Src/uart.c ****             break;                 
  177:Core/Src/uart.c ****             case GAME_GOTO_MAIN_ASCII :
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
   85:Core/Src/uart.c ****                 print_lock_Watch = PRINT_OUT_LOCK_OFF;
   87              		.loc 1 85 17 view .LVU19
   85:Core/Src/uart.c ****                 print_lock_Watch = PRINT_OUT_LOCK_OFF;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 6
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 6
 
 
   88              		.loc 1 85 29 is_stmt 0 view .LVU20
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  127              		.loc 1 97 29 is_stmt 0 view .LVU35
  128 0060 544B     		ldr	r3, .L31
  129 0062 0522     		movs	r2, #5
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 7
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 7
 
 
  130 0064 1A70     		strb	r2, [r3]
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  120:Core/Src/uart.c ****                 print_lock_Watch = PRINT_OUT_LOCK_OFF;         
  174              		.loc 1 120 17 view .LVU46
  120:Core/Src/uart.c ****                 print_lock_Watch = PRINT_OUT_LOCK_OFF;         
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 8
 
 
  175              		.loc 1 120 29 is_stmt 0 view .LVU47
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  215 00da 3038     		subs	r0, r0, #48
  216              	.LVL7:
  135:Core/Src/uart.c ****         {
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 9
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 9
 
 
  217              		.loc 1 135 9 is_stmt 0 view .LVU62
@@ -522,7 +522,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  148:Core/Src/uart.c ****                 print_lock_Watch = PRINT_OUT_LOCK_OFF;         
  249              		.loc 1 148 29 is_stmt 0 view .LVU69
  250 011c 254B     		ldr	r3, .L31
- 251 011e 0222     		movs	r2, #2
+ 251 011e 0322     		movs	r2, #3
  252 0120 1A70     		strb	r2, [r3]
  149:Core/Src/uart.c ****             break;                 
  253              		.loc 1 149 17 is_stmt 1 view .LVU70
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  152:Core/Src/uart.c ****                 print_lock_Main = PRINT_OUT_LOCK_OFF;           
  261              		.loc 1 152 17 view .LVU73
  152:Core/Src/uart.c ****                 print_lock_Main = PRINT_OUT_LOCK_OFF;           
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 10
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 10
 
 
  262              		.loc 1 152 29 is_stmt 0 view .LVU74
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  306 0174 89010000 		.word	.L25+1
  307 0178 97010000 		.word	.L23+1
  308              		.p2align 1
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 11
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 11
 
 
  309              	.L26:
@@ -624,7 +624,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  174:Core/Src/uart.c ****                 print_lock_Watch = PRINT_OUT_LOCK_OFF;         
  323              		.loc 1 174 29 is_stmt 0 view .LVU91
  324 0188 0A4B     		ldr	r3, .L31
- 325 018a 0222     		movs	r2, #2
+ 325 018a 0422     		movs	r2, #4
  326 018c 1A70     		strb	r2, [r3]
  175:Core/Src/uart.c ****             break;                 
  327              		.loc 1 175 17 is_stmt 1 view .LVU92
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  182:Core/Src/uart.c ****                 print_lock_Error = PRINT_OUT_LOCK_OFF;
  348              		.loc 1 182 17 view .LVU100
  182:Core/Src/uart.c ****                 print_lock_Error = PRINT_OUT_LOCK_OFF;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 12
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 12
 
 
  349              		.loc 1 182 29 is_stmt 0 view .LVU101
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  387 0071 000000   		.align	2
  388              	.LC3:
  389 0074 44657363 		.ascii	"Description: Wrong menu item in Watch Menu Mode\012"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 13
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 13
 
 
  389      72697074 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  202:Core/Src/uart.c ****         sprintf(Tx_data,"Name: Hong, Gildong\n\n");
  203:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);
  204:Core/Src/uart.c ****         HAL_UART_Receive_IT(&UART1,&Rx_data,1);
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 14
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 14
 
 
  205:Core/Src/uart.c ****         
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  259:Core/Src/uart.c ****         sprintf(Tx_data,"Watch Mode\n");
  260:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);
  261:Core/Src/uart.c ****         sprintf(Tx_data,"1. START Watch\n");
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 15
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 15
 
 
  262:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);    
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  316:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);            
  317:Core/Src/uart.c ****         sprintf(Tx_data,"press number key to run.\n");
  318:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);    
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 16
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 16
 
 
  319:Core/Src/uart.c ****         HAL_UART_Receive_IT(&UART1,&Rx_data,1); 
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  453 0022 5E4E     		ldr	r6, .L41+8
  454 0024 3446     		mov	r4, r6
  455 0026 5E4D     		ldr	r5, .L41+12
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 17
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 17
 
 
  456 0028 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  505 0076 0022     		movs	r2, #0
  506 0078 1A70     		strb	r2, [r3]
  338:Core/Src/uart.c ****             break;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 18
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 18
 
 
  507              		.loc 1 338 13 is_stmt 1 view .LVU126
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  529 0098 82B2     		uxth	r2, r0
  530 009a 3146     		mov	r1, r6
  531 009c 3846     		mov	r0, r7
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 19
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 19
 
 
  532 009e FFF7FEFF 		bl	HAL_UART_Transmit
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  576 00e0 95E80F00 		ldm	r5, {r0, r1, r2, r3}
  577 00e4 07C4     		stmia	r4!, {r0, r1, r2}
  578 00e6 2370     		strb	r3, [r4]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 20
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 20
 
 
  349:Core/Src/uart.c ****                 HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  622 0132 254B     		ldr	r3, .L41+52
  623 0134 0022     		movs	r2, #0
  624 0136 1A70     		strb	r2, [r3]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 21
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 21
 
 
  354:Core/Src/uart.c ****             break;
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  670 0180 3846     		mov	r0, r7
  671 0182 FFF7FEFF 		bl	HAL_UART_Transmit
  672              	.LVL25:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 22
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 22
 
 
  360:Core/Src/uart.c ****                 Menu_status = MENU_GAME;
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  715      31323334 
  715      35363738 
  716 0032 0000     		.align	2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 23
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 23
 
 
  717              	.LC10:
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  760 001e 94E80700 		ldm	r4, {r0, r1, r2}
  761 0022 ACE80300 		stmia	ip!, {r0, r1}
  762 0026 ACF80020 		strh	r2, [ip]	@ movhi
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 24
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 24
 
 
  199:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  807 007a FFF7FEFF 		bl	strlen
  808              	.LVL30:
  203:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 25
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 25
 
 
  809              		.loc 1 203 9 view .LVU186
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  853 00b6 114B     		ldr	r3, .L55+28
  854 00b8 0222     		movs	r2, #2
  855 00ba 1A70     		strb	r2, [r3]
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 26
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 26
 
 
  214:Core/Src/uart.c ****                 print_lock_Watch = PRINT_OUT_LOCK_OFF;
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  896 00ec 1C000000 		.word	.LC9
  897 00f0 34000000 		.word	.LC10
  898 00f4 00000000 		.word	.LANCHOR9
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 27
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 27
 
 
  899 00f8 00000000 		.word	.LANCHOR1
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  934              	Uart_Main_Menu:
  935              	.LFB339:
  231:Core/Src/uart.c **** {
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 28
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 28
 
 
  936              		.loc 1 231 1 is_stmt 1 view -0
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  980 002a FFF7FEFF 		bl	HAL_UART_Transmit
  981              	.LVL34:
  238:Core/Src/uart.c ****         sprintf(Tx_data,"1. Watch Mode\n");
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 29
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 29
 
 
  982              		.loc 1 238 9 is_stmt 1 view .LVU222
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  243:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);            
  1028              		.loc 1 243 9 view .LVU231
  243:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);            
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 30
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 30
 
 
  1029              		.loc 1 243 42 is_stmt 0 view .LVU232
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  247:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);    
  1075              		.loc 1 247 9 view .LVU241
  1076 00dc 6423     		movs	r3, #100
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 31
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 31
 
 
  1077 00de 82B2     		uxth	r2, r0
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1119 003b 00       		.align	2
  1120              	.LC21:
  1121 003c 382E2044 		.ascii	"8. Display Current Menu\012\000"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 32
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 32
 
 
  1121      6973706C 
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1161 0016 484C     		ldr	r4, .L70+4
  1162 0018 484B     		ldr	r3, .L70+8
  1163 001a 93E80700 		ldm	r3, {r0, r1, r2}
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 33
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 33
 
 
  1164 001e 84E80700 		stm	r4, {r0, r1, r2}
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1207 0064 3046     		mov	r0, r6
  1208 0066 FFF7FEFF 		bl	HAL_UART_Transmit
  1209              	.LVL51:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 34
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 34
 
 
  265:Core/Src/uart.c ****         sprintf(Tx_data,"3. Stop Watch\n");
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1255 00bc 0FCF     		ldmia	r7!, {r0, r1, r2, r3}
  1256 00be 0FC5     		stmia	r5!, {r0, r1, r2, r3}
  1257 00c0 97E80700 		ldm	r7, {r0, r1, r2}
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 35
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 35
 
 
  1258 00c4 03C5     		stmia	r5!, {r0, r1}
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1302 0114 FFF7FEFF 		bl	strlen
  1303              	.LVL60:
  274:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);    
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 36
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 36
 
 
  1304              		.loc 1 274 9 view .LVU282
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1347      61687265 
  1347      6E686569 
  1347      74204469 
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 37
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 37
 
 
  1347      73706C61 
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  285:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);
  1394              		.loc 1 285 9 view .LVU294
  285:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 38
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 38
 
 
  1395              		.loc 1 285 42 is_stmt 0 view .LVU295
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  289:Core/Src/uart.c ****         HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);                          
  1441              		.loc 1 289 9 view .LVU304
  1442 0076 6423     		movs	r3, #100
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 39
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 39
 
 
  1443 0078 82B2     		uxth	r2, r0
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1489              	.LVL72:
  294:Core/Src/uart.c ****         sprintf(Tx_data,"9. Go Main Menu\n");
  1490              		.loc 1 294 9 is_stmt 1 view .LVU313
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 40
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 40
 
 
  1491 00d2 A446     		mov	ip, r4
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1536 011e 74E7     		b	.L72
  1537              	.L77:
  1538              		.align	2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 41
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 41
 
 
  1539              	.L76:
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1585              		.cfi_offset 4, -24
  1586              		.cfi_offset 5, -20
  1587              		.cfi_offset 6, -16
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 42
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 42
 
 
  1588              		.cfi_offset 7, -12
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1632 0052 6423     		movs	r3, #100
  1633 0054 82B2     		uxth	r2, r0
  1634 0056 2146     		mov	r1, r4
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 43
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 43
 
 
  1635 0058 3846     		mov	r0, r7
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1680              		.loc 1 315 9 is_stmt 1 view .LVU346
  1681 00ae 2646     		mov	r6, r4
  1682 00b0 DFF878C0 		ldr	ip, .L85+36
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 44
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 44
 
 
  1683 00b4 BCE80F00 		ldmia	ip!, {r0, r1, r2, r3}
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1727 0102 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
  1728              	.L86:
  1729 0106 00BF     		.align	2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 45
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 45
 
 
  1730              	.L85:
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1784              	.LCFI7:
  1785              		.cfi_def_cfa_offset 8
  1786              		.cfi_offset 3, -8
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 46
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 46
 
 
  1787              		.cfi_offset 14, -4
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1830 002c FFF7FEFF 		bl	Uart_Game_Menu
  1831              	.LVL96:
   39:Core/Src/uart.c ****         break;    
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 47
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 47
 
 
  1832              		.loc 1 39 9 view .LVU372
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1877              	.L109:
   51:Core/Src/uart.c **** {
  1878              		.loc 1 51 1 view .LVU380
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 48
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 48
 
 
  1879 000a 70B5     		push	{r4, r5, r6, lr}
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
   59:Core/Src/uart.c ****             HAL_UART_Transmit(&UART1,Tx_data,strlen(Tx_data), 100);
  1924              		.loc 1 59 13 view .LVU390
  1925 0050 164C     		ldr	r4, .L110+16
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 49
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 49
 
 
  1926 0052 6423     		movs	r3, #100
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  1971 0098 70BD     		pop	{r4, r5, r6, pc}
  1972              	.L111:
  1973 009a 00BF     		.align	2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 50
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 50
 
 
  1974              	.L110:
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  2041              	print_lock_Thermo:
  2042 0000 00       		.space	1
  2043              		.section	.bss.print_lock_Watch,"aw",%nobits
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 51
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 51
 
 
  2044              		.set	.LANCHOR3,. + 0
@@ -3019,83 +3019,83 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 1
  2063              		.file 8 "Core/Inc/vardef.h"
  2064              		.file 9 "Core/Inc/main.h"
  2065              		.file 10 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\string.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 52
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 52
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 uart.c
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:19     .text.Uart_Menu_Select:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:24     .text.Uart_Menu_Select:00000000 Uart_Menu_Select
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:69     .text.Uart_Menu_Select:00000026 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:73     .text.Uart_Menu_Select:0000002a $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:150    .text.Uart_Menu_Select:0000007c $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:160    .text.Uart_Menu_Select:000000a4 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:224    .text.Uart_Menu_Select:000000e8 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:234    .text.Uart_Menu_Select:00000110 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:298    .text.Uart_Menu_Select:00000154 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:308    .text.Uart_Menu_Select:0000017c $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:365    .text.Uart_Menu_Select:000001b4 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:377    .rodata.Uart_Error_Menu.str1.4:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:406    .text.Uart_Error_Menu:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:411    .text.Uart_Error_Menu:00000000 Uart_Error_Menu
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:446    .text.Uart_Error_Menu:0000001e $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:450    .text.Uart_Error_Menu:00000022 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:689    .text.Uart_Error_Menu:00000194 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:710    .rodata.Uart_Programmer_Info.str1.4:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:720    .text.Uart_Programmer_Info:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:725    .text.Uart_Programmer_Info:00000000 Uart_Programmer_Info
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:830    .text.Uart_Programmer_Info:000000a2 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:834    .text.Uart_Programmer_Info:000000a6 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:893    .text.Uart_Programmer_Info:000000e0 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:910    .rodata.Uart_Main_Menu.str1.4:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:929    .text.Uart_Main_Menu:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:934    .text.Uart_Main_Menu:00000000 Uart_Main_Menu
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1093   .text.Uart_Main_Menu:000000f4 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1107   .rodata.Uart_Watch_Menu.str1.4:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1126   .text.Uart_Watch_Menu:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1131   .text.Uart_Watch_Menu:00000000 Uart_Watch_Menu
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1323   .text.Uart_Watch_Menu:00000134 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1339   .rodata.Uart_Thermometer_Menu.str1.4:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1349   .text.Uart_Thermometer_Menu:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1354   .text.Uart_Thermometer_Menu:00000000 Uart_Thermometer_Menu
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1540   .text.Uart_Thermometer_Menu:00000120 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1555   .rodata.Uart_Game_Menu.str1.4:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1562   .text.Uart_Game_Menu:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1567   .text.Uart_Game_Menu:00000000 Uart_Game_Menu
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1731   .text.Uart_Game_Menu:00000108 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1745   .text.Uart_Receive_Init:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1751   .text.Uart_Receive_Init:00000000 Uart_Receive_Init
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1771   .text.Uart_Transmit:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1777   .text.Uart_Transmit:00000000 Uart_Transmit
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1795   .text.Uart_Transmit:0000000e $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1801   .text.Uart_Transmit:00000014 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1844   .text.Uart_Transmit:00000038 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1849   .rodata.HAL_UART_RxCpltCallback.str1.4:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1856   .text.HAL_UART_RxCpltCallback:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1862   .text.HAL_UART_RxCpltCallback:00000000 HAL_UART_RxCpltCallback
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1975   .text.HAL_UART_RxCpltCallback:0000009c $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2017   .bss.print_lock_Error:00000000 print_lock_Error
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2041   .bss.print_lock_Thermo:00000000 print_lock_Thermo
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2023   .bss.print_lock_Game:00000000 print_lock_Game
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2047   .bss.print_lock_Watch:00000000 print_lock_Watch
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2035   .bss.print_lock_Main:00000000 print_lock_Main
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s 			page 53
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:19     .text.Uart_Menu_Select:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:24     .text.Uart_Menu_Select:00000000 Uart_Menu_Select
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:69     .text.Uart_Menu_Select:00000026 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:73     .text.Uart_Menu_Select:0000002a $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:150    .text.Uart_Menu_Select:0000007c $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:160    .text.Uart_Menu_Select:000000a4 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:224    .text.Uart_Menu_Select:000000e8 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:234    .text.Uart_Menu_Select:00000110 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:298    .text.Uart_Menu_Select:00000154 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:308    .text.Uart_Menu_Select:0000017c $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:365    .text.Uart_Menu_Select:000001b4 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:377    .rodata.Uart_Error_Menu.str1.4:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:406    .text.Uart_Error_Menu:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:411    .text.Uart_Error_Menu:00000000 Uart_Error_Menu
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:446    .text.Uart_Error_Menu:0000001e $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:450    .text.Uart_Error_Menu:00000022 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:689    .text.Uart_Error_Menu:00000194 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:710    .rodata.Uart_Programmer_Info.str1.4:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:720    .text.Uart_Programmer_Info:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:725    .text.Uart_Programmer_Info:00000000 Uart_Programmer_Info
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:830    .text.Uart_Programmer_Info:000000a2 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:834    .text.Uart_Programmer_Info:000000a6 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:893    .text.Uart_Programmer_Info:000000e0 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:910    .rodata.Uart_Main_Menu.str1.4:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:929    .text.Uart_Main_Menu:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:934    .text.Uart_Main_Menu:00000000 Uart_Main_Menu
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1093   .text.Uart_Main_Menu:000000f4 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1107   .rodata.Uart_Watch_Menu.str1.4:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1126   .text.Uart_Watch_Menu:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1131   .text.Uart_Watch_Menu:00000000 Uart_Watch_Menu
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1323   .text.Uart_Watch_Menu:00000134 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1339   .rodata.Uart_Thermometer_Menu.str1.4:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1349   .text.Uart_Thermometer_Menu:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1354   .text.Uart_Thermometer_Menu:00000000 Uart_Thermometer_Menu
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1540   .text.Uart_Thermometer_Menu:00000120 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1555   .rodata.Uart_Game_Menu.str1.4:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1562   .text.Uart_Game_Menu:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1567   .text.Uart_Game_Menu:00000000 Uart_Game_Menu
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1731   .text.Uart_Game_Menu:00000108 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1745   .text.Uart_Receive_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1751   .text.Uart_Receive_Init:00000000 Uart_Receive_Init
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1771   .text.Uart_Transmit:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1777   .text.Uart_Transmit:00000000 Uart_Transmit
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1795   .text.Uart_Transmit:0000000e $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1801   .text.Uart_Transmit:00000014 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1844   .text.Uart_Transmit:00000038 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1849   .rodata.HAL_UART_RxCpltCallback.str1.4:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1856   .text.HAL_UART_RxCpltCallback:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1862   .text.HAL_UART_RxCpltCallback:00000000 HAL_UART_RxCpltCallback
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1975   .text.HAL_UART_RxCpltCallback:0000009c $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2017   .bss.print_lock_Error:00000000 print_lock_Error
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2041   .bss.print_lock_Thermo:00000000 print_lock_Thermo
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2023   .bss.print_lock_Game:00000000 print_lock_Game
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2047   .bss.print_lock_Watch:00000000 print_lock_Watch
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2035   .bss.print_lock_Main:00000000 print_lock_Main
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s 			page 53
 
 
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2029   .bss.print_lock_Info:00000000 print_lock_Info
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1998   .bss.Menu_status_Old:00000000 Menu_status_Old
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2053   .data.Menu_status:00000000 Menu_status
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2004   .bss.Rx_data:00000000 Rx_data
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2011   .bss.Tx_data:00000000 Tx_data
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:1999   .bss.Menu_status_Old:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2005   .bss.Rx_data:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2007   .bss.Tx_data:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2018   .bss.print_lock_Error:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2024   .bss.print_lock_Game:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2030   .bss.print_lock_Info:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2036   .bss.print_lock_Main:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2042   .bss.print_lock_Thermo:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccYpvWDk.s:2048   .bss.print_lock_Watch:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2029   .bss.print_lock_Info:00000000 print_lock_Info
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1998   .bss.Menu_status_Old:00000000 Menu_status_Old
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2053   .data.Menu_status:00000000 Menu_status
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2004   .bss.Rx_data:00000000 Rx_data
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2011   .bss.Tx_data:00000000 Tx_data
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:1999   .bss.Menu_status_Old:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2005   .bss.Rx_data:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2007   .bss.Tx_data:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2018   .bss.print_lock_Error:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2024   .bss.print_lock_Game:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2030   .bss.print_lock_Info:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2036   .bss.print_lock_Main:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2042   .bss.print_lock_Thermo:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccuiEyCX.s:2048   .bss.print_lock_Watch:00000000 $d
 
 UNDEFINED SYMBOLS
 strlen

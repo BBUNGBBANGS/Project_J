@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -25,7 +25,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
   22              		.thumb_func
   24              	LCD_Power_Control:
   25              	.LVL0:
-  26              	.LFB332:
+  26              	.LFB334:
   27              		.file 1 "Core/Src/lcd.c"
    1:Core/Src/lcd.c **** #include "lcd.h"
    2:Core/Src/lcd.c **** static void LCD_Power_Control(uint8 status, uint8 duty);
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
   42              		.loc 1 14 5 is_stmt 0 view .LVU3
   43 0008 0148     		ldr	r0, .L3
   44              	.LVL2:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 2
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 2
 
 
   45              		.loc 1 14 5 view .LVU4
@@ -75,7 +75,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
   53              	.L3:
   54 0010 00200258 		.word	1476534272
   55              		.cfi_endproc
-  56              	.LFE332:
+  56              	.LFE334:
   58              		.section	.text.LCD_Output_Red,"ax",%progbits
   59              		.align	1
   60              		.syntax unified
@@ -83,7 +83,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
   62              		.thumb_func
   64              	LCD_Output_Red:
   65              	.LVL4:
-  66              	.LFB335:
+  66              	.LFB337:
   18:Core/Src/lcd.c **** 
   19:Core/Src/lcd.c **** void LCD_Set_Clock(void)
   20:Core/Src/lcd.c **** {
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
   49:Core/Src/lcd.c **** }
   50:Core/Src/lcd.c **** 
   51:Core/Src/lcd.c **** void LCD_Set_Color(void)
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 3
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 3
 
 
   52:Core/Src/lcd.c **** {
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
   66:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_R4_MODULE,LCD_R4_PIN,((data>>4)&0x01));
  107              		.loc 1 66 5 view .LVU14
  108 003a C4F30012 		ubfx	r2, r4, #4, #1
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 4
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 4
 
 
  109 003e 4FF48061 		mov	r1, #1024
@@ -219,7 +219,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  139 0074 00040258 		.word	1476527104
  140 0078 00180258 		.word	1476532224
  141              		.cfi_endproc
- 142              	.LFE335:
+ 142              	.LFE337:
  144              		.section	.text.LCD_Output_Green,"ax",%progbits
  145              		.align	1
  146              		.syntax unified
@@ -227,7 +227,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  148              		.thumb_func
  150              	LCD_Output_Green:
  151              	.LVL14:
- 152              	.LFB336:
+ 152              	.LFB338:
   72:Core/Src/lcd.c **** 
   73:Core/Src/lcd.c **** static void LCD_Output_Green(uint8 data)
   74:Core/Src/lcd.c **** {
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  157              		.loc 1 74 1 is_stmt 0 view .LVU21
  158 0000 38B5     		push	{r3, r4, r5, lr}
  159              	.LCFI2:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 5
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 5
 
 
  160              		.cfi_def_cfa_offset 16
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  207              		.loc 1 81 5 view .LVU29
  208 005c C4F38012 		ubfx	r2, r4, #6, #1
  209 0060 0221     		movs	r1, #2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 6
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 6
 
 
  210 0062 2846     		mov	r0, r5
@@ -322,7 +322,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  225 0074 00100258 		.word	1476530176
  226 0078 00180258 		.word	1476532224
  227              		.cfi_endproc
- 228              	.LFE336:
+ 228              	.LFE338:
  230              		.section	.text.LCD_Output_Blue,"ax",%progbits
  231              		.align	1
  232              		.syntax unified
@@ -330,7 +330,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  234              		.thumb_func
  236              	LCD_Output_Blue:
  237              	.LVL24:
- 238              	.LFB337:
+ 238              	.LFB339:
   85:Core/Src/lcd.c **** 
   86:Core/Src/lcd.c **** static void LCD_Output_Blue(uint8 data)
   87:Core/Src/lcd.c **** {
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  259              	.LVL26:
   89:Core/Src/lcd.c ****     HAL_GPIO_WritePin(LCD_B1_MODULE,LCD_B1_PIN,((data>>1)&0x01));
  260              		.loc 1 89 5 is_stmt 1 view .LVU37
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 7
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 7
 
 
  261 0010 184D     		ldr	r5, .L15+4
@@ -418,14 +418,14 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  307              	.L16:
  308 006e 00BF     		.align	2
  309              	.L15:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 8
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 8
 
 
  310 0070 00100258 		.word	1476530176
  311 0074 00180258 		.word	1476532224
  312 0078 000C0258 		.word	1476529152
  313              		.cfi_endproc
- 314              	.LFE337:
+ 314              	.LFE339:
  316              		.section	.text.LCD_Init,"ax",%progbits
  317              		.align	1
  318              		.global	LCD_Init
@@ -433,7 +433,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  320              		.thumb
  321              		.thumb_func
  323              	LCD_Init:
- 324              	.LFB331:
+ 324              	.LFB333:
    8:Core/Src/lcd.c **** {
  325              		.loc 1 8 1 is_stmt 1 view -0
  326              		.cfi_startproc
@@ -454,7 +454,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  339              		.loc 1 10 1 is_stmt 0 view .LVU48
  340 000a 08BD     		pop	{r3, pc}
  341              		.cfi_endproc
- 342              	.LFE331:
+ 342              	.LFE333:
  344              		.section	.text.LCD_Set_Clock,"ax",%progbits
  345              		.align	1
  346              		.global	LCD_Set_Clock
@@ -462,7 +462,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  348              		.thumb
  349              		.thumb_func
  351              	LCD_Set_Clock:
- 352              	.LFB333:
+ 352              	.LFB335:
   20:Core/Src/lcd.c **** {
  353              		.loc 1 20 1 is_stmt 1 view -0
  354              		.cfi_startproc
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
   22:Core/Src/lcd.c ****     static uint8 counter;
  363              		.loc 1 22 5 view .LVU51
   23:Core/Src/lcd.c ****     state = (~state)&0x01;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 9
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 9
 
 
  364              		.loc 1 23 5 view .LVU52
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  406 0040 1248     		ldr	r0, .L27+8
  407 0042 FFF7FEFF 		bl	HAL_GPIO_WritePin
  408              	.LVL37:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 10
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 10
 
 
   32:Core/Src/lcd.c ****         if(counter == 17)
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  450 007a 0648     		ldr	r0, .L27+16
  451 007c FFF7FEFF 		bl	HAL_GPIO_WritePin
  452              	.LVL39:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 11
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 11
 
 
  453 0080 E9E7     		b	.L23
@@ -611,7 +611,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  460 0090 00180258 		.word	1476532224
  461 0094 00200258 		.word	1476534272
  462              		.cfi_endproc
- 463              	.LFE333:
+ 463              	.LFE335:
  465              		.section	.text.LCD_Set_Color,"ax",%progbits
  466              		.align	1
  467              		.global	LCD_Set_Color
@@ -619,7 +619,7 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  469              		.thumb
  470              		.thumb_func
  472              	LCD_Set_Color:
- 473              	.LFB334:
+ 473              	.LFB336:
   52:Core/Src/lcd.c **** {
  474              		.loc 1 52 1 view -0
  475              		.cfi_startproc
@@ -651,14 +651,14 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  496              		.loc 1 58 1 is_stmt 0 view .LVU83
  497 0014 08BD     		pop	{r3, pc}
  498              		.cfi_endproc
- 499              	.LFE334:
+ 499              	.LFE336:
  501              		.section	.bss.counter.0,"aw",%nobits
  502              		.set	.LANCHOR1,. + 0
  505              	counter.0:
  506 0000 00       		.space	1
  507              		.section	.bss.state.1,"aw",%nobits
  508              		.set	.LANCHOR0,. + 0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 12
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 12
 
 
  511              	state.1:
@@ -670,34 +670,34 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 1
  517              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h"
  518              		.file 5 "Core/Inc/vardef.h"
  519              		.file 6 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s 			page 13
+ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 lcd.c
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:19     .text.LCD_Power_Control:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:24     .text.LCD_Power_Control:00000000 LCD_Power_Control
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:54     .text.LCD_Power_Control:00000010 $d
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:59     .text.LCD_Output_Red:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:64     .text.LCD_Output_Red:00000000 LCD_Output_Red
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:137    .text.LCD_Output_Red:0000006c $d
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:145    .text.LCD_Output_Green:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:150    .text.LCD_Output_Green:00000000 LCD_Output_Green
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:225    .text.LCD_Output_Green:00000074 $d
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:231    .text.LCD_Output_Blue:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:236    .text.LCD_Output_Blue:00000000 LCD_Output_Blue
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:310    .text.LCD_Output_Blue:00000070 $d
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:317    .text.LCD_Init:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:323    .text.LCD_Init:00000000 LCD_Init
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:345    .text.LCD_Set_Clock:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:351    .text.LCD_Set_Clock:00000000 LCD_Set_Clock
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:457    .text.LCD_Set_Clock:00000084 $d
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:466    .text.LCD_Set_Color:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:472    .text.LCD_Set_Color:00000000 LCD_Set_Color
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:505    .bss.counter.0:00000000 counter.0
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:506    .bss.counter.0:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:511    .bss.state.1:00000000 state.1
-C:\Users\jisu8\AppData\Local\Temp\ccNRkByN.s:512    .bss.state.1:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:19     .text.LCD_Power_Control:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:24     .text.LCD_Power_Control:00000000 LCD_Power_Control
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:54     .text.LCD_Power_Control:00000010 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:59     .text.LCD_Output_Red:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:64     .text.LCD_Output_Red:00000000 LCD_Output_Red
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:137    .text.LCD_Output_Red:0000006c $d
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:145    .text.LCD_Output_Green:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:150    .text.LCD_Output_Green:00000000 LCD_Output_Green
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:225    .text.LCD_Output_Green:00000074 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:231    .text.LCD_Output_Blue:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:236    .text.LCD_Output_Blue:00000000 LCD_Output_Blue
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:310    .text.LCD_Output_Blue:00000070 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:317    .text.LCD_Init:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:323    .text.LCD_Init:00000000 LCD_Init
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:345    .text.LCD_Set_Clock:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:351    .text.LCD_Set_Clock:00000000 LCD_Set_Clock
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:457    .text.LCD_Set_Clock:00000084 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:466    .text.LCD_Set_Color:00000000 $t
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:472    .text.LCD_Set_Color:00000000 LCD_Set_Color
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:505    .bss.counter.0:00000000 counter.0
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:506    .bss.counter.0:00000000 $d
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:511    .bss.state.1:00000000 state.1
+C:\Users\jisu8\AppData\Local\Temp\ccqlQ1QS.s:512    .bss.state.1:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin
