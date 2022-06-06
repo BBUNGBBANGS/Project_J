@@ -1,5 +1,5 @@
 #settings
-./vscode/*.json
+.vscode/*.json
 
 #build folders
-./build/
+build/
