@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
    7:Core/Src/motor_driver.c **** uint8 Motor_Driver_Fault;
    8:Core/Src/motor_driver.c **** static void Motor_Driver_Output_Step(uint32 angle);
    9:Core/Src/motor_driver.c **** static void Motor_Driver_Output_Duty(uint16 duty);
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 2
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 2
 
 
   10:Core/Src/motor_driver.c **** static void Motor_Driver_Port_Set_Mode(uint16 pin,uint8 mode);
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  106              		.cfi_def_cfa_register 7
   20:Core/Src/motor_driver.c ****     Motor_Driver_Output_Step(AS5048_Angle);
  107              		.loc 1 20 5
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 3
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 3
 
 
  108 0004 064B     		ldr	r3, .L3
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  154              		.loc 1 30 10
  155 0008 0023     		movs	r3, #0
  156 000a FB73     		strb	r3, [r7, #15]
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 4
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 4
 
 
   31:Core/Src/motor_driver.c ****     Motor_Angle = angle + Motor_Angle_Offset;
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  197 0050 FB73     		strb	r3, [r7, #15]
  198 0052 32E0     		b	.L8
  199              	.L9:
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 5
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 5
 
 
   45:Core/Src/motor_driver.c ****     }
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  242 009e FB73     		strb	r3, [r7, #15]
  243 00a0 0BE0     		b	.L8
  244              	.L12:
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 6
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 6
 
 
   57:Core/Src/motor_driver.c ****     }    
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  288              		.thumb
  289              		.thumb_func
  291              	Motor_Driver_Output_Duty:
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 7
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 7
 
 
  292              	.LFB336:
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  334              		.loc 1 80 17
  335 0040 0121     		movs	r1, #1
  336 0042 4FF40050 		mov	r0, #8192
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 8
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 8
 
 
  337 0046 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  380 0090 564B     		ldr	r3, .L29+4
  381              		.loc 1 91 62
  382 0092 0022     		movs	r2, #0
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 9
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 9
 
 
  383 0094 9A63     		str	r2, [r3, #56]
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  426 00dc 0221     		movs	r1, #2
  427 00de 4FF42040 		mov	r0, #40960
  428 00e2 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 10
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 10
 
 
  103:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_U,GPIO_PIN_RESET);
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  472 0134 4FF40041 		mov	r1, #32768
  473 0138 2D48     		ldr	r0, .L29+8
  474 013a FFF7FEFF 		bl	HAL_GPIO_WritePin
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 11
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 11
 
 
  114:Core/Src/motor_driver.c ****             break;        
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  517 0186 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
  126:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
  518              		.loc 1 126 37
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 12
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 12
 
 
  519 018a 184B     		ldr	r3, .L29+4
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  141:Core/Src/motor_driver.c ****         MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
  559              		.loc 1 141 29
  560 01d0 064B     		ldr	r3, .L29+4
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 13
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 13
 
 
  561              		.loc 1 141 54
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  610              		.cfi_offset 7, -8
  611              		.cfi_offset 14, -4
  612 0002 88B0     		sub	sp, sp, #32
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 14
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 14
 
 
  613              	.LCFI18:
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  654 003e 0348     		ldr	r0, .L34
  655 0040 FFF7FEFF 		bl	HAL_GPIO_Init
  161:Core/Src/motor_driver.c **** }
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 15
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 15
 
 
  656              		.loc 1 161 1
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  707              	.L37:
  708 001c 00040258 		.word	1476527104
  709 0020 00000000 		.word	Motor_Driver_Fault
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 16
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 16
 
 
  710              		.cfi_endproc
@@ -910,40 +910,40 @@ ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
  717              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h"
  718              		.file 5 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h"
  719              		.file 6 "Core/Inc/vardef.h"
-ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 17
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 motor_driver.c
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:23     .data.Motor_Driver_Duty:0000000000000000 Motor_Driver_Duty
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:20     .data.Motor_Driver_Duty:0000000000000000 $d
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:29     .bss.Motor_Driver_Step:0000000000000000 Motor_Driver_Step
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:30     .bss.Motor_Driver_Step:0000000000000000 $d
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:36     .bss.Motor_Angle_Offset:0000000000000000 Motor_Angle_Offset
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:33     .bss.Motor_Angle_Offset:0000000000000000 $d
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:42     .bss.Motor_Driver_Fault:0000000000000000 Motor_Driver_Fault
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:43     .bss.Motor_Driver_Fault:0000000000000000 $d
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:48     .bss.AS5048_Angle:0000000000000000 AS5048_Angle
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:49     .bss.AS5048_Angle:0000000000000000 $d
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:51     .text.Motor_Driver_Init:0000000000000000 $t
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:57     .text.Motor_Driver_Init:0000000000000000 Motor_Driver_Init
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:87     .text.Motor_Drvier_Control:0000000000000000 $t
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:93     .text.Motor_Drvier_Control:0000000000000000 Motor_Drvier_Control
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:136    .text.Motor_Driver_Output_Step:0000000000000000 Motor_Driver_Output_Step
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:291    .text.Motor_Driver_Output_Duty:0000000000000000 Motor_Driver_Output_Duty
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:679    .text.Motor_Drvier_Fault:0000000000000000 Motor_Drvier_Fault
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:125    .text.Motor_Drvier_Control:0000000000000020 $d
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:131    .text.Motor_Driver_Output_Step:0000000000000000 $t
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:280    .text.Motor_Driver_Output_Step:00000000000000cc $d
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:286    .text.Motor_Driver_Output_Duty:0000000000000000 $t
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:326    .text.Motor_Driver_Output_Duty:0000000000000028 $d
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:332    .text.Motor_Driver_Output_Duty:0000000000000040 $t
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:601    .text.Motor_Driver_Port_Set_Mode:0000000000000000 Motor_Driver_Port_Set_Mode
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:589    .text.Motor_Driver_Output_Duty:00000000000001e8 $d
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:596    .text.Motor_Driver_Port_Set_Mode:0000000000000000 $t
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:669    .text.Motor_Driver_Port_Set_Mode:000000000000004c $d
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:674    .text.Motor_Drvier_Fault:0000000000000000 $t
-/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:708    .text.Motor_Drvier_Fault:000000000000001c $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:23     .data.Motor_Driver_Duty:0000000000000000 Motor_Driver_Duty
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:20     .data.Motor_Driver_Duty:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:29     .bss.Motor_Driver_Step:0000000000000000 Motor_Driver_Step
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:30     .bss.Motor_Driver_Step:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:36     .bss.Motor_Angle_Offset:0000000000000000 Motor_Angle_Offset
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:33     .bss.Motor_Angle_Offset:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:42     .bss.Motor_Driver_Fault:0000000000000000 Motor_Driver_Fault
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:43     .bss.Motor_Driver_Fault:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:48     .bss.AS5048_Angle:0000000000000000 AS5048_Angle
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:49     .bss.AS5048_Angle:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:51     .text.Motor_Driver_Init:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:57     .text.Motor_Driver_Init:0000000000000000 Motor_Driver_Init
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:87     .text.Motor_Drvier_Control:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:93     .text.Motor_Drvier_Control:0000000000000000 Motor_Drvier_Control
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:136    .text.Motor_Driver_Output_Step:0000000000000000 Motor_Driver_Output_Step
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:291    .text.Motor_Driver_Output_Duty:0000000000000000 Motor_Driver_Output_Duty
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:679    .text.Motor_Drvier_Fault:0000000000000000 Motor_Drvier_Fault
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:125    .text.Motor_Drvier_Control:0000000000000020 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:131    .text.Motor_Driver_Output_Step:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:280    .text.Motor_Driver_Output_Step:00000000000000cc $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:286    .text.Motor_Driver_Output_Duty:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:326    .text.Motor_Driver_Output_Duty:0000000000000028 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:332    .text.Motor_Driver_Output_Duty:0000000000000040 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:601    .text.Motor_Driver_Port_Set_Mode:0000000000000000 Motor_Driver_Port_Set_Mode
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:589    .text.Motor_Driver_Output_Duty:00000000000001e8 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:596    .text.Motor_Driver_Port_Set_Mode:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:669    .text.Motor_Driver_Port_Set_Mode:000000000000004c $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:674    .text.Motor_Drvier_Fault:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccMYR3iy.s:708    .text.Motor_Drvier_Fault:000000000000001c $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin
