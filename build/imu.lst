@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s 			page 1
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -11,21 +11,35 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s 			page 1
    8              		.eabi_attribute 24, 1
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
-  11              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 30, 6
   12              		.eabi_attribute 34, 1
   13              		.eabi_attribute 18, 4
   14              		.file	"imu.c"
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.text.IMU_Read_Data,"ax",%progbits
-  19              		.align	1
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
-  24              	IMU_Read_Data:
-  25              	.LFB335:
-  26              		.file 1 "Core/Src/imu.c"
+  18              		.global	IMU_BANK0
+  19              		.section	.bss.IMU_BANK0,"aw",%nobits
+  20              		.align	2
+  23              	IMU_BANK0:
+  24 0000 00000000 		.space	65
+  24      00000000 
+  24      00000000 
+  24      00000000 
+  24      00000000 
+  25              		.global	IMU_Address
+  26              		.section	.bss.IMU_Address,"aw",%nobits
+  29              	IMU_Address:
+  30 0000 00       		.space	1
+  31              		.section	.text.IMU_Control,"ax",%progbits
+  32              		.align	1
+  33              		.global	IMU_Control
+  34              		.syntax unified
+  35              		.thumb
+  36              		.thumb_func
+  38              	IMU_Control:
+  39              	.LFB333:
+  40              		.file 1 "Core/Src/imu.c"
    1:Core/Src/imu.c **** #include "imu.h"
    2:Core/Src/imu.c **** 
    3:Core/Src/imu.c **** static void IMU_Read_Data(void);
@@ -33,173 +47,171 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s 			page 1
    5:Core/Src/imu.c **** uint8 IMU_Address;
    6:Core/Src/imu.c **** void IMU_Control(void)
    7:Core/Src/imu.c **** {
+  41              		.loc 1 7 1
+  42              		.cfi_startproc
+  43              		@ args = 0, pretend = 0, frame = 0
+  44              		@ frame_needed = 1, uses_anonymous_args = 0
+  45 0000 80B5     		push	{r7, lr}
+  46              	.LCFI0:
+  47              		.cfi_def_cfa_offset 8
+  48              		.cfi_offset 7, -8
+  49              		.cfi_offset 14, -4
+  50 0002 00AF     		add	r7, sp, #0
+  51              	.LCFI1:
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s 			page 2
+
+
+  52              		.cfi_def_cfa_register 7
    8:Core/Src/imu.c ****     IMU_Read_Data();
+  53              		.loc 1 8 5
+  54 0004 FFF7FEFF 		bl	IMU_Read_Data
    9:Core/Src/imu.c **** }
+  55              		.loc 1 9 1
+  56 0008 00BF     		nop
+  57 000a 80BD     		pop	{r7, pc}
+  58              		.cfi_endproc
+  59              	.LFE333:
+  61              		.section	.text.IMU_FindAddress,"ax",%progbits
+  62              		.align	1
+  63              		.global	IMU_FindAddress
+  64              		.syntax unified
+  65              		.thumb
+  66              		.thumb_func
+  68              	IMU_FindAddress:
+  69              	.LFB334:
   10:Core/Src/imu.c **** 
   11:Core/Src/imu.c **** void IMU_FindAddress(void)
   12:Core/Src/imu.c **** {
+  70              		.loc 1 12 1
+  71              		.cfi_startproc
+  72              		@ args = 0, pretend = 0, frame = 0
+  73              		@ frame_needed = 1, uses_anonymous_args = 0
+  74 0000 80B5     		push	{r7, lr}
+  75              	.LCFI2:
+  76              		.cfi_def_cfa_offset 8
+  77              		.cfi_offset 7, -8
+  78              		.cfi_offset 14, -4
+  79 0002 00AF     		add	r7, sp, #0
+  80              	.LCFI3:
+  81              		.cfi_def_cfa_register 7
   13:Core/Src/imu.c ****     if(HAL_OK == HAL_I2C_IsDeviceReady(&IMU_MODULE,IMU_Address,3,10))
+  82              		.loc 1 13 18
+  83 0004 094B     		ldr	r3, .L5
+  84 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  85 0008 99B2     		uxth	r1, r3
+  86 000a 0A23     		movs	r3, #10
+  87 000c 0322     		movs	r2, #3
+  88 000e 0848     		ldr	r0, .L5+4
+  89 0010 FFF7FEFF 		bl	HAL_I2C_IsDeviceReady
+  90 0014 0346     		mov	r3, r0
+  91              		.loc 1 13 7
+  92 0016 002B     		cmp	r3, #0
+  93 0018 05D0     		beq	.L4
   14:Core/Src/imu.c ****     {
   15:Core/Src/imu.c ****         /*do noThing*/
   16:Core/Src/imu.c ****     }
   17:Core/Src/imu.c ****     else
   18:Core/Src/imu.c ****     {
   19:Core/Src/imu.c ****         IMU_Address++;
+  94              		.loc 1 19 20
+  95 001a 044B     		ldr	r3, .L5
+  96 001c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  97 001e 0133     		adds	r3, r3, #1
+  98 0020 DAB2     		uxtb	r2, r3
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s 			page 3
+
+
+  99 0022 024B     		ldr	r3, .L5
+ 100 0024 1A70     		strb	r2, [r3]
+ 101              	.L4:
   20:Core/Src/imu.c ****     }
   21:Core/Src/imu.c **** }
+ 102              		.loc 1 21 1
+ 103 0026 00BF     		nop
+ 104 0028 80BD     		pop	{r7, pc}
+ 105              	.L6:
+ 106 002a 00BF     		.align	2
+ 107              	.L5:
+ 108 002c 00000000 		.word	IMU_Address
+ 109 0030 00000000 		.word	hi2c1
+ 110              		.cfi_endproc
+ 111              	.LFE334:
+ 113              		.section	.text.IMU_Read_Data,"ax",%progbits
+ 114              		.align	1
+ 115              		.syntax unified
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	IMU_Read_Data:
+ 120              	.LFB335:
   22:Core/Src/imu.c **** 
   23:Core/Src/imu.c **** static void IMU_Read_Data(void)
   24:Core/Src/imu.c **** {
-  27              		.loc 1 24 1 view -0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 0
-  30              		@ frame_needed = 0, uses_anonymous_args = 0
-  31              		@ link register save eliminated.
+ 121              		.loc 1 24 1
+ 122              		.cfi_startproc
+ 123              		@ args = 0, pretend = 0, frame = 0
+ 124              		@ frame_needed = 1, uses_anonymous_args = 0
+ 125              		@ link register save eliminated.
+ 126 0000 80B4     		push	{r7}
+ 127              	.LCFI4:
+ 128              		.cfi_def_cfa_offset 4
+ 129              		.cfi_offset 7, -4
+ 130 0002 00AF     		add	r7, sp, #0
+ 131              	.LCFI5:
+ 132              		.cfi_def_cfa_register 7
   25:Core/Src/imu.c ****     IMU_BANK0.ACCEL_XOUT_H.ACCEL_XOUT_H = 0;
-  32              		.loc 1 25 5 view .LVU1
-  33              		.loc 1 25 41 is_stmt 0 view .LVU2
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s 			page 2
-
-
-  34 0000 014B     		ldr	r3, .L2
-  35 0002 0022     		movs	r2, #0
-  36 0004 5A74     		strb	r2, [r3, #17]
+ 133              		.loc 1 25 41
+ 134 0004 034B     		ldr	r3, .L8
+ 135 0006 0022     		movs	r2, #0
+ 136 0008 5A74     		strb	r2, [r3, #17]
   26:Core/Src/imu.c **** }...
-  37              		.loc 1 26 1 view .LVU3
-  38 0006 7047     		bx	lr
-  39              	.L3:
-  40              		.align	2
-  41              	.L2:
-  42 0008 00000000 		.word	.LANCHOR0
-  43              		.cfi_endproc
-  44              	.LFE335:
-  46              		.section	.text.IMU_Control,"ax",%progbits
-  47              		.align	1
-  48              		.global	IMU_Control
-  49              		.syntax unified
-  50              		.thumb
-  51              		.thumb_func
-  53              	IMU_Control:
-  54              	.LFB333:
-   7:Core/Src/imu.c **** {
-  55              		.loc 1 7 1 is_stmt 1 view -0
-  56              		.cfi_startproc
-  57              		@ args = 0, pretend = 0, frame = 0
-  58              		@ frame_needed = 0, uses_anonymous_args = 0
-  59 0000 08B5     		push	{r3, lr}
-  60              	.LCFI0:
-  61              		.cfi_def_cfa_offset 8
-  62              		.cfi_offset 3, -8
-  63              		.cfi_offset 14, -4
-   8:Core/Src/imu.c ****     IMU_Read_Data();
-  64              		.loc 1 8 5 view .LVU5
-  65 0002 FFF7FEFF 		bl	IMU_Read_Data
-  66              	.LVL0:
-   9:Core/Src/imu.c **** }
-  67              		.loc 1 9 1 is_stmt 0 view .LVU6
-  68 0006 08BD     		pop	{r3, pc}
-  69              		.cfi_endproc
-  70              	.LFE333:
-  72              		.section	.text.IMU_FindAddress,"ax",%progbits
-  73              		.align	1
-  74              		.global	IMU_FindAddress
-  75              		.syntax unified
-  76              		.thumb
-  77              		.thumb_func
-  79              	IMU_FindAddress:
-  80              	.LFB334:
-  12:Core/Src/imu.c **** {
-  81              		.loc 1 12 1 is_stmt 1 view -0
-  82              		.cfi_startproc
-  83              		@ args = 0, pretend = 0, frame = 0
-  84              		@ frame_needed = 0, uses_anonymous_args = 0
-  85 0000 08B5     		push	{r3, lr}
-  86              	.LCFI1:
-  87              		.cfi_def_cfa_offset 8
-  88              		.cfi_offset 3, -8
-  89              		.cfi_offset 14, -4
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s 			page 3
+ 137              		.loc 1 26 1
+ 138 000a 00BF     		nop
+ 139 000c BD46     		mov	sp, r7
+ 140              	.LCFI6:
+ 141              		.cfi_def_cfa_register 13
+ 142              		@ sp needed
+ 143 000e 5DF8047B 		ldr	r7, [sp], #4
+ 144              	.LCFI7:
+ 145              		.cfi_restore 7
+ 146              		.cfi_def_cfa_offset 0
+ 147 0012 7047     		bx	lr
+ 148              	.L9:
+ 149              		.align	2
+ 150              	.L8:
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s 			page 4
 
 
-  13:Core/Src/imu.c ****     if(HAL_OK == HAL_I2C_IsDeviceReady(&IMU_MODULE,IMU_Address,3,10))
-  90              		.loc 1 13 5 view .LVU8
-  13:Core/Src/imu.c ****     if(HAL_OK == HAL_I2C_IsDeviceReady(&IMU_MODULE,IMU_Address,3,10))
-  91              		.loc 1 13 18 is_stmt 0 view .LVU9
-  92 0002 0A23     		movs	r3, #10
-  93 0004 0322     		movs	r2, #3
-  94 0006 0549     		ldr	r1, .L9
-  95 0008 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
-  96 000a 0548     		ldr	r0, .L9+4
-  97 000c FFF7FEFF 		bl	HAL_I2C_IsDeviceReady
-  98              	.LVL1:
-  13:Core/Src/imu.c ****     if(HAL_OK == HAL_I2C_IsDeviceReady(&IMU_MODULE,IMU_Address,3,10))
-  99              		.loc 1 13 7 view .LVU10
- 100 0010 18B1     		cbz	r0, .L6
-  19:Core/Src/imu.c ****         IMU_Address++;
- 101              		.loc 1 19 9 is_stmt 1 view .LVU11
-  19:Core/Src/imu.c ****         IMU_Address++;
- 102              		.loc 1 19 20 is_stmt 0 view .LVU12
- 103 0012 024A     		ldr	r2, .L9
- 104 0014 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 105 0016 0133     		adds	r3, r3, #1
- 106 0018 1370     		strb	r3, [r2]
- 107              	.L6:
-  21:Core/Src/imu.c **** }
- 108              		.loc 1 21 1 view .LVU13
- 109 001a 08BD     		pop	{r3, pc}
- 110              	.L10:
- 111              		.align	2
- 112              	.L9:
- 113 001c 00000000 		.word	.LANCHOR1
- 114 0020 00000000 		.word	hi2c1
- 115              		.cfi_endproc
- 116              	.LFE334:
- 118              		.global	IMU_Address
- 119              		.global	IMU_BANK0
- 120              		.section	.bss.IMU_Address,"aw",%nobits
- 121              		.set	.LANCHOR1,. + 0
- 124              	IMU_Address:
- 125 0000 00       		.space	1
- 126              		.section	.bss.IMU_BANK0,"aw",%nobits
- 127              		.align	2
- 128              		.set	.LANCHOR0,. + 0
- 131              	IMU_BANK0:
- 132 0000 00000000 		.space	65
- 132      00000000 
- 132      00000000 
- 132      00000000 
- 132      00000000 
- 133              		.text
- 134              	.Letext0:
- 135              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
- 136              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
- 137              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h"
- 138              		.file 5 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
- 139              		.file 6 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h"
- 140              		.file 7 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c.h"
- 141              		.file 8 "Core/Inc/vardef.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s 			page 4
-
-
- 142              		.file 9 "Core/Inc/imu.h"
- 143              		.file 10 "Core/Inc/main.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s 			page 5
+ 151 0014 00000000 		.word	IMU_BANK0
+ 152              		.cfi_endproc
+ 153              	.LFE335:
+ 155              		.text
+ 156              	.Letext0:
+ 157              		.file 2 "/Users/seojisu/Library/Arm-GCC-xPack/arm-none-eabi/include/machine/_default_types.h"
+ 158              		.file 3 "/Users/seojisu/Library/Arm-GCC-xPack/arm-none-eabi/include/sys/_stdint.h"
+ 159              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h"
+ 160              		.file 5 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 161              		.file 6 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h"
+ 162              		.file 7 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c.h"
+ 163              		.file 8 "Core/Inc/vardef.h"
+ 164              		.file 9 "Core/Inc/imu.h"
+ 165              		.file 10 "Core/Inc/main.h"
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s 			page 5
 
 
 DEFINED SYMBOLS
-                            *ABS*:00000000 imu.c
-C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s:19     .text.IMU_Read_Data:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s:24     .text.IMU_Read_Data:00000000 IMU_Read_Data
-C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s:42     .text.IMU_Read_Data:00000008 $d
-C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s:47     .text.IMU_Control:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s:53     .text.IMU_Control:00000000 IMU_Control
-C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s:73     .text.IMU_FindAddress:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s:79     .text.IMU_FindAddress:00000000 IMU_FindAddress
-C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s:113    .text.IMU_FindAddress:0000001c $d
-C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s:124    .bss.IMU_Address:00000000 IMU_Address
-C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s:131    .bss.IMU_BANK0:00000000 IMU_BANK0
-C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s:125    .bss.IMU_Address:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccWLEp6l.s:127    .bss.IMU_BANK0:00000000 $d
+                            *ABS*:0000000000000000 imu.c
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s:23     .bss.IMU_BANK0:0000000000000000 IMU_BANK0
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s:20     .bss.IMU_BANK0:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s:29     .bss.IMU_Address:0000000000000000 IMU_Address
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s:30     .bss.IMU_Address:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s:32     .text.IMU_Control:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s:38     .text.IMU_Control:0000000000000000 IMU_Control
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s:119    .text.IMU_Read_Data:0000000000000000 IMU_Read_Data
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s:62     .text.IMU_FindAddress:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s:68     .text.IMU_FindAddress:0000000000000000 IMU_FindAddress
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s:108    .text.IMU_FindAddress:000000000000002c $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s:114    .text.IMU_Read_Data:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccexLCUX.s:151    .text.IMU_Read_Data:0000000000000014 $d
 
 UNDEFINED SYMBOLS
 HAL_I2C_IsDeviceReady

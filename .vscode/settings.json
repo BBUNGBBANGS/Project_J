@@ -1,6 +1,6 @@
 {
     "cortex-debug.armToolchainPath": "/Users/seojisu/Library/Arm-GCC-xPack/bin/",
-    "cortex-debug.openocdPath": "/opt/homebrew/opt/open-ocd/bin/openocd",
+    "cortex-debug.openocdPath": "/Users/seojisu/Library/xPacks/@xpack-dev-tools/openocd/0.11.0-4.1/.content/bin/openocd",
     "files.associations": {
         "switch.h": "c",
         "main.h": "c",

@@ -3,7 +3,7 @@
         {
             "type": "cppbuild",
             "label": "C/C++: arm-none-eabi-gcc.exe 활성 파일 빌드",
-            "command": "D:\\3.tools\\ARM_GCC_ToolChain\\bin/arm-none-eabi-gcc.exe",
+            "command": "/Users/seojisu/Library/Arm-GCC-xPack/bin/arm-none-eabi-gcc",
             "args": [
                 "-g",
                 "${file}",

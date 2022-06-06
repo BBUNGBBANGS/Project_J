@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s 			page 1
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -11,22 +11,69 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s 			page 1
    8              		.eabi_attribute 24, 1
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
-  11              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 30, 6
   12              		.eabi_attribute 34, 1
   13              		.eabi_attribute 18, 4
   14              		.file	"can.c"
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.text.Can_Init,"ax",%progbits
-  19              		.align	1
-  20              		.global	Can_Init
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  25              	Can_Init:
-  26              	.LFB333:
-  27              		.file 1 "Core/Src/can.c"
+  18              		.global	Tx_Buffer
+  19              		.section	.data.Tx_Buffer,"aw"
+  20              		.align	2
+  23              	Tx_Buffer:
+  24 0000 11223344 		.ascii	"\021\"3DUfw\210"
+  24      55667788 
+  25              		.global	Tx_length
+  26              		.section	.data.Tx_length,"aw"
+  29              	Tx_length:
+  30 0000 08       		.byte	8
+  31              		.global	CAN1
+  32              		.section	.bss.CAN1,"aw",%nobits
+  33              		.align	2
+  36              	CAN1:
+  37 0000 00000000 		.space	36
+  37      00000000 
+  37      00000000 
+  37      00000000 
+  37      00000000 
+  38              		.global	CAN2
+  39              		.section	.bss.CAN2,"aw",%nobits
+  40              		.align	2
+  43              	CAN2:
+  44 0000 00000000 		.space	36
+  44      00000000 
+  44      00000000 
+  44      00000000 
+  44      00000000 
+  45              		.global	CAN1_Start_status
+  46              		.section	.bss.CAN1_Start_status,"aw",%nobits
+  49              	CAN1_Start_status:
+  50 0000 00       		.space	1
+  51              		.global	CAN2_Start_status
+  52              		.section	.bss.CAN2_Start_status,"aw",%nobits
+  55              	CAN2_Start_status:
+  56 0000 00       		.space	1
+  57              		.global	CAN1_Tx_status
+  58              		.section	.bss.CAN1_Tx_status,"aw",%nobits
+  61              	CAN1_Tx_status:
+  62 0000 00       		.space	1
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s 			page 2
+
+
+  63              		.global	CAN2_Tx_status
+  64              		.section	.bss.CAN2_Tx_status,"aw",%nobits
+  67              	CAN2_Tx_status:
+  68 0000 00       		.space	1
+  69              		.section	.text.Can_Init,"ax",%progbits
+  70              		.align	1
+  71              		.global	Can_Init
+  72              		.syntax unified
+  73              		.thumb
+  74              		.thumb_func
+  76              	Can_Init:
+  77              	.LFB333:
+  78              		.file 1 "Core/Src/can.c"
    1:Core/Src/can.c **** #include "main.h"
    2:Core/Src/can.c **** #include "can.h"
    3:Core/Src/can.c **** 
@@ -41,285 +88,252 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s 			page 1
   12:Core/Src/can.c **** 
   13:Core/Src/can.c **** void Can_Init(void)
   14:Core/Src/can.c **** {
-  28              		.loc 1 14 1 view -0
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32 0000 08B5     		push	{r3, lr}
-  33              	.LCFI0:
-  34              		.cfi_def_cfa_offset 8
-  35              		.cfi_offset 3, -8
-  36              		.cfi_offset 14, -4
+  79              		.loc 1 14 1
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 1, uses_anonymous_args = 0
+  83 0000 80B5     		push	{r7, lr}
+  84              	.LCFI0:
+  85              		.cfi_def_cfa_offset 8
+  86              		.cfi_offset 7, -8
+  87              		.cfi_offset 14, -4
+  88 0002 00AF     		add	r7, sp, #0
+  89              	.LCFI1:
+  90              		.cfi_def_cfa_register 7
   15:Core/Src/can.c ****     CAN1_Start_status = HAL_FDCAN_Start(&hfdcan1);
-  37              		.loc 1 15 5 view .LVU1
-  38              		.loc 1 15 25 is_stmt 0 view .LVU2
-  39 0002 0548     		ldr	r0, .L3
-  40 0004 FFF7FEFF 		bl	HAL_FDCAN_Start
-  41              	.LVL0:
-  42              		.loc 1 15 23 view .LVU3
-  43 0008 044B     		ldr	r3, .L3+4
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s 			page 2
-
-
-  44 000a 1870     		strb	r0, [r3]
+  91              		.loc 1 15 25
+  92 0004 0748     		ldr	r0, .L3
+  93 0006 FFF7FEFF 		bl	HAL_FDCAN_Start
+  94 000a 0346     		mov	r3, r0
+  95 000c 1A46     		mov	r2, r3
+  96              		.loc 1 15 23
+  97 000e 064B     		ldr	r3, .L3+4
+  98 0010 1A70     		strb	r2, [r3]
   16:Core/Src/can.c ****     CAN2_Start_status = HAL_FDCAN_Start(&hfdcan2);
-  45              		.loc 1 16 5 is_stmt 1 view .LVU4
-  46              		.loc 1 16 25 is_stmt 0 view .LVU5
-  47 000c 0448     		ldr	r0, .L3+8
-  48 000e FFF7FEFF 		bl	HAL_FDCAN_Start
-  49              	.LVL1:
-  50              		.loc 1 16 23 view .LVU6
-  51 0012 044B     		ldr	r3, .L3+12
-  52 0014 1870     		strb	r0, [r3]
+  99              		.loc 1 16 25
+ 100 0012 0648     		ldr	r0, .L3+8
+ 101 0014 FFF7FEFF 		bl	HAL_FDCAN_Start
+ 102 0018 0346     		mov	r3, r0
+ 103 001a 1A46     		mov	r2, r3
+ 104              		.loc 1 16 23
+ 105 001c 044B     		ldr	r3, .L3+12
+ 106 001e 1A70     		strb	r2, [r3]
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s 			page 3
+
+
   17:Core/Src/can.c ****     return;
-  53              		.loc 1 17 5 is_stmt 1 view .LVU7
+ 107              		.loc 1 17 5
+ 108 0020 00BF     		nop
   18:Core/Src/can.c **** }
-  54              		.loc 1 18 1 is_stmt 0 view .LVU8
-  55 0016 08BD     		pop	{r3, pc}
-  56              	.L4:
-  57              		.align	2
-  58              	.L3:
-  59 0018 00000000 		.word	hfdcan1
-  60 001c 00000000 		.word	.LANCHOR0
-  61 0020 00000000 		.word	hfdcan2
-  62 0024 00000000 		.word	.LANCHOR1
-  63              		.cfi_endproc
-  64              	.LFE333:
-  66              		.section	.text.Can_Transmit,"ax",%progbits
-  67              		.align	1
-  68              		.global	Can_Transmit
-  69              		.syntax unified
-  70              		.thumb
-  71              		.thumb_func
-  73              	Can_Transmit:
-  74              	.LFB334:
+ 109              		.loc 1 18 1
+ 110 0022 80BD     		pop	{r7, pc}
+ 111              	.L4:
+ 112              		.align	2
+ 113              	.L3:
+ 114 0024 00000000 		.word	hfdcan1
+ 115 0028 00000000 		.word	CAN1_Start_status
+ 116 002c 00000000 		.word	hfdcan2
+ 117 0030 00000000 		.word	CAN2_Start_status
+ 118              		.cfi_endproc
+ 119              	.LFE333:
+ 121              		.section	.text.Can_Transmit,"ax",%progbits
+ 122              		.align	1
+ 123              		.global	Can_Transmit
+ 124              		.syntax unified
+ 125              		.thumb
+ 126              		.thumb_func
+ 128              	Can_Transmit:
+ 129              	.LFB334:
   19:Core/Src/can.c **** 
   20:Core/Src/can.c **** void Can_Transmit(void)
   21:Core/Src/can.c **** {
-  75              		.loc 1 21 1 is_stmt 1 view -0
-  76              		.cfi_startproc
-  77              		@ args = 0, pretend = 0, frame = 0
-  78              		@ frame_needed = 0, uses_anonymous_args = 0
-  79 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
-  80              	.LCFI1:
-  81              		.cfi_def_cfa_offset 24
-  82              		.cfi_offset 3, -24
-  83              		.cfi_offset 4, -20
-  84              		.cfi_offset 5, -16
-  85              		.cfi_offset 6, -12
-  86              		.cfi_offset 7, -8
-  87              		.cfi_offset 14, -4
+ 130              		.loc 1 21 1
+ 131              		.cfi_startproc
+ 132              		@ args = 0, pretend = 0, frame = 0
+ 133              		@ frame_needed = 1, uses_anonymous_args = 0
+ 134 0000 80B5     		push	{r7, lr}
+ 135              	.LCFI2:
+ 136              		.cfi_def_cfa_offset 8
+ 137              		.cfi_offset 7, -8
+ 138              		.cfi_offset 14, -4
+ 139 0002 00AF     		add	r7, sp, #0
+ 140              	.LCFI3:
+ 141              		.cfi_def_cfa_register 7
   22:Core/Src/can.c ****     CAN1.Identifier=0xAAA;
-  88              		.loc 1 22 5 view .LVU10
-  89              		.loc 1 22 20 is_stmt 0 view .LVU11
-  90 0002 1349     		ldr	r1, .L7
-  91 0004 40F6AA27 		movw	r7, #2730
-  92 0008 0F60     		str	r7, [r1]
+ 142              		.loc 1 22 20
+ 143 0004 264B     		ldr	r3, .L7
+ 144 0006 40F6AA22 		movw	r2, #2730
+ 145 000a 1A60     		str	r2, [r3]
   23:Core/Src/can.c ****     CAN1.IdType=FDCAN_STANDARD_ID;
-  93              		.loc 1 23 5 is_stmt 1 view .LVU12
-  94              		.loc 1 23 16 is_stmt 0 view .LVU13
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s 			page 3
-
-
-  95 000a 0024     		movs	r4, #0
-  96 000c 4C60     		str	r4, [r1, #4]
+ 146              		.loc 1 23 16
+ 147 000c 244B     		ldr	r3, .L7
+ 148 000e 0022     		movs	r2, #0
+ 149 0010 5A60     		str	r2, [r3, #4]
   24:Core/Src/can.c ****     CAN1.TxFrameType=FDCAN_DATA_FRAME;
-  97              		.loc 1 24 5 is_stmt 1 view .LVU14
-  98              		.loc 1 24 21 is_stmt 0 view .LVU15
-  99 000e 8C60     		str	r4, [r1, #8]
+ 150              		.loc 1 24 21
+ 151 0012 234B     		ldr	r3, .L7
+ 152 0014 0022     		movs	r2, #0
+ 153 0016 9A60     		str	r2, [r3, #8]
   25:Core/Src/can.c ****     CAN1.DataLength=FDCAN_DLC_BYTES_8;
- 100              		.loc 1 25 5 is_stmt 1 view .LVU16
- 101              		.loc 1 25 20 is_stmt 0 view .LVU17
- 102 0010 4FF40026 		mov	r6, #524288
- 103 0014 CE60     		str	r6, [r1, #12]
+ 154              		.loc 1 25 20
+ 155 0018 214B     		ldr	r3, .L7
+ 156 001a 4FF40022 		mov	r2, #524288
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s 			page 4
+
+
+ 157 001e DA60     		str	r2, [r3, #12]
   26:Core/Src/can.c ****     CAN1.ErrorStateIndicator=FDCAN_ESI_ACTIVE;
- 104              		.loc 1 26 5 is_stmt 1 view .LVU18
- 105              		.loc 1 26 29 is_stmt 0 view .LVU19
- 106 0016 0C61     		str	r4, [r1, #16]
+ 158              		.loc 1 26 29
+ 159 0020 1F4B     		ldr	r3, .L7
+ 160 0022 0022     		movs	r2, #0
+ 161 0024 1A61     		str	r2, [r3, #16]
   27:Core/Src/can.c ****     CAN1.BitRateSwitch=FDCAN_BRS_OFF;
- 107              		.loc 1 27 5 is_stmt 1 view .LVU20
- 108              		.loc 1 27 23 is_stmt 0 view .LVU21
- 109 0018 4C61     		str	r4, [r1, #20]
+ 162              		.loc 1 27 23
+ 163 0026 1E4B     		ldr	r3, .L7
+ 164 0028 0022     		movs	r2, #0
+ 165 002a 5A61     		str	r2, [r3, #20]
   28:Core/Src/can.c ****     CAN1.FDFormat=FDCAN_CLASSIC_CAN;
- 110              		.loc 1 28 5 is_stmt 1 view .LVU22
- 111              		.loc 1 28 18 is_stmt 0 view .LVU23
- 112 001a 8C61     		str	r4, [r1, #24]
+ 166              		.loc 1 28 18
+ 167 002c 1C4B     		ldr	r3, .L7
+ 168 002e 0022     		movs	r2, #0
+ 169 0030 9A61     		str	r2, [r3, #24]
   29:Core/Src/can.c ****     CAN1.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
- 113              		.loc 1 29 5 is_stmt 1 view .LVU24
- 114              		.loc 1 29 28 is_stmt 0 view .LVU25
- 115 001c CC61     		str	r4, [r1, #28]
+ 170              		.loc 1 29 28
+ 171 0032 1B4B     		ldr	r3, .L7
+ 172 0034 0022     		movs	r2, #0
+ 173 0036 DA61     		str	r2, [r3, #28]
   30:Core/Src/can.c ****     CAN1.MessageMarker=0;
- 116              		.loc 1 30 5 is_stmt 1 view .LVU26
- 117              		.loc 1 30 23 is_stmt 0 view .LVU27
- 118 001e 0C62     		str	r4, [r1, #32]
+ 174              		.loc 1 30 23
+ 175 0038 194B     		ldr	r3, .L7
+ 176 003a 0022     		movs	r2, #0
+ 177 003c 1A62     		str	r2, [r3, #32]
   31:Core/Src/can.c ****     CAN1_Tx_status = HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan1,&CAN1,Tx_Buffer);    
- 119              		.loc 1 31 5 is_stmt 1 view .LVU28
- 120              		.loc 1 31 22 is_stmt 0 view .LVU29
- 121 0020 0C4D     		ldr	r5, .L7+4
- 122 0022 2A46     		mov	r2, r5
- 123 0024 0C48     		ldr	r0, .L7+8
- 124 0026 FFF7FEFF 		bl	HAL_FDCAN_AddMessageToTxFifoQ
- 125              	.LVL2:
- 126              		.loc 1 31 20 view .LVU30
- 127 002a 0C4B     		ldr	r3, .L7+12
- 128 002c 1870     		strb	r0, [r3]
+ 178              		.loc 1 31 22
+ 179 003e 194A     		ldr	r2, .L7+4
+ 180 0040 1749     		ldr	r1, .L7
+ 181 0042 1948     		ldr	r0, .L7+8
+ 182 0044 FFF7FEFF 		bl	HAL_FDCAN_AddMessageToTxFifoQ
+ 183 0048 0346     		mov	r3, r0
+ 184 004a 1A46     		mov	r2, r3
+ 185              		.loc 1 31 20
+ 186 004c 174B     		ldr	r3, .L7+12
+ 187 004e 1A70     		strb	r2, [r3]
   32:Core/Src/can.c ****     CAN2.Identifier=0xAAA;
- 129              		.loc 1 32 5 is_stmt 1 view .LVU31
- 130              		.loc 1 32 20 is_stmt 0 view .LVU32
- 131 002e 0C49     		ldr	r1, .L7+16
- 132 0030 0F60     		str	r7, [r1]
+ 188              		.loc 1 32 20
+ 189 0050 174B     		ldr	r3, .L7+16
+ 190 0052 40F6AA22 		movw	r2, #2730
+ 191 0056 1A60     		str	r2, [r3]
   33:Core/Src/can.c ****     CAN2.IdType=FDCAN_STANDARD_ID;
- 133              		.loc 1 33 5 is_stmt 1 view .LVU33
- 134              		.loc 1 33 16 is_stmt 0 view .LVU34
- 135 0032 4C60     		str	r4, [r1, #4]
+ 192              		.loc 1 33 16
+ 193 0058 154B     		ldr	r3, .L7+16
+ 194 005a 0022     		movs	r2, #0
+ 195 005c 5A60     		str	r2, [r3, #4]
   34:Core/Src/can.c ****     CAN2.TxFrameType=FDCAN_DATA_FRAME;
- 136              		.loc 1 34 5 is_stmt 1 view .LVU35
- 137              		.loc 1 34 21 is_stmt 0 view .LVU36
- 138 0034 8C60     		str	r4, [r1, #8]
+ 196              		.loc 1 34 21
+ 197 005e 144B     		ldr	r3, .L7+16
+ 198 0060 0022     		movs	r2, #0
+ 199 0062 9A60     		str	r2, [r3, #8]
   35:Core/Src/can.c ****     CAN2.DataLength=FDCAN_DLC_BYTES_8;
- 139              		.loc 1 35 5 is_stmt 1 view .LVU37
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s 			page 4
+ 200              		.loc 1 35 20
+ 201 0064 124B     		ldr	r3, .L7+16
+ 202 0066 4FF40022 		mov	r2, #524288
+ 203 006a DA60     		str	r2, [r3, #12]
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s 			page 5
 
 
- 140              		.loc 1 35 20 is_stmt 0 view .LVU38
- 141 0036 CE60     		str	r6, [r1, #12]
   36:Core/Src/can.c ****     CAN2.ErrorStateIndicator=FDCAN_ESI_ACTIVE;
- 142              		.loc 1 36 5 is_stmt 1 view .LVU39
- 143              		.loc 1 36 29 is_stmt 0 view .LVU40
- 144 0038 0C61     		str	r4, [r1, #16]
+ 204              		.loc 1 36 29
+ 205 006c 104B     		ldr	r3, .L7+16
+ 206 006e 0022     		movs	r2, #0
+ 207 0070 1A61     		str	r2, [r3, #16]
   37:Core/Src/can.c ****     CAN2.BitRateSwitch=FDCAN_BRS_OFF;
- 145              		.loc 1 37 5 is_stmt 1 view .LVU41
- 146              		.loc 1 37 23 is_stmt 0 view .LVU42
- 147 003a 4C61     		str	r4, [r1, #20]
+ 208              		.loc 1 37 23
+ 209 0072 0F4B     		ldr	r3, .L7+16
+ 210 0074 0022     		movs	r2, #0
+ 211 0076 5A61     		str	r2, [r3, #20]
   38:Core/Src/can.c ****     CAN2.FDFormat=FDCAN_CLASSIC_CAN;
- 148              		.loc 1 38 5 is_stmt 1 view .LVU43
- 149              		.loc 1 38 18 is_stmt 0 view .LVU44
- 150 003c 8C61     		str	r4, [r1, #24]
+ 212              		.loc 1 38 18
+ 213 0078 0D4B     		ldr	r3, .L7+16
+ 214 007a 0022     		movs	r2, #0
+ 215 007c 9A61     		str	r2, [r3, #24]
   39:Core/Src/can.c ****     CAN2.TxEventFifoControl=FDCAN_NO_TX_EVENTS;
- 151              		.loc 1 39 5 is_stmt 1 view .LVU45
- 152              		.loc 1 39 28 is_stmt 0 view .LVU46
- 153 003e CC61     		str	r4, [r1, #28]
+ 216              		.loc 1 39 28
+ 217 007e 0C4B     		ldr	r3, .L7+16
+ 218 0080 0022     		movs	r2, #0
+ 219 0082 DA61     		str	r2, [r3, #28]
   40:Core/Src/can.c ****     CAN2.MessageMarker=0;
- 154              		.loc 1 40 5 is_stmt 1 view .LVU47
- 155              		.loc 1 40 23 is_stmt 0 view .LVU48
- 156 0040 0C62     		str	r4, [r1, #32]
+ 220              		.loc 1 40 23
+ 221 0084 0A4B     		ldr	r3, .L7+16
+ 222 0086 0022     		movs	r2, #0
+ 223 0088 1A62     		str	r2, [r3, #32]
   41:Core/Src/can.c ****     CAN2_Tx_status = HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan2,&CAN2,Tx_Buffer);
- 157              		.loc 1 41 5 is_stmt 1 view .LVU49
- 158              		.loc 1 41 22 is_stmt 0 view .LVU50
- 159 0042 2A46     		mov	r2, r5
- 160 0044 0748     		ldr	r0, .L7+20
- 161 0046 FFF7FEFF 		bl	HAL_FDCAN_AddMessageToTxFifoQ
- 162              	.LVL3:
- 163              		.loc 1 41 20 view .LVU51
- 164 004a 074B     		ldr	r3, .L7+24
- 165 004c 1870     		strb	r0, [r3]
+ 224              		.loc 1 41 22
+ 225 008a 064A     		ldr	r2, .L7+4
+ 226 008c 0849     		ldr	r1, .L7+16
+ 227 008e 0948     		ldr	r0, .L7+20
+ 228 0090 FFF7FEFF 		bl	HAL_FDCAN_AddMessageToTxFifoQ
+ 229 0094 0346     		mov	r3, r0
+ 230 0096 1A46     		mov	r2, r3
+ 231              		.loc 1 41 20
+ 232 0098 074B     		ldr	r3, .L7+24
+ 233 009a 1A70     		strb	r2, [r3]
   42:Core/Src/can.c ****     return;
- 166              		.loc 1 42 5 is_stmt 1 view .LVU52
+ 234              		.loc 1 42 5
+ 235 009c 00BF     		nop
   43:Core/Src/can.c **** }...
- 167              		.loc 1 43 1 is_stmt 0 view .LVU53
- 168 004e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 169              	.L8:
- 170              		.align	2
- 171              	.L7:
- 172 0050 00000000 		.word	.LANCHOR2
- 173 0054 00000000 		.word	.LANCHOR3
- 174 0058 00000000 		.word	hfdcan1
- 175 005c 00000000 		.word	.LANCHOR4
- 176 0060 00000000 		.word	.LANCHOR5
- 177 0064 00000000 		.word	hfdcan2
- 178 0068 00000000 		.word	.LANCHOR6
- 179              		.cfi_endproc
- 180              	.LFE334:
- 182              		.global	CAN2_Tx_status
- 183              		.global	CAN1_Tx_status
- 184              		.global	CAN2_Start_status
- 185              		.global	CAN1_Start_status
- 186              		.global	CAN2
- 187              		.global	CAN1
- 188              		.global	Tx_length
- 189              		.global	Tx_Buffer
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s 			page 5
+ 236              		.loc 1 43 1
+ 237 009e 80BD     		pop	{r7, pc}
+ 238              	.L8:
+ 239              		.align	2
+ 240              	.L7:
+ 241 00a0 00000000 		.word	CAN1
+ 242 00a4 00000000 		.word	Tx_Buffer
+ 243 00a8 00000000 		.word	hfdcan1
+ 244 00ac 00000000 		.word	CAN1_Tx_status
+ 245 00b0 00000000 		.word	CAN2
+ 246 00b4 00000000 		.word	hfdcan2
+ 247 00b8 00000000 		.word	CAN2_Tx_status
+ 248              		.cfi_endproc
+ 249              	.LFE334:
+ 251              		.text
+ 252              	.Letext0:
+ 253              		.file 2 "/Users/seojisu/Library/Arm-GCC-xPack/arm-none-eabi/include/machine/_default_types.h"
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s 			page 6
 
 
- 190              		.section	.bss.CAN1,"aw",%nobits
- 191              		.align	2
- 192              		.set	.LANCHOR2,. + 0
- 195              	CAN1:
- 196 0000 00000000 		.space	36
- 196      00000000 
- 196      00000000 
- 196      00000000 
- 196      00000000 
- 197              		.section	.bss.CAN1_Start_status,"aw",%nobits
- 198              		.set	.LANCHOR0,. + 0
- 201              	CAN1_Start_status:
- 202 0000 00       		.space	1
- 203              		.section	.bss.CAN1_Tx_status,"aw",%nobits
- 204              		.set	.LANCHOR4,. + 0
- 207              	CAN1_Tx_status:
- 208 0000 00       		.space	1
- 209              		.section	.bss.CAN2,"aw",%nobits
- 210              		.align	2
- 211              		.set	.LANCHOR5,. + 0
- 214              	CAN2:
- 215 0000 00000000 		.space	36
- 215      00000000 
- 215      00000000 
- 215      00000000 
- 215      00000000 
- 216              		.section	.bss.CAN2_Start_status,"aw",%nobits
- 217              		.set	.LANCHOR1,. + 0
- 220              	CAN2_Start_status:
- 221 0000 00       		.space	1
- 222              		.section	.bss.CAN2_Tx_status,"aw",%nobits
- 223              		.set	.LANCHOR6,. + 0
- 226              	CAN2_Tx_status:
- 227 0000 00       		.space	1
- 228              		.section	.data.Tx_Buffer,"aw"
- 229              		.align	2
- 230              		.set	.LANCHOR3,. + 0
- 233              	Tx_Buffer:
- 234 0000 11223344 		.ascii	"\021\"3DUfw\210"
- 234      55667788 
- 235              		.section	.data.Tx_length,"aw"
- 238              	Tx_length:
- 239 0000 08       		.byte	8
- 240              		.text
- 241              	.Letext0:
- 242              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
- 243              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
- 244              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h"
- 245              		.file 5 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h"
- 246              		.file 6 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
- 247              		.file 7 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_fdcan.h"
- 248              		.file 8 "Core/Inc/vardef.h"
- 249              		.file 9 "Core/Inc/main.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s 			page 6
+ 254              		.file 3 "/Users/seojisu/Library/Arm-GCC-xPack/arm-none-eabi/include/sys/_stdint.h"
+ 255              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h"
+ 256              		.file 5 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h"
+ 257              		.file 6 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 258              		.file 7 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_fdcan.h"
+ 259              		.file 8 "Core/Inc/vardef.h"
+ 260              		.file 9 "Core/Inc/main.h"
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s 			page 7
 
 
 DEFINED SYMBOLS
-                            *ABS*:00000000 can.c
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:19     .text.Can_Init:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:25     .text.Can_Init:00000000 Can_Init
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:59     .text.Can_Init:00000018 $d
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:67     .text.Can_Transmit:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:73     .text.Can_Transmit:00000000 Can_Transmit
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:172    .text.Can_Transmit:00000050 $d
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:226    .bss.CAN2_Tx_status:00000000 CAN2_Tx_status
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:207    .bss.CAN1_Tx_status:00000000 CAN1_Tx_status
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:220    .bss.CAN2_Start_status:00000000 CAN2_Start_status
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:201    .bss.CAN1_Start_status:00000000 CAN1_Start_status
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:214    .bss.CAN2:00000000 CAN2
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:195    .bss.CAN1:00000000 CAN1
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:238    .data.Tx_length:00000000 Tx_length
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:233    .data.Tx_Buffer:00000000 Tx_Buffer
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:191    .bss.CAN1:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:202    .bss.CAN1_Start_status:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:208    .bss.CAN1_Tx_status:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:210    .bss.CAN2:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:221    .bss.CAN2_Start_status:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:227    .bss.CAN2_Tx_status:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccpLCWkk.s:229    .data.Tx_Buffer:00000000 $d
+                            *ABS*:0000000000000000 can.c
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:23     .data.Tx_Buffer:0000000000000000 Tx_Buffer
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:20     .data.Tx_Buffer:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:29     .data.Tx_length:0000000000000000 Tx_length
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:36     .bss.CAN1:0000000000000000 CAN1
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:33     .bss.CAN1:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:43     .bss.CAN2:0000000000000000 CAN2
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:40     .bss.CAN2:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:49     .bss.CAN1_Start_status:0000000000000000 CAN1_Start_status
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:50     .bss.CAN1_Start_status:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:55     .bss.CAN2_Start_status:0000000000000000 CAN2_Start_status
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:56     .bss.CAN2_Start_status:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:61     .bss.CAN1_Tx_status:0000000000000000 CAN1_Tx_status
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:62     .bss.CAN1_Tx_status:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:67     .bss.CAN2_Tx_status:0000000000000000 CAN2_Tx_status
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:68     .bss.CAN2_Tx_status:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:70     .text.Can_Init:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:76     .text.Can_Init:0000000000000000 Can_Init
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:114    .text.Can_Init:0000000000000024 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:122    .text.Can_Transmit:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:128    .text.Can_Transmit:0000000000000000 Can_Transmit
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccZMynyN.s:241    .text.Can_Transmit:00000000000000a0 $d
 
 UNDEFINED SYMBOLS
 HAL_FDCAN_Start

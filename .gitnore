@@ -1,2 +1,5 @@
 #settings
 ./vscode/*.json
+
+#build folders
+./build/

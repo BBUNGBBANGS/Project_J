@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 1
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -11,22 +11,44 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 1
    8              		.eabi_attribute 24, 1
    9              		.eabi_attribute 25, 1
   10              		.eabi_attribute 26, 1
-  11              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 30, 6
   12              		.eabi_attribute 34, 1
   13              		.eabi_attribute 18, 4
   14              		.file	"motor_driver.c"
   15              		.text
   16              	.Ltext0:
   17              		.cfi_sections	.debug_frame
-  18              		.section	.text.Motor_Driver_Output_Step,"ax",%progbits
-  19              		.align	1
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
-  24              	Motor_Driver_Output_Step:
-  25              	.LVL0:
-  26              	.LFB335:
-  27              		.file 1 "Core/Src/motor_driver.c"
+  18              		.global	Motor_Driver_Duty
+  19              		.section	.data.Motor_Driver_Duty,"aw"
+  20              		.align	2
+  23              	Motor_Driver_Duty:
+  24 0000 1E000000 		.word	30
+  25              		.global	Motor_Driver_Step
+  26              		.section	.bss.Motor_Driver_Step,"aw",%nobits
+  29              	Motor_Driver_Step:
+  30 0000 00       		.space	1
+  31              		.global	Motor_Angle_Offset
+  32              		.section	.bss.Motor_Angle_Offset,"aw",%nobits
+  33              		.align	2
+  36              	Motor_Angle_Offset:
+  37 0000 00000000 		.space	4
+  38              		.global	Motor_Driver_Fault
+  39              		.section	.bss.Motor_Driver_Fault,"aw",%nobits
+  42              	Motor_Driver_Fault:
+  43 0000 00       		.space	1
+  44              		.global	AS5048_Angle
+  45              		.section	.bss.AS5048_Angle,"aw",%nobits
+  48              	AS5048_Angle:
+  49 0000 00       		.space	1
+  50              		.section	.text.Motor_Driver_Init,"ax",%progbits
+  51              		.align	1
+  52              		.global	Motor_Driver_Init
+  53              		.syntax unified
+  54              		.thumb
+  55              		.thumb_func
+  57              	Motor_Driver_Init:
+  58              	.LFB333:
+  59              		.file 1 "Core/Src/motor_driver.c"
    1:Core/Src/motor_driver.c **** #include "motor_driver.h"
    2:Core/Src/motor_driver.c **** //#include "as5048.h"
    3:Core/Src/motor_driver.c **** 
@@ -36,276 +58,646 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 1
    7:Core/Src/motor_driver.c **** uint8 Motor_Driver_Fault;
    8:Core/Src/motor_driver.c **** static void Motor_Driver_Output_Step(uint32 angle);
    9:Core/Src/motor_driver.c **** static void Motor_Driver_Output_Duty(uint16 duty);
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 2
+
+
   10:Core/Src/motor_driver.c **** static void Motor_Driver_Port_Set_Mode(uint16 pin,uint8 mode);
   11:Core/Src/motor_driver.c **** static void Motor_Drvier_Fault(void);
   12:Core/Src/motor_driver.c **** uint8 AS5048_Angle;
   13:Core/Src/motor_driver.c **** void Motor_Driver_Init(void)
   14:Core/Src/motor_driver.c **** {
+  60              		.loc 1 14 1
+  61              		.cfi_startproc
+  62              		@ args = 0, pretend = 0, frame = 0
+  63              		@ frame_needed = 1, uses_anonymous_args = 0
+  64              		@ link register save eliminated.
+  65 0000 80B4     		push	{r7}
+  66              	.LCFI0:
+  67              		.cfi_def_cfa_offset 4
+  68              		.cfi_offset 7, -4
+  69 0002 00AF     		add	r7, sp, #0
+  70              	.LCFI1:
+  71              		.cfi_def_cfa_register 7
   15:Core/Src/motor_driver.c ****     //HAL_GPIO_WritePin(MOTOR_DRIVER_ENABLE_MODULE,MOTOR_DRIVER_ENABLE_PIN,GPIO_PIN_SET);
   16:Core/Src/motor_driver.c **** }
+  72              		.loc 1 16 1
+  73 0004 00BF     		nop
+  74 0006 BD46     		mov	sp, r7
+  75              	.LCFI2:
+  76              		.cfi_def_cfa_register 13
+  77              		@ sp needed
+  78 0008 5DF8047B 		ldr	r7, [sp], #4
+  79              	.LCFI3:
+  80              		.cfi_restore 7
+  81              		.cfi_def_cfa_offset 0
+  82 000c 7047     		bx	lr
+  83              		.cfi_endproc
+  84              	.LFE333:
+  86              		.section	.text.Motor_Drvier_Control,"ax",%progbits
+  87              		.align	1
+  88              		.global	Motor_Drvier_Control
+  89              		.syntax unified
+  90              		.thumb
+  91              		.thumb_func
+  93              	Motor_Drvier_Control:
+  94              	.LFB334:
   17:Core/Src/motor_driver.c **** 
   18:Core/Src/motor_driver.c **** void Motor_Drvier_Control(void)
   19:Core/Src/motor_driver.c **** {
+  95              		.loc 1 19 1
+  96              		.cfi_startproc
+  97              		@ args = 0, pretend = 0, frame = 0
+  98              		@ frame_needed = 1, uses_anonymous_args = 0
+  99 0000 80B5     		push	{r7, lr}
+ 100              	.LCFI4:
+ 101              		.cfi_def_cfa_offset 8
+ 102              		.cfi_offset 7, -8
+ 103              		.cfi_offset 14, -4
+ 104 0002 00AF     		add	r7, sp, #0
+ 105              	.LCFI5:
+ 106              		.cfi_def_cfa_register 7
   20:Core/Src/motor_driver.c ****     Motor_Driver_Output_Step(AS5048_Angle);
+ 107              		.loc 1 20 5
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 3
+
+
+ 108 0004 064B     		ldr	r3, .L3
+ 109 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 110 0008 1846     		mov	r0, r3
+ 111 000a FFF7FEFF 		bl	Motor_Driver_Output_Step
   21:Core/Src/motor_driver.c ****     Motor_Driver_Output_Duty(Motor_Driver_Duty);
+ 112              		.loc 1 21 5
+ 113 000e 054B     		ldr	r3, .L3+4
+ 114 0010 1B68     		ldr	r3, [r3]
+ 115 0012 1846     		mov	r0, r3
+ 116 0014 FFF7FEFF 		bl	Motor_Driver_Output_Duty
   22:Core/Src/motor_driver.c ****     Motor_Drvier_Fault();
+ 117              		.loc 1 22 5
+ 118 0018 FFF7FEFF 		bl	Motor_Drvier_Fault
   23:Core/Src/motor_driver.c **** }
+ 119              		.loc 1 23 1
+ 120 001c 00BF     		nop
+ 121 001e 80BD     		pop	{r7, pc}
+ 122              	.L4:
+ 123              		.align	2
+ 124              	.L3:
+ 125 0020 00000000 		.word	AS5048_Angle
+ 126 0024 00000000 		.word	Motor_Driver_Duty
+ 127              		.cfi_endproc
+ 128              	.LFE334:
+ 130              		.section	.text.Motor_Driver_Output_Step,"ax",%progbits
+ 131              		.align	1
+ 132              		.syntax unified
+ 133              		.thumb
+ 134              		.thumb_func
+ 136              	Motor_Driver_Output_Step:
+ 137              	.LFB335:
   24:Core/Src/motor_driver.c **** 
   25:Core/Src/motor_driver.c **** static void Motor_Driver_Output_Step(uint32 angle)
   26:Core/Src/motor_driver.c **** {
-  28              		.loc 1 26 1 view -0
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32              		@ link register save eliminated.
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 2
-
-
+ 138              		.loc 1 26 1
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 16
+ 141              		@ frame_needed = 1, uses_anonymous_args = 0
+ 142              		@ link register save eliminated.
+ 143 0000 80B4     		push	{r7}
+ 144              	.LCFI6:
+ 145              		.cfi_def_cfa_offset 4
+ 146              		.cfi_offset 7, -4
+ 147 0002 85B0     		sub	sp, sp, #20
+ 148              	.LCFI7:
+ 149              		.cfi_def_cfa_offset 24
+ 150 0004 00AF     		add	r7, sp, #0
+ 151              	.LCFI8:
+ 152              		.cfi_def_cfa_register 7
+ 153 0006 7860     		str	r0, [r7, #4]
   27:Core/Src/motor_driver.c ****     uint8 step;
-  33              		.loc 1 27 5 view .LVU1
   28:Core/Src/motor_driver.c ****     uint32 Motor_Angle;
-  34              		.loc 1 28 5 view .LVU2
   29:Core/Src/motor_driver.c **** 
   30:Core/Src/motor_driver.c ****     step = 0;
-  35              		.loc 1 30 5 view .LVU3
+ 154              		.loc 1 30 10
+ 155 0008 0023     		movs	r3, #0
+ 156 000a FB73     		strb	r3, [r7, #15]
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 4
+
+
   31:Core/Src/motor_driver.c ****     Motor_Angle = angle + Motor_Angle_Offset;
-  36              		.loc 1 31 5 view .LVU4
-  37              		.loc 1 31 25 is_stmt 0 view .LVU5
-  38 0000 194B     		ldr	r3, .L10
-  39 0002 1B68     		ldr	r3, [r3]
-  40              		.loc 1 31 17 view .LVU6
-  41 0004 1844     		add	r0, r0, r3
-  42              	.LVL1:
+ 157              		.loc 1 31 25
+ 158 000c 2F4B     		ldr	r3, .L13
+ 159 000e 1B68     		ldr	r3, [r3]
+ 160              		.loc 1 31 17
+ 161 0010 7A68     		ldr	r2, [r7, #4]
+ 162 0012 1344     		add	r3, r3, r2
+ 163 0014 BB60     		str	r3, [r7, #8]
   32:Core/Src/motor_driver.c **** 
   33:Core/Src/motor_driver.c ****     if(Motor_Angle>36000)
-  43              		.loc 1 33 5 is_stmt 1 view .LVU7
-  44              		.loc 1 33 7 is_stmt 0 view .LVU8
-  45 0006 48F6A043 		movw	r3, #36000
-  46 000a 9842     		cmp	r0, r3
-  47 000c 02D9     		bls	.L2
+ 164              		.loc 1 33 7
+ 165 0016 BB68     		ldr	r3, [r7, #8]
+ 166 0018 48F6A042 		movw	r2, #36000
+ 167 001c 9342     		cmp	r3, r2
+ 168 001e 04D9     		bls	.L6
   34:Core/Src/motor_driver.c ****     {
   35:Core/Src/motor_driver.c ****         Motor_Angle = 36000 - Motor_Angle;
-  48              		.loc 1 35 9 is_stmt 1 view .LVU9
-  49              		.loc 1 35 21 is_stmt 0 view .LVU10
-  50 000e C0F50C40 		rsb	r0, r0, #35840
-  51              	.LVL2:
-  52              		.loc 1 35 21 view .LVU11
-  53 0012 A030     		adds	r0, r0, #160
-  54              	.LVL3:
-  55              	.L2:
+ 169              		.loc 1 35 21
+ 170 0020 BA68     		ldr	r2, [r7, #8]
+ 171 0022 48F6A043 		movw	r3, #36000
+ 172 0026 9B1A     		subs	r3, r3, r2
+ 173 0028 BB60     		str	r3, [r7, #8]
+ 174              	.L6:
   36:Core/Src/motor_driver.c ****     }
   37:Core/Src/motor_driver.c **** 
   38:Core/Src/motor_driver.c ****     if((0<=Motor_Angle)&&(Motor_Angle<6000))
-  56              		.loc 1 38 5 is_stmt 1 view .LVU12
-  57              		.loc 1 38 7 is_stmt 0 view .LVU13
-  58 0014 41F26F73 		movw	r3, #5999
-  59 0018 9842     		cmp	r0, r3
-  60 001a 17D9     		bls	.L4
+ 175              		.loc 1 38 7
+ 176 002a BB68     		ldr	r3, [r7, #8]
+ 177 002c 41F26F72 		movw	r2, #5999
+ 178 0030 9342     		cmp	r3, r2
+ 179 0032 02D8     		bhi	.L7
   39:Core/Src/motor_driver.c ****     {
   40:Core/Src/motor_driver.c ****         step = MOTOR_STEP_1;
+ 180              		.loc 1 40 14
+ 181 0034 0123     		movs	r3, #1
+ 182 0036 FB73     		strb	r3, [r7, #15]
+ 183 0038 3FE0     		b	.L8
+ 184              	.L7:
   41:Core/Src/motor_driver.c ****     }
   42:Core/Src/motor_driver.c ****     else if((6000<=Motor_Angle)&&(Motor_Angle<12000))
-  61              		.loc 1 42 10 is_stmt 1 view .LVU14
-  62              		.loc 1 42 32 is_stmt 0 view .LVU15
-  63 001c 134B     		ldr	r3, .L10+4
-  64 001e 0344     		add	r3, r3, r0
-  65              		.loc 1 42 12 view .LVU16
-  66 0020 41F26F72 		movw	r2, #5999
-  67 0024 9342     		cmp	r3, r2
-  68 0026 15D9     		bls	.L5
+ 185              		.loc 1 42 12
+ 186 003a BB68     		ldr	r3, [r7, #8]
+ 187 003c 41F26F72 		movw	r2, #5999
+ 188 0040 9342     		cmp	r3, r2
+ 189 0042 07D9     		bls	.L9
+ 190              		.loc 1 42 32 discriminator 1
+ 191 0044 BB68     		ldr	r3, [r7, #8]
+ 192 0046 42F6DF62 		movw	r2, #11999
+ 193 004a 9342     		cmp	r3, r2
+ 194 004c 02D8     		bhi	.L9
   43:Core/Src/motor_driver.c ****     {
   44:Core/Src/motor_driver.c ****         step = MOTOR_STEP_2;       
+ 195              		.loc 1 44 14
+ 196 004e 0223     		movs	r3, #2
+ 197 0050 FB73     		strb	r3, [r7, #15]
+ 198 0052 32E0     		b	.L8
+ 199              	.L9:
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 5
+
+
   45:Core/Src/motor_driver.c ****     }
   46:Core/Src/motor_driver.c ****     else if((12000<=Motor_Angle)&&(Motor_Angle<18000))
-  69              		.loc 1 46 10 is_stmt 1 view .LVU17
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 3
-
-
-  70              		.loc 1 46 33 is_stmt 0 view .LVU18
-  71 0028 114B     		ldr	r3, .L10+8
-  72 002a 0344     		add	r3, r3, r0
-  73              		.loc 1 46 12 view .LVU19
-  74 002c 9342     		cmp	r3, r2
-  75 002e 13D9     		bls	.L6
+ 200              		.loc 1 46 12
+ 201 0054 BB68     		ldr	r3, [r7, #8]
+ 202 0056 42F6DF62 		movw	r2, #11999
+ 203 005a 9342     		cmp	r3, r2
+ 204 005c 07D9     		bls	.L10
+ 205              		.loc 1 46 33 discriminator 1
+ 206 005e BB68     		ldr	r3, [r7, #8]
+ 207 0060 44F24F62 		movw	r2, #17999
+ 208 0064 9342     		cmp	r3, r2
+ 209 0066 02D8     		bhi	.L10
   47:Core/Src/motor_driver.c ****     {
   48:Core/Src/motor_driver.c ****         step = MOTOR_STEP_3;       
+ 210              		.loc 1 48 14
+ 211 0068 0323     		movs	r3, #3
+ 212 006a FB73     		strb	r3, [r7, #15]
+ 213 006c 25E0     		b	.L8
+ 214              	.L10:
   49:Core/Src/motor_driver.c ****     }    
   50:Core/Src/motor_driver.c ****     else if((18000<=Motor_Angle)&&(Motor_Angle<24000))
-  76              		.loc 1 50 10 is_stmt 1 view .LVU20
-  77              		.loc 1 50 33 is_stmt 0 view .LVU21
-  78 0030 104B     		ldr	r3, .L10+12
-  79 0032 0344     		add	r3, r3, r0
-  80              		.loc 1 50 12 view .LVU22
-  81 0034 9342     		cmp	r3, r2
-  82 0036 11D9     		bls	.L7
+ 215              		.loc 1 50 12
+ 216 006e BB68     		ldr	r3, [r7, #8]
+ 217 0070 44F24F62 		movw	r2, #17999
+ 218 0074 9342     		cmp	r3, r2
+ 219 0076 07D9     		bls	.L11
+ 220              		.loc 1 50 33 discriminator 1
+ 221 0078 BB68     		ldr	r3, [r7, #8]
+ 222 007a 45F6BF52 		movw	r2, #23999
+ 223 007e 9342     		cmp	r3, r2
+ 224 0080 02D8     		bhi	.L11
   51:Core/Src/motor_driver.c ****     {
   52:Core/Src/motor_driver.c ****         step = MOTOR_STEP_4;       
+ 225              		.loc 1 52 14
+ 226 0082 0423     		movs	r3, #4
+ 227 0084 FB73     		strb	r3, [r7, #15]
+ 228 0086 18E0     		b	.L8
+ 229              	.L11:
   53:Core/Src/motor_driver.c ****     }    
   54:Core/Src/motor_driver.c ****     else if((24000<=Motor_Angle)&&(Motor_Angle<30000))
-  83              		.loc 1 54 10 is_stmt 1 view .LVU23
-  84              		.loc 1 54 33 is_stmt 0 view .LVU24
-  85 0038 0F4B     		ldr	r3, .L10+16
-  86 003a 0344     		add	r3, r3, r0
-  87              		.loc 1 54 12 view .LVU25
-  88 003c 9342     		cmp	r3, r2
-  89 003e 0FD9     		bls	.L8
+ 230              		.loc 1 54 12
+ 231 0088 BB68     		ldr	r3, [r7, #8]
+ 232 008a 45F6BF52 		movw	r2, #23999
+ 233 008e 9342     		cmp	r3, r2
+ 234 0090 07D9     		bls	.L12
+ 235              		.loc 1 54 33 discriminator 1
+ 236 0092 BB68     		ldr	r3, [r7, #8]
+ 237 0094 47F22F52 		movw	r2, #29999
+ 238 0098 9342     		cmp	r3, r2
+ 239 009a 02D8     		bhi	.L12
   55:Core/Src/motor_driver.c ****     {
   56:Core/Src/motor_driver.c ****         step = MOTOR_STEP_5;       
+ 240              		.loc 1 56 14
+ 241 009c 0523     		movs	r3, #5
+ 242 009e FB73     		strb	r3, [r7, #15]
+ 243 00a0 0BE0     		b	.L8
+ 244              	.L12:
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 6
+
+
   57:Core/Src/motor_driver.c ****     }    
   58:Core/Src/motor_driver.c ****     else if((30000<=Motor_Angle)&&(Motor_Angle<36000))
-  90              		.loc 1 58 10 is_stmt 1 view .LVU26
-  91              		.loc 1 58 33 is_stmt 0 view .LVU27
-  92 0040 0E4B     		ldr	r3, .L10+20
-  93 0042 0344     		add	r3, r3, r0
-  94              		.loc 1 58 12 view .LVU28
-  95 0044 9342     		cmp	r3, r2
-  96 0046 0DD9     		bls	.L9
-  30:Core/Src/motor_driver.c ****     Motor_Angle = angle + Motor_Angle_Offset;
-  97              		.loc 1 30 10 view .LVU29
-  98 0048 0022     		movs	r2, #0
-  99 004a 00E0     		b	.L3
- 100              	.L4:
-  40:Core/Src/motor_driver.c ****     }
- 101              		.loc 1 40 14 view .LVU30
- 102 004c 0122     		movs	r2, #1
- 103              	.L3:
- 104              	.LVL4:
+ 245              		.loc 1 58 12
+ 246 00a2 BB68     		ldr	r3, [r7, #8]
+ 247 00a4 47F22F52 		movw	r2, #29999
+ 248 00a8 9342     		cmp	r3, r2
+ 249 00aa 06D9     		bls	.L8
+ 250              		.loc 1 58 33 discriminator 1
+ 251 00ac BB68     		ldr	r3, [r7, #8]
+ 252 00ae 48F69F42 		movw	r2, #35999
+ 253 00b2 9342     		cmp	r3, r2
+ 254 00b4 01D8     		bhi	.L8
   59:Core/Src/motor_driver.c ****     {
   60:Core/Src/motor_driver.c ****         step = MOTOR_STEP_6;       
+ 255              		.loc 1 60 14
+ 256 00b6 0623     		movs	r3, #6
+ 257 00b8 FB73     		strb	r3, [r7, #15]
+ 258              	.L8:
   61:Core/Src/motor_driver.c ****     }
   62:Core/Src/motor_driver.c ****     else
   63:Core/Src/motor_driver.c ****     {
   64:Core/Src/motor_driver.c ****         /* error state */
   65:Core/Src/motor_driver.c ****     }
- 105              		.loc 1 65 5 is_stmt 1 view .LVU31
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 4
-
-
   66:Core/Src/motor_driver.c **** 
   67:Core/Src/motor_driver.c ****     Motor_Driver_Step = step;
- 106              		.loc 1 67 5 view .LVU32
- 107              		.loc 1 67 23 is_stmt 0 view .LVU33
- 108 004e 0C4B     		ldr	r3, .L10+24
- 109 0050 1A70     		strb	r2, [r3]
+ 259              		.loc 1 67 23
+ 260 00ba 054A     		ldr	r2, .L13+4
+ 261 00bc FB7B     		ldrb	r3, [r7, #15]
+ 262 00be 1370     		strb	r3, [r2]
   68:Core/Src/motor_driver.c **** }
- 110              		.loc 1 68 1 view .LVU34
- 111 0052 7047     		bx	lr
- 112              	.LVL5:
- 113              	.L5:
-  44:Core/Src/motor_driver.c ****     }
- 114              		.loc 1 44 14 view .LVU35
- 115 0054 0222     		movs	r2, #2
- 116 0056 FAE7     		b	.L3
- 117              	.L6:
-  48:Core/Src/motor_driver.c ****     }    
- 118              		.loc 1 48 14 view .LVU36
- 119 0058 0322     		movs	r2, #3
- 120 005a F8E7     		b	.L3
- 121              	.L7:
-  52:Core/Src/motor_driver.c ****     }    
- 122              		.loc 1 52 14 view .LVU37
- 123 005c 0422     		movs	r2, #4
- 124 005e F6E7     		b	.L3
- 125              	.L8:
-  56:Core/Src/motor_driver.c ****     }    
- 126              		.loc 1 56 14 view .LVU38
- 127 0060 0522     		movs	r2, #5
- 128 0062 F4E7     		b	.L3
- 129              	.L9:
-  60:Core/Src/motor_driver.c ****     }
- 130              		.loc 1 60 14 view .LVU39
- 131 0064 0622     		movs	r2, #6
- 132 0066 F2E7     		b	.L3
- 133              	.L11:
- 134              		.align	2
- 135              	.L10:
- 136 0068 00000000 		.word	.LANCHOR0
- 137 006c 90E8FFFF 		.word	-6000
- 138 0070 20D1FFFF 		.word	-12000
- 139 0074 B0B9FFFF 		.word	-18000
- 140 0078 40A2FFFF 		.word	-24000
- 141 007c D08AFFFF 		.word	-30000
- 142 0080 00000000 		.word	.LANCHOR1
- 143              		.cfi_endproc
- 144              	.LFE335:
- 146              		.section	.text.Motor_Driver_Port_Set_Mode,"ax",%progbits
- 147              		.align	1
- 148              		.syntax unified
- 149              		.thumb
- 150              		.thumb_func
- 152              	Motor_Driver_Port_Set_Mode:
- 153              	.LVL6:
- 154              	.LFB337:
+ 263              		.loc 1 68 1
+ 264 00c0 00BF     		nop
+ 265 00c2 1437     		adds	r7, r7, #20
+ 266              	.LCFI9:
+ 267              		.cfi_def_cfa_offset 4
+ 268 00c4 BD46     		mov	sp, r7
+ 269              	.LCFI10:
+ 270              		.cfi_def_cfa_register 13
+ 271              		@ sp needed
+ 272 00c6 5DF8047B 		ldr	r7, [sp], #4
+ 273              	.LCFI11:
+ 274              		.cfi_restore 7
+ 275              		.cfi_def_cfa_offset 0
+ 276 00ca 7047     		bx	lr
+ 277              	.L14:
+ 278              		.align	2
+ 279              	.L13:
+ 280 00cc 00000000 		.word	Motor_Angle_Offset
+ 281 00d0 00000000 		.word	Motor_Driver_Step
+ 282              		.cfi_endproc
+ 283              	.LFE335:
+ 285              		.section	.text.Motor_Driver_Output_Duty,"ax",%progbits
+ 286              		.align	1
+ 287              		.syntax unified
+ 288              		.thumb
+ 289              		.thumb_func
+ 291              	Motor_Driver_Output_Duty:
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 7
+
+
+ 292              	.LFB336:
   69:Core/Src/motor_driver.c **** 
   70:Core/Src/motor_driver.c **** static void Motor_Driver_Output_Duty(uint16 duty)
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 5
-
-
   71:Core/Src/motor_driver.c **** {
+ 293              		.loc 1 71 1
+ 294              		.cfi_startproc
+ 295              		@ args = 0, pretend = 0, frame = 16
+ 296              		@ frame_needed = 1, uses_anonymous_args = 0
+ 297 0000 80B5     		push	{r7, lr}
+ 298              	.LCFI12:
+ 299              		.cfi_def_cfa_offset 8
+ 300              		.cfi_offset 7, -8
+ 301              		.cfi_offset 14, -4
+ 302 0002 84B0     		sub	sp, sp, #16
+ 303              	.LCFI13:
+ 304              		.cfi_def_cfa_offset 24
+ 305 0004 00AF     		add	r7, sp, #0
+ 306              	.LCFI14:
+ 307              		.cfi_def_cfa_register 7
+ 308 0006 7860     		str	r0, [r7, #4]
   72:Core/Src/motor_driver.c ****     uint8 step;
   73:Core/Src/motor_driver.c **** 
   74:Core/Src/motor_driver.c ****     step = Motor_Driver_Step;
+ 309              		.loc 1 74 10
+ 310 0008 774B     		ldr	r3, .L29
+ 311 000a 1B78     		ldrb	r3, [r3]
+ 312 000c FB73     		strb	r3, [r7, #15]
   75:Core/Src/motor_driver.c ****     if(duty>0)
+ 313              		.loc 1 75 7
+ 314 000e 7B68     		ldr	r3, [r7, #4]
+ 315 0010 002B     		cmp	r3, #0
+ 316 0012 00F0D580 		beq	.L16
   76:Core/Src/motor_driver.c ****     {
   77:Core/Src/motor_driver.c ****         switch(step)
+ 317              		.loc 1 77 9
+ 318 0016 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 319 0018 013B     		subs	r3, r3, #1
+ 320 001a 052B     		cmp	r3, #5
+ 321 001c 00F2DF80 		bhi	.L27
+ 322 0020 01A2     		adr	r2, .L19
+ 323 0022 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 324 0026 00BF     		.p2align 2
+ 325              	.L19:
+ 326 0028 41000000 		.word	.L24+1
+ 327 002c 81000000 		.word	.L23+1
+ 328 0030 C1000000 		.word	.L22+1
+ 329 0034 01010000 		.word	.L21+1
+ 330 0038 41010000 		.word	.L20+1
+ 331 003c 81010000 		.word	.L18+1
+ 332              		.p2align 1
+ 333              	.L24:
   78:Core/Src/motor_driver.c ****         {
   79:Core/Src/motor_driver.c ****             case MOTOR_STEP_1:
   80:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U,OUTPUT_TIM_MODE);
+ 334              		.loc 1 80 17
+ 335 0040 0121     		movs	r1, #1
+ 336 0042 4FF40050 		mov	r0, #8192
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 8
+
+
+ 337 0046 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
   81:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = duty;
+ 338              		.loc 1 81 37
+ 339 004a 684A     		ldr	r2, .L29+4
+ 340              		.loc 1 81 62
+ 341 004c 7B68     		ldr	r3, [r7, #4]
+ 342 004e 5363     		str	r3, [r2, #52]
   82:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
+ 343              		.loc 1 82 37
+ 344 0050 664B     		ldr	r3, .L29+4
+ 345              		.loc 1 82 62
+ 346 0052 0022     		movs	r2, #0
+ 347 0054 9A63     		str	r2, [r3, #56]
   83:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;
+ 348              		.loc 1 83 37
+ 349 0056 654B     		ldr	r3, .L29+4
+ 350              		.loc 1 83 62
+ 351 0058 0022     		movs	r2, #0
+ 352 005a DA63     		str	r2, [r3, #60]
   84:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_V|LOWSIDE_PIN_W,OUTPUT_GPIO_MODE);
+ 353              		.loc 1 84 17
+ 354 005c 0221     		movs	r1, #2
+ 355 005e 4FF44040 		mov	r0, #49152
+ 356 0062 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
   85:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_V,GPIO_PIN_SET);
+ 357              		.loc 1 85 17
+ 358 0066 0122     		movs	r2, #1
+ 359 0068 4FF48041 		mov	r1, #16384
+ 360 006c 6048     		ldr	r0, .L29+8
+ 361 006e FFF7FEFF 		bl	HAL_GPIO_WritePin
   86:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_W,GPIO_PIN_RESET);
+ 362              		.loc 1 86 17
+ 363 0072 0022     		movs	r2, #0
+ 364 0074 4FF40041 		mov	r1, #32768
+ 365 0078 5D48     		ldr	r0, .L29+8
+ 366 007a FFF7FEFF 		bl	HAL_GPIO_WritePin
   87:Core/Src/motor_driver.c ****             break;
+ 367              		.loc 1 87 13
+ 368 007e AFE0     		b	.L26
+ 369              	.L23:
   88:Core/Src/motor_driver.c ****             case MOTOR_STEP_2:
   89:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U,OUTPUT_TIM_MODE);
+ 370              		.loc 1 89 17
+ 371 0080 0121     		movs	r1, #1
+ 372 0082 4FF40050 		mov	r0, #8192
+ 373 0086 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
   90:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = duty;       
+ 374              		.loc 1 90 37
+ 375 008a 584A     		ldr	r2, .L29+4
+ 376              		.loc 1 90 62
+ 377 008c 7B68     		ldr	r3, [r7, #4]
+ 378 008e 5363     		str	r3, [r2, #52]
   91:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
+ 379              		.loc 1 91 37
+ 380 0090 564B     		ldr	r3, .L29+4
+ 381              		.loc 1 91 62
+ 382 0092 0022     		movs	r2, #0
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 9
+
+
+ 383 0094 9A63     		str	r2, [r3, #56]
   92:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;
+ 384              		.loc 1 92 37
+ 385 0096 554B     		ldr	r3, .L29+4
+ 386              		.loc 1 92 62
+ 387 0098 0022     		movs	r2, #0
+ 388 009a DA63     		str	r2, [r3, #60]
   93:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_V|LOWSIDE_PIN_W,OUTPUT_GPIO_MODE);
+ 389              		.loc 1 93 17
+ 390 009c 0221     		movs	r1, #2
+ 391 009e 4FF44040 		mov	r0, #49152
+ 392 00a2 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
   94:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_V,GPIO_PIN_RESET);
+ 393              		.loc 1 94 17
+ 394 00a6 0022     		movs	r2, #0
+ 395 00a8 4FF48041 		mov	r1, #16384
+ 396 00ac 5048     		ldr	r0, .L29+8
+ 397 00ae FFF7FEFF 		bl	HAL_GPIO_WritePin
   95:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_W,GPIO_PIN_SET);
+ 398              		.loc 1 95 17
+ 399 00b2 0122     		movs	r2, #1
+ 400 00b4 4FF40041 		mov	r1, #32768
+ 401 00b8 4D48     		ldr	r0, .L29+8
+ 402 00ba FFF7FEFF 		bl	HAL_GPIO_WritePin
   96:Core/Src/motor_driver.c ****             break;       
+ 403              		.loc 1 96 13
+ 404 00be 8FE0     		b	.L26
+ 405              	.L22:
   97:Core/Src/motor_driver.c ****             case MOTOR_STEP_3:
   98:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_V,OUTPUT_TIM_MODE);
+ 406              		.loc 1 98 17
+ 407 00c0 0121     		movs	r1, #1
+ 408 00c2 4FF48040 		mov	r0, #16384
+ 409 00c6 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
   99:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
+ 410              		.loc 1 99 37
+ 411 00ca 484B     		ldr	r3, .L29+4
+ 412              		.loc 1 99 62
+ 413 00cc 0022     		movs	r2, #0
+ 414 00ce 5A63     		str	r2, [r3, #52]
  100:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = duty;
+ 415              		.loc 1 100 37
+ 416 00d0 464A     		ldr	r2, .L29+4
+ 417              		.loc 1 100 62
+ 418 00d2 7B68     		ldr	r3, [r7, #4]
+ 419 00d4 9363     		str	r3, [r2, #56]
  101:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;          
+ 420              		.loc 1 101 37
+ 421 00d6 454B     		ldr	r3, .L29+4
+ 422              		.loc 1 101 62
+ 423 00d8 0022     		movs	r2, #0
+ 424 00da DA63     		str	r2, [r3, #60]
  102:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_W,OUTPUT_GPIO_MODE);
+ 425              		.loc 1 102 17
+ 426 00dc 0221     		movs	r1, #2
+ 427 00de 4FF42040 		mov	r0, #40960
+ 428 00e2 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 10
+
+
  103:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_U,GPIO_PIN_RESET);
+ 429              		.loc 1 103 17
+ 430 00e6 0022     		movs	r2, #0
+ 431 00e8 4FF40051 		mov	r1, #8192
+ 432 00ec 4048     		ldr	r0, .L29+8
+ 433 00ee FFF7FEFF 		bl	HAL_GPIO_WritePin
  104:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_W,GPIO_PIN_SET);
+ 434              		.loc 1 104 17
+ 435 00f2 0122     		movs	r2, #1
+ 436 00f4 4FF40041 		mov	r1, #32768
+ 437 00f8 3D48     		ldr	r0, .L29+8
+ 438 00fa FFF7FEFF 		bl	HAL_GPIO_WritePin
  105:Core/Src/motor_driver.c ****             break;
+ 439              		.loc 1 105 13
+ 440 00fe 6FE0     		b	.L26
+ 441              	.L21:
  106:Core/Src/motor_driver.c ****             case MOTOR_STEP_4:           
  107:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_V,OUTPUT_TIM_MODE);
+ 442              		.loc 1 107 17
+ 443 0100 0121     		movs	r1, #1
+ 444 0102 4FF48040 		mov	r0, #16384
+ 445 0106 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
  108:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
+ 446              		.loc 1 108 37
+ 447 010a 384B     		ldr	r3, .L29+4
+ 448              		.loc 1 108 62
+ 449 010c 0022     		movs	r2, #0
+ 450 010e 5A63     		str	r2, [r3, #52]
  109:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = duty;       
+ 451              		.loc 1 109 37
+ 452 0110 364A     		ldr	r2, .L29+4
+ 453              		.loc 1 109 62
+ 454 0112 7B68     		ldr	r3, [r7, #4]
+ 455 0114 9363     		str	r3, [r2, #56]
  110:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;          
+ 456              		.loc 1 110 37
+ 457 0116 354B     		ldr	r3, .L29+4
+ 458              		.loc 1 110 62
+ 459 0118 0022     		movs	r2, #0
+ 460 011a DA63     		str	r2, [r3, #60]
  111:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_W,OUTPUT_GPIO_MODE);
+ 461              		.loc 1 111 17
+ 462 011c 0221     		movs	r1, #2
+ 463 011e 4FF42040 		mov	r0, #40960
+ 464 0122 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
  112:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_U,GPIO_PIN_SET);
+ 465              		.loc 1 112 17
+ 466 0126 0122     		movs	r2, #1
+ 467 0128 4FF40051 		mov	r1, #8192
+ 468 012c 3048     		ldr	r0, .L29+8
+ 469 012e FFF7FEFF 		bl	HAL_GPIO_WritePin
  113:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_W,GPIO_PIN_RESET);
+ 470              		.loc 1 113 17
+ 471 0132 0022     		movs	r2, #0
+ 472 0134 4FF40041 		mov	r1, #32768
+ 473 0138 2D48     		ldr	r0, .L29+8
+ 474 013a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 11
+
+
  114:Core/Src/motor_driver.c ****             break;        
+ 475              		.loc 1 114 13
+ 476 013e 4FE0     		b	.L26
+ 477              	.L20:
  115:Core/Src/motor_driver.c ****             case MOTOR_STEP_5:
  116:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_W,OUTPUT_TIM_MODE);
+ 478              		.loc 1 116 17
+ 479 0140 0121     		movs	r1, #1
+ 480 0142 4FF40040 		mov	r0, #32768
+ 481 0146 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
  117:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
+ 482              		.loc 1 117 37
+ 483 014a 284B     		ldr	r3, .L29+4
+ 484              		.loc 1 117 62
+ 485 014c 0022     		movs	r2, #0
+ 486 014e 5A63     		str	r2, [r3, #52]
  118:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
+ 487              		.loc 1 118 37
+ 488 0150 264B     		ldr	r3, .L29+4
+ 489              		.loc 1 118 62
+ 490 0152 0022     		movs	r2, #0
+ 491 0154 9A63     		str	r2, [r3, #56]
  119:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = duty;            
+ 492              		.loc 1 119 37
+ 493 0156 254A     		ldr	r2, .L29+4
+ 494              		.loc 1 119 62
+ 495 0158 7B68     		ldr	r3, [r7, #4]
+ 496 015a D363     		str	r3, [r2, #60]
  120:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_V,OUTPUT_GPIO_MODE);
+ 497              		.loc 1 120 17
+ 498 015c 0221     		movs	r1, #2
+ 499 015e 4FF4C040 		mov	r0, #24576
+ 500 0162 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
  121:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_U,GPIO_PIN_SET);
+ 501              		.loc 1 121 17
+ 502 0166 0122     		movs	r2, #1
+ 503 0168 4FF40051 		mov	r1, #8192
+ 504 016c 2048     		ldr	r0, .L29+8
+ 505 016e FFF7FEFF 		bl	HAL_GPIO_WritePin
  122:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_V,GPIO_PIN_RESET);       
+ 506              		.loc 1 122 17
+ 507 0172 0022     		movs	r2, #0
+ 508 0174 4FF48041 		mov	r1, #16384
+ 509 0178 1D48     		ldr	r0, .L29+8
+ 510 017a FFF7FEFF 		bl	HAL_GPIO_WritePin
  123:Core/Src/motor_driver.c ****             break;
+ 511              		.loc 1 123 13
+ 512 017e 2FE0     		b	.L26
+ 513              	.L18:
  124:Core/Src/motor_driver.c ****             case MOTOR_STEP_6:          
  125:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_W,OUTPUT_TIM_MODE);
+ 514              		.loc 1 125 17
+ 515 0180 0121     		movs	r1, #1
+ 516 0182 4FF40040 		mov	r0, #32768
+ 517 0186 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
  126:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
+ 518              		.loc 1 126 37
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 12
+
+
+ 519 018a 184B     		ldr	r3, .L29+4
+ 520              		.loc 1 126 62
+ 521 018c 0022     		movs	r2, #0
+ 522 018e 5A63     		str	r2, [r3, #52]
  127:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 6
-
-
+ 523              		.loc 1 127 37
+ 524 0190 164B     		ldr	r3, .L29+4
+ 525              		.loc 1 127 62
+ 526 0192 0022     		movs	r2, #0
+ 527 0194 9A63     		str	r2, [r3, #56]
  128:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = duty;            
+ 528              		.loc 1 128 37
+ 529 0196 154A     		ldr	r2, .L29+4
+ 530              		.loc 1 128 62
+ 531 0198 7B68     		ldr	r3, [r7, #4]
+ 532 019a D363     		str	r3, [r2, #60]
  129:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_V,OUTPUT_GPIO_MODE);
+ 533              		.loc 1 129 17
+ 534 019c 0221     		movs	r1, #2
+ 535 019e 4FF4C040 		mov	r0, #24576
+ 536 01a2 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
  130:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_U,GPIO_PIN_RESET);
+ 537              		.loc 1 130 17
+ 538 01a6 0022     		movs	r2, #0
+ 539 01a8 4FF40051 		mov	r1, #8192
+ 540 01ac 1048     		ldr	r0, .L29+8
+ 541 01ae FFF7FEFF 		bl	HAL_GPIO_WritePin
  131:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_V,GPIO_PIN_SET);
+ 542              		.loc 1 131 17
+ 543 01b2 0122     		movs	r2, #1
+ 544 01b4 4FF48041 		mov	r1, #16384
+ 545 01b8 0D48     		ldr	r0, .L29+8
+ 546 01ba FFF7FEFF 		bl	HAL_GPIO_WritePin
  132:Core/Src/motor_driver.c ****             break;        
+ 547              		.loc 1 132 13
+ 548 01be 0FE0     		b	.L26
+ 549              	.L16:
  133:Core/Src/motor_driver.c ****             default :
  134:Core/Src/motor_driver.c ****             break;
  135:Core/Src/motor_driver.c ****         }
@@ -313,731 +705,247 @@ ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 1
  137:Core/Src/motor_driver.c ****     else
  138:Core/Src/motor_driver.c ****     {
  139:Core/Src/motor_driver.c ****         Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_V|LOWSIDE_PIN_W,OUTPUT_TIM_MODE);
+ 550              		.loc 1 139 9
+ 551 01c0 0121     		movs	r1, #1
+ 552 01c2 4FF46040 		mov	r0, #57344
+ 553 01c6 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
  140:Core/Src/motor_driver.c ****         MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
+ 554              		.loc 1 140 29
+ 555 01ca 084B     		ldr	r3, .L29+4
+ 556              		.loc 1 140 54
+ 557 01cc 0022     		movs	r2, #0
+ 558 01ce 5A63     		str	r2, [r3, #52]
  141:Core/Src/motor_driver.c ****         MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
+ 559              		.loc 1 141 29
+ 560 01d0 064B     		ldr	r3, .L29+4
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 13
+
+
+ 561              		.loc 1 141 54
+ 562 01d2 0022     		movs	r2, #0
+ 563 01d4 9A63     		str	r2, [r3, #56]
  142:Core/Src/motor_driver.c ****         MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;     
+ 564              		.loc 1 142 29
+ 565 01d6 054B     		ldr	r3, .L29+4
+ 566              		.loc 1 142 54
+ 567 01d8 0022     		movs	r2, #0
+ 568 01da DA63     		str	r2, [r3, #60]
  143:Core/Src/motor_driver.c ****     }
  144:Core/Src/motor_driver.c **** }
+ 569              		.loc 1 144 1
+ 570 01dc 00E0     		b	.L28
+ 571              	.L27:
+ 134:Core/Src/motor_driver.c ****         }
+ 572              		.loc 1 134 13
+ 573 01de 00BF     		nop
+ 574              	.L26:
+ 575              	.L28:
+ 576              		.loc 1 144 1
+ 577 01e0 00BF     		nop
+ 578 01e2 1037     		adds	r7, r7, #16
+ 579              	.LCFI15:
+ 580              		.cfi_def_cfa_offset 8
+ 581 01e4 BD46     		mov	sp, r7
+ 582              	.LCFI16:
+ 583              		.cfi_def_cfa_register 13
+ 584              		@ sp needed
+ 585 01e6 80BD     		pop	{r7, pc}
+ 586              	.L30:
+ 587              		.align	2
+ 588              	.L29:
+ 589 01e8 00000000 		.word	Motor_Driver_Step
+ 590 01ec 00000140 		.word	1073807360
+ 591 01f0 00040258 		.word	1476527104
+ 592              		.cfi_endproc
+ 593              	.LFE336:
+ 595              		.section	.text.Motor_Driver_Port_Set_Mode,"ax",%progbits
+ 596              		.align	1
+ 597              		.syntax unified
+ 598              		.thumb
+ 599              		.thumb_func
+ 601              	Motor_Driver_Port_Set_Mode:
+ 602              	.LFB337:
  145:Core/Src/motor_driver.c **** 
  146:Core/Src/motor_driver.c **** static void Motor_Driver_Port_Set_Mode(uint16 pin,uint8 mode)
  147:Core/Src/motor_driver.c **** {
- 155              		.loc 1 147 1 is_stmt 1 view -0
- 156              		.cfi_startproc
- 157              		@ args = 0, pretend = 0, frame = 24
- 158              		@ frame_needed = 0, uses_anonymous_args = 0
- 159              		.loc 1 147 1 is_stmt 0 view .LVU41
- 160 0000 00B5     		push	{lr}
- 161              	.LCFI0:
- 162              		.cfi_def_cfa_offset 4
- 163              		.cfi_offset 14, -4
- 164 0002 87B0     		sub	sp, sp, #28
- 165              	.LCFI1:
- 166              		.cfi_def_cfa_offset 32
+ 603              		.loc 1 147 1
+ 604              		.cfi_startproc
+ 605              		@ args = 0, pretend = 0, frame = 32
+ 606              		@ frame_needed = 1, uses_anonymous_args = 0
+ 607 0000 80B5     		push	{r7, lr}
+ 608              	.LCFI17:
+ 609              		.cfi_def_cfa_offset 8
+ 610              		.cfi_offset 7, -8
+ 611              		.cfi_offset 14, -4
+ 612 0002 88B0     		sub	sp, sp, #32
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 14
+
+
+ 613              	.LCFI18:
+ 614              		.cfi_def_cfa_offset 40
+ 615 0004 00AF     		add	r7, sp, #0
+ 616              	.LCFI19:
+ 617              		.cfi_def_cfa_register 7
+ 618 0006 7860     		str	r0, [r7, #4]
+ 619 0008 0B46     		mov	r3, r1
+ 620 000a FB70     		strb	r3, [r7, #3]
  148:Core/Src/motor_driver.c ****     GPIO_InitTypeDef GPIO_InitStruct = {0};
- 167              		.loc 1 148 5 is_stmt 1 view .LVU42
- 168              		.loc 1 148 22 is_stmt 0 view .LVU43
- 169 0004 0023     		movs	r3, #0
- 170 0006 0193     		str	r3, [sp, #4]
- 171 0008 0293     		str	r3, [sp, #8]
- 172 000a 0393     		str	r3, [sp, #12]
- 173 000c 0493     		str	r3, [sp, #16]
- 174 000e 0593     		str	r3, [sp, #20]
+ 621              		.loc 1 148 22
+ 622 000c 07F10C03 		add	r3, r7, #12
+ 623 0010 0022     		movs	r2, #0
+ 624 0012 1A60     		str	r2, [r3]
+ 625 0014 5A60     		str	r2, [r3, #4]
+ 626 0016 9A60     		str	r2, [r3, #8]
+ 627 0018 DA60     		str	r2, [r3, #12]
+ 628 001a 1A61     		str	r2, [r3, #16]
  149:Core/Src/motor_driver.c ****     GPIO_InitStruct.Pin = pin;
- 175              		.loc 1 149 5 is_stmt 1 view .LVU44
- 176              		.loc 1 149 25 is_stmt 0 view .LVU45
- 177 0010 0190     		str	r0, [sp, #4]
+ 629              		.loc 1 149 25
+ 630 001c 7B68     		ldr	r3, [r7, #4]
+ 631 001e FB60     		str	r3, [r7, #12]
  150:Core/Src/motor_driver.c ****     if(OUTPUT_TIM_MODE == mode)
- 178              		.loc 1 150 5 is_stmt 1 view .LVU46
- 179              		.loc 1 150 7 is_stmt 0 view .LVU47
- 180 0012 0129     		cmp	r1, #1
- 181 0014 08D0     		beq	.L16
+ 632              		.loc 1 150 7
+ 633 0020 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 634 0022 012B     		cmp	r3, #1
+ 635 0024 04D1     		bne	.L32
  151:Core/Src/motor_driver.c ****     {
  152:Core/Src/motor_driver.c ****         GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 636              		.loc 1 152 30
+ 637 0026 0223     		movs	r3, #2
+ 638 0028 3B61     		str	r3, [r7, #16]
  153:Core/Src/motor_driver.c ****         GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
+ 639              		.loc 1 153 35
+ 640 002a 0123     		movs	r3, #1
+ 641 002c FB61     		str	r3, [r7, #28]
+ 642 002e 03E0     		b	.L33
+ 643              	.L32:
  154:Core/Src/motor_driver.c ****     }
  155:Core/Src/motor_driver.c ****     else
  156:Core/Src/motor_driver.c ****     {
  157:Core/Src/motor_driver.c ****         GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 7
-
-
- 182              		.loc 1 157 9 is_stmt 1 view .LVU48
- 183              		.loc 1 157 30 is_stmt 0 view .LVU49
- 184 0016 0123     		movs	r3, #1
- 185 0018 0293     		str	r3, [sp, #8]
+ 644              		.loc 1 157 30
+ 645 0030 0123     		movs	r3, #1
+ 646 0032 3B61     		str	r3, [r7, #16]
  158:Core/Src/motor_driver.c ****         GPIO_InitStruct.Alternate = 0;        
- 186              		.loc 1 158 9 is_stmt 1 view .LVU50
- 187              	.L14:
+ 647              		.loc 1 158 35
+ 648 0034 0023     		movs	r3, #0
+ 649 0036 FB61     		str	r3, [r7, #28]
+ 650              	.L33:
  159:Core/Src/motor_driver.c ****     }
  160:Core/Src/motor_driver.c ****     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct); 
- 188              		.loc 1 160 5 view .LVU51
- 189 001a 01A9     		add	r1, sp, #4
- 190              	.LVL7:
- 191              		.loc 1 160 5 is_stmt 0 view .LVU52
- 192 001c 0548     		ldr	r0, .L17
- 193              	.LVL8:
- 194              		.loc 1 160 5 view .LVU53
- 195 001e FFF7FEFF 		bl	HAL_GPIO_Init
- 196              	.LVL9:
+ 651              		.loc 1 160 5
+ 652 0038 07F10C03 		add	r3, r7, #12
+ 653 003c 1946     		mov	r1, r3
+ 654 003e 0348     		ldr	r0, .L34
+ 655 0040 FFF7FEFF 		bl	HAL_GPIO_Init
  161:Core/Src/motor_driver.c **** }
- 197              		.loc 1 161 1 view .LVU54
- 198 0022 07B0     		add	sp, sp, #28
- 199              	.LCFI2:
- 200              		.cfi_remember_state
- 201              		.cfi_def_cfa_offset 4
- 202              		@ sp needed
- 203 0024 5DF804FB 		ldr	pc, [sp], #4
- 204              	.LVL10:
- 205              	.L16:
- 206              	.LCFI3:
- 207              		.cfi_restore_state
- 152:Core/Src/motor_driver.c ****         GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
- 208              		.loc 1 152 9 is_stmt 1 view .LVU55
- 152:Core/Src/motor_driver.c ****         GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
- 209              		.loc 1 152 30 is_stmt 0 view .LVU56
- 210 0028 0223     		movs	r3, #2
- 211 002a 0293     		str	r3, [sp, #8]
- 153:Core/Src/motor_driver.c ****     }
- 212              		.loc 1 153 9 is_stmt 1 view .LVU57
- 153:Core/Src/motor_driver.c ****     }
- 213              		.loc 1 153 35 is_stmt 0 view .LVU58
- 214 002c 0123     		movs	r3, #1
- 215 002e 0593     		str	r3, [sp, #20]
- 216 0030 F3E7     		b	.L14
- 217              	.L18:
- 218 0032 00BF     		.align	2
- 219              	.L17:
- 220 0034 00040258 		.word	1476527104
- 221              		.cfi_endproc
- 222              	.LFE337:
- 224              		.section	.text.Motor_Driver_Output_Duty,"ax",%progbits
- 225              		.align	1
- 226              		.syntax unified
- 227              		.thumb
- 228              		.thumb_func
- 230              	Motor_Driver_Output_Duty:
- 231              	.LVL11:
- 232              	.LFB336:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 8
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 15
 
 
-  71:Core/Src/motor_driver.c ****     uint8 step;
- 233              		.loc 1 71 1 is_stmt 1 view -0
- 234              		.cfi_startproc
- 235              		@ args = 0, pretend = 0, frame = 0
- 236              		@ frame_needed = 0, uses_anonymous_args = 0
-  71:Core/Src/motor_driver.c ****     uint8 step;
- 237              		.loc 1 71 1 is_stmt 0 view .LVU60
- 238 0000 38B5     		push	{r3, r4, r5, lr}
- 239              	.LCFI4:
- 240              		.cfi_def_cfa_offset 16
- 241              		.cfi_offset 3, -16
- 242              		.cfi_offset 4, -12
- 243              		.cfi_offset 5, -8
- 244              		.cfi_offset 14, -4
-  72:Core/Src/motor_driver.c **** 
- 245              		.loc 1 72 5 is_stmt 1 view .LVU61
-  74:Core/Src/motor_driver.c ****     if(duty>0)
- 246              		.loc 1 74 5 view .LVU62
-  74:Core/Src/motor_driver.c ****     if(duty>0)
- 247              		.loc 1 74 10 is_stmt 0 view .LVU63
- 248 0002 644B     		ldr	r3, .L30
- 249 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 250              	.LVL12:
-  75:Core/Src/motor_driver.c ****     {
- 251              		.loc 1 75 5 is_stmt 1 view .LVU64
-  75:Core/Src/motor_driver.c ****     {
- 252              		.loc 1 75 7 is_stmt 0 view .LVU65
- 253 0006 0028     		cmp	r0, #0
- 254 0008 00F0B880 		beq	.L20
- 255 000c 0446     		mov	r4, r0
-  77:Core/Src/motor_driver.c ****         {
- 256              		.loc 1 77 9 is_stmt 1 view .LVU66
- 257 000e 013B     		subs	r3, r3, #1
- 258              	.LVL13:
-  77:Core/Src/motor_driver.c ****         {
- 259              		.loc 1 77 9 is_stmt 0 view .LVU67
- 260 0010 052B     		cmp	r3, #5
- 261 0012 00F2BD80 		bhi	.L19
- 262 0016 DFE803F0 		tbb	[pc, r3]
- 263              	.L23:
- 264 001a 03       		.byte	(.L28-.L23)/2
- 265 001b 20       		.byte	(.L27-.L23)/2
- 266 001c 3D       		.byte	(.L26-.L23)/2
- 267 001d 5A       		.byte	(.L25-.L23)/2
- 268 001e 77       		.byte	(.L24-.L23)/2
- 269 001f 94       		.byte	(.L22-.L23)/2
- 270              		.p2align 1
- 271              	.L28:
-  80:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = duty;
- 272              		.loc 1 80 17 is_stmt 1 view .LVU68
- 273 0020 0121     		movs	r1, #1
- 274 0022 4FF40050 		mov	r0, #8192
- 275              	.LVL14:
-  80:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = duty;
- 276              		.loc 1 80 17 is_stmt 0 view .LVU69
- 277 0026 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 278              	.LVL15:
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 9
-
-
-  81:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
- 279              		.loc 1 81 17 is_stmt 1 view .LVU70
-  81:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
- 280              		.loc 1 81 62 is_stmt 0 view .LVU71
- 281 002a 5B4B     		ldr	r3, .L30+4
- 282 002c 5C63     		str	r4, [r3, #52]
-  82:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;
- 283              		.loc 1 82 17 is_stmt 1 view .LVU72
-  82:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;
- 284              		.loc 1 82 62 is_stmt 0 view .LVU73
- 285 002e 0024     		movs	r4, #0
- 286              	.LVL16:
-  82:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;
- 287              		.loc 1 82 62 view .LVU74
- 288 0030 9C63     		str	r4, [r3, #56]
- 289              	.LVL17:
-  83:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_V|LOWSIDE_PIN_W,OUTPUT_GPIO_MODE);
- 290              		.loc 1 83 17 is_stmt 1 view .LVU75
-  83:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_V|LOWSIDE_PIN_W,OUTPUT_GPIO_MODE);
- 291              		.loc 1 83 62 is_stmt 0 view .LVU76
- 292 0032 DC63     		str	r4, [r3, #60]
-  84:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_V,GPIO_PIN_SET);
- 293              		.loc 1 84 17 is_stmt 1 view .LVU77
- 294 0034 0221     		movs	r1, #2
- 295 0036 4FF44040 		mov	r0, #49152
- 296 003a FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 297              	.LVL18:
-  85:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_W,GPIO_PIN_RESET);
- 298              		.loc 1 85 17 view .LVU78
- 299 003e 574D     		ldr	r5, .L30+8
- 300 0040 0122     		movs	r2, #1
- 301 0042 4FF48041 		mov	r1, #16384
- 302 0046 2846     		mov	r0, r5
- 303 0048 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 304              	.LVL19:
-  86:Core/Src/motor_driver.c ****             break;
- 305              		.loc 1 86 17 view .LVU79
- 306 004c 2246     		mov	r2, r4
- 307 004e 4FF40041 		mov	r1, #32768
- 308 0052 2846     		mov	r0, r5
- 309 0054 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 310              	.LVL20:
-  87:Core/Src/motor_driver.c ****             case MOTOR_STEP_2:
- 311              		.loc 1 87 13 view .LVU80
- 312 0058 9AE0     		b	.L19
- 313              	.LVL21:
- 314              	.L27:
-  89:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = duty;       
- 315              		.loc 1 89 17 view .LVU81
- 316 005a 0121     		movs	r1, #1
- 317 005c 4FF40050 		mov	r0, #8192
- 318              	.LVL22:
-  89:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = duty;       
- 319              		.loc 1 89 17 is_stmt 0 view .LVU82
- 320 0060 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 321              	.LVL23:
-  90:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 10
-
-
- 322              		.loc 1 90 17 is_stmt 1 view .LVU83
-  90:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
- 323              		.loc 1 90 62 is_stmt 0 view .LVU84
- 324 0064 4C4B     		ldr	r3, .L30+4
- 325 0066 5C63     		str	r4, [r3, #52]
-  91:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;
- 326              		.loc 1 91 17 is_stmt 1 view .LVU85
-  91:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;
- 327              		.loc 1 91 62 is_stmt 0 view .LVU86
- 328 0068 0024     		movs	r4, #0
- 329              	.LVL24:
-  91:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;
- 330              		.loc 1 91 62 view .LVU87
- 331 006a 9C63     		str	r4, [r3, #56]
- 332              	.LVL25:
-  92:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_V|LOWSIDE_PIN_W,OUTPUT_GPIO_MODE);
- 333              		.loc 1 92 17 is_stmt 1 view .LVU88
-  92:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_V|LOWSIDE_PIN_W,OUTPUT_GPIO_MODE);
- 334              		.loc 1 92 62 is_stmt 0 view .LVU89
- 335 006c DC63     		str	r4, [r3, #60]
-  93:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_V,GPIO_PIN_RESET);
- 336              		.loc 1 93 17 is_stmt 1 view .LVU90
- 337 006e 0221     		movs	r1, #2
- 338 0070 4FF44040 		mov	r0, #49152
- 339 0074 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 340              	.LVL26:
-  94:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_W,GPIO_PIN_SET);
- 341              		.loc 1 94 17 view .LVU91
- 342 0078 484D     		ldr	r5, .L30+8
- 343 007a 2246     		mov	r2, r4
- 344 007c 4FF48041 		mov	r1, #16384
- 345 0080 2846     		mov	r0, r5
- 346 0082 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 347              	.LVL27:
-  95:Core/Src/motor_driver.c ****             break;       
- 348              		.loc 1 95 17 view .LVU92
- 349 0086 0122     		movs	r2, #1
- 350 0088 4FF40041 		mov	r1, #32768
- 351 008c 2846     		mov	r0, r5
- 352 008e FFF7FEFF 		bl	HAL_GPIO_WritePin
- 353              	.LVL28:
-  96:Core/Src/motor_driver.c ****             case MOTOR_STEP_3:
- 354              		.loc 1 96 13 view .LVU93
- 355 0092 7DE0     		b	.L19
- 356              	.LVL29:
- 357              	.L26:
-  98:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
- 358              		.loc 1 98 17 view .LVU94
- 359 0094 0121     		movs	r1, #1
- 360 0096 4FF48040 		mov	r0, #16384
- 361              	.LVL30:
-  98:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
- 362              		.loc 1 98 17 is_stmt 0 view .LVU95
- 363 009a FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 364              	.LVL31:
-  99:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = duty;
- 365              		.loc 1 99 17 is_stmt 1 view .LVU96
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 11
-
-
-  99:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = duty;
- 366              		.loc 1 99 62 is_stmt 0 view .LVU97
- 367 009e 3E4B     		ldr	r3, .L30+4
- 368 00a0 0025     		movs	r5, #0
- 369 00a2 5D63     		str	r5, [r3, #52]
- 100:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;          
- 370              		.loc 1 100 17 is_stmt 1 view .LVU98
- 100:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;          
- 371              		.loc 1 100 62 is_stmt 0 view .LVU99
- 372 00a4 9C63     		str	r4, [r3, #56]
- 101:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_W,OUTPUT_GPIO_MODE);
- 373              		.loc 1 101 17 is_stmt 1 view .LVU100
- 101:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_W,OUTPUT_GPIO_MODE);
- 374              		.loc 1 101 62 is_stmt 0 view .LVU101
- 375 00a6 DD63     		str	r5, [r3, #60]
- 102:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_U,GPIO_PIN_RESET);
- 376              		.loc 1 102 17 is_stmt 1 view .LVU102
- 377 00a8 0221     		movs	r1, #2
- 378 00aa 4FF42040 		mov	r0, #40960
- 379 00ae FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 380              	.LVL32:
- 103:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_W,GPIO_PIN_SET);
- 381              		.loc 1 103 17 view .LVU103
- 382 00b2 3A4C     		ldr	r4, .L30+8
- 383              	.LVL33:
- 103:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_W,GPIO_PIN_SET);
- 384              		.loc 1 103 17 is_stmt 0 view .LVU104
- 385 00b4 2A46     		mov	r2, r5
- 386 00b6 4FF40051 		mov	r1, #8192
- 387 00ba 2046     		mov	r0, r4
- 388 00bc FFF7FEFF 		bl	HAL_GPIO_WritePin
- 389              	.LVL34:
- 104:Core/Src/motor_driver.c ****             break;
- 390              		.loc 1 104 17 is_stmt 1 view .LVU105
- 391 00c0 0122     		movs	r2, #1
- 392 00c2 4FF40041 		mov	r1, #32768
- 393 00c6 2046     		mov	r0, r4
- 394 00c8 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 395              	.LVL35:
- 105:Core/Src/motor_driver.c ****             case MOTOR_STEP_4:           
- 396              		.loc 1 105 13 view .LVU106
- 397 00cc 60E0     		b	.L19
- 398              	.LVL36:
- 399              	.L25:
- 107:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
- 400              		.loc 1 107 17 view .LVU107
- 401 00ce 0121     		movs	r1, #1
- 402 00d0 4FF48040 		mov	r0, #16384
- 403              	.LVL37:
- 107:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
- 404              		.loc 1 107 17 is_stmt 0 view .LVU108
- 405 00d4 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 406              	.LVL38:
- 108:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = duty;       
- 407              		.loc 1 108 17 is_stmt 1 view .LVU109
- 108:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = duty;       
- 408              		.loc 1 108 62 is_stmt 0 view .LVU110
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 12
-
-
- 409 00d8 2F4B     		ldr	r3, .L30+4
- 410 00da 0025     		movs	r5, #0
- 411 00dc 5D63     		str	r5, [r3, #52]
- 109:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;          
- 412              		.loc 1 109 17 is_stmt 1 view .LVU111
- 109:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;          
- 413              		.loc 1 109 62 is_stmt 0 view .LVU112
- 414 00de 9C63     		str	r4, [r3, #56]
- 110:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_W,OUTPUT_GPIO_MODE);
- 415              		.loc 1 110 17 is_stmt 1 view .LVU113
- 110:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_W,OUTPUT_GPIO_MODE);
- 416              		.loc 1 110 62 is_stmt 0 view .LVU114
- 417 00e0 DD63     		str	r5, [r3, #60]
- 111:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_U,GPIO_PIN_SET);
- 418              		.loc 1 111 17 is_stmt 1 view .LVU115
- 419 00e2 0221     		movs	r1, #2
- 420 00e4 4FF42040 		mov	r0, #40960
- 421 00e8 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 422              	.LVL39:
- 112:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_W,GPIO_PIN_RESET);
- 423              		.loc 1 112 17 view .LVU116
- 424 00ec 2B4C     		ldr	r4, .L30+8
- 425              	.LVL40:
- 112:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_W,GPIO_PIN_RESET);
- 426              		.loc 1 112 17 is_stmt 0 view .LVU117
- 427 00ee 0122     		movs	r2, #1
- 428 00f0 4FF40051 		mov	r1, #8192
- 429 00f4 2046     		mov	r0, r4
- 430 00f6 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 431              	.LVL41:
- 113:Core/Src/motor_driver.c ****             break;        
- 432              		.loc 1 113 17 is_stmt 1 view .LVU118
- 433 00fa 2A46     		mov	r2, r5
- 434 00fc 4FF40041 		mov	r1, #32768
- 435 0100 2046     		mov	r0, r4
- 436 0102 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 437              	.LVL42:
- 114:Core/Src/motor_driver.c ****             case MOTOR_STEP_5:
- 438              		.loc 1 114 13 view .LVU119
- 439 0106 43E0     		b	.L19
- 440              	.LVL43:
- 441              	.L24:
- 116:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
- 442              		.loc 1 116 17 view .LVU120
- 443 0108 0121     		movs	r1, #1
- 444 010a 4FF40040 		mov	r0, #32768
- 445              	.LVL44:
- 116:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
- 446              		.loc 1 116 17 is_stmt 0 view .LVU121
- 447 010e FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 448              	.LVL45:
- 117:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
- 449              		.loc 1 117 17 is_stmt 1 view .LVU122
- 117:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
- 450              		.loc 1 117 62 is_stmt 0 view .LVU123
- 451 0112 214B     		ldr	r3, .L30+4
- 452 0114 0025     		movs	r5, #0
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 13
-
-
- 453 0116 5D63     		str	r5, [r3, #52]
- 118:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = duty;            
- 454              		.loc 1 118 17 is_stmt 1 view .LVU124
- 118:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = duty;            
- 455              		.loc 1 118 62 is_stmt 0 view .LVU125
- 456 0118 9D63     		str	r5, [r3, #56]
- 119:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_V,OUTPUT_GPIO_MODE);
- 457              		.loc 1 119 17 is_stmt 1 view .LVU126
- 119:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_V,OUTPUT_GPIO_MODE);
- 458              		.loc 1 119 62 is_stmt 0 view .LVU127
- 459 011a DC63     		str	r4, [r3, #60]
- 120:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_U,GPIO_PIN_SET);
- 460              		.loc 1 120 17 is_stmt 1 view .LVU128
- 461 011c 0221     		movs	r1, #2
- 462 011e 4FF4C040 		mov	r0, #24576
- 463 0122 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 464              	.LVL46:
- 121:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_V,GPIO_PIN_RESET);       
- 465              		.loc 1 121 17 view .LVU129
- 466 0126 1D4C     		ldr	r4, .L30+8
- 467              	.LVL47:
- 121:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_V,GPIO_PIN_RESET);       
- 468              		.loc 1 121 17 is_stmt 0 view .LVU130
- 469 0128 0122     		movs	r2, #1
- 470 012a 4FF40051 		mov	r1, #8192
- 471 012e 2046     		mov	r0, r4
- 472 0130 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 473              	.LVL48:
- 122:Core/Src/motor_driver.c ****             break;
- 474              		.loc 1 122 17 is_stmt 1 view .LVU131
- 475 0134 2A46     		mov	r2, r5
- 476 0136 4FF48041 		mov	r1, #16384
- 477 013a 2046     		mov	r0, r4
- 478 013c FFF7FEFF 		bl	HAL_GPIO_WritePin
- 479              	.LVL49:
- 123:Core/Src/motor_driver.c ****             case MOTOR_STEP_6:          
- 480              		.loc 1 123 13 view .LVU132
- 481 0140 26E0     		b	.L19
- 482              	.LVL50:
- 483              	.L22:
- 125:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
- 484              		.loc 1 125 17 view .LVU133
- 485 0142 0121     		movs	r1, #1
- 486 0144 4FF40040 		mov	r0, #32768
- 487              	.LVL51:
- 125:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
- 488              		.loc 1 125 17 is_stmt 0 view .LVU134
- 489 0148 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 490              	.LVL52:
- 126:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
- 491              		.loc 1 126 17 is_stmt 1 view .LVU135
- 126:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
- 492              		.loc 1 126 62 is_stmt 0 view .LVU136
- 493 014c 124B     		ldr	r3, .L30+4
- 494 014e 0025     		movs	r5, #0
- 495 0150 5D63     		str	r5, [r3, #52]
- 127:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = duty;            
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 14
-
-
- 496              		.loc 1 127 17 is_stmt 1 view .LVU137
- 127:Core/Src/motor_driver.c ****                 MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = duty;            
- 497              		.loc 1 127 62 is_stmt 0 view .LVU138
- 498 0152 9D63     		str	r5, [r3, #56]
- 128:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_V,OUTPUT_GPIO_MODE);
- 499              		.loc 1 128 17 is_stmt 1 view .LVU139
- 128:Core/Src/motor_driver.c ****                 Motor_Driver_Port_Set_Mode(LOWSIDE_PIN_U|LOWSIDE_PIN_V,OUTPUT_GPIO_MODE);
- 500              		.loc 1 128 62 is_stmt 0 view .LVU140
- 501 0154 DC63     		str	r4, [r3, #60]
- 129:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_U,GPIO_PIN_RESET);
- 502              		.loc 1 129 17 is_stmt 1 view .LVU141
- 503 0156 0221     		movs	r1, #2
- 504 0158 4FF4C040 		mov	r0, #24576
- 505 015c FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 506              	.LVL53:
- 130:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_V,GPIO_PIN_SET);
- 507              		.loc 1 130 17 view .LVU142
- 508 0160 0E4C     		ldr	r4, .L30+8
- 509              	.LVL54:
- 130:Core/Src/motor_driver.c ****                 HAL_GPIO_WritePin(GPIOB,LOWSIDE_PIN_V,GPIO_PIN_SET);
- 510              		.loc 1 130 17 is_stmt 0 view .LVU143
- 511 0162 2A46     		mov	r2, r5
- 512 0164 4FF40051 		mov	r1, #8192
- 513 0168 2046     		mov	r0, r4
- 514 016a FFF7FEFF 		bl	HAL_GPIO_WritePin
- 515              	.LVL55:
- 131:Core/Src/motor_driver.c ****             break;        
- 516              		.loc 1 131 17 is_stmt 1 view .LVU144
- 517 016e 0122     		movs	r2, #1
- 518 0170 4FF48041 		mov	r1, #16384
- 519 0174 2046     		mov	r0, r4
- 520 0176 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 521              	.LVL56:
- 132:Core/Src/motor_driver.c ****             default :
- 522              		.loc 1 132 13 view .LVU145
- 523 017a 09E0     		b	.L19
- 524              	.LVL57:
- 525              	.L20:
- 139:Core/Src/motor_driver.c ****         MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
- 526              		.loc 1 139 9 view .LVU146
- 527 017c 0121     		movs	r1, #1
- 528 017e 4FF46040 		mov	r0, #57344
- 529              	.LVL58:
- 139:Core/Src/motor_driver.c ****         MOTOR_DRIVER_TIMER_U->MOTOR_DRIVER_CHANNEL_U = MOTOR_DRIVER_OUTPUT_LOW;
- 530              		.loc 1 139 9 is_stmt 0 view .LVU147
- 531 0182 FFF7FEFF 		bl	Motor_Driver_Port_Set_Mode
- 532              	.LVL59:
- 140:Core/Src/motor_driver.c ****         MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
- 533              		.loc 1 140 9 is_stmt 1 view .LVU148
- 140:Core/Src/motor_driver.c ****         MOTOR_DRIVER_TIMER_V->MOTOR_DRIVER_CHANNEL_V = MOTOR_DRIVER_OUTPUT_LOW;
- 534              		.loc 1 140 54 is_stmt 0 view .LVU149
- 535 0186 044B     		ldr	r3, .L30+4
- 536 0188 0022     		movs	r2, #0
- 537 018a 5A63     		str	r2, [r3, #52]
- 141:Core/Src/motor_driver.c ****         MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;     
- 538              		.loc 1 141 9 is_stmt 1 view .LVU150
- 141:Core/Src/motor_driver.c ****         MOTOR_DRIVER_TIMER_W->MOTOR_DRIVER_CHANNEL_W = MOTOR_DRIVER_OUTPUT_LOW;     
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 15
-
-
- 539              		.loc 1 141 54 is_stmt 0 view .LVU151
- 540 018c 9A63     		str	r2, [r3, #56]
- 142:Core/Src/motor_driver.c ****     }
- 541              		.loc 1 142 9 is_stmt 1 view .LVU152
- 142:Core/Src/motor_driver.c ****     }
- 542              		.loc 1 142 54 is_stmt 0 view .LVU153
- 543 018e DA63     		str	r2, [r3, #60]
- 544              	.L19:
- 144:Core/Src/motor_driver.c **** 
- 545              		.loc 1 144 1 view .LVU154
- 546 0190 38BD     		pop	{r3, r4, r5, pc}
- 547              	.L31:
- 548 0192 00BF     		.align	2
- 549              	.L30:
- 550 0194 00000000 		.word	.LANCHOR1
- 551 0198 00000140 		.word	1073807360
- 552 019c 00040258 		.word	1476527104
- 553              		.cfi_endproc
- 554              	.LFE336:
- 556              		.section	.text.Motor_Drvier_Fault,"ax",%progbits
- 557              		.align	1
- 558              		.syntax unified
- 559              		.thumb
- 560              		.thumb_func
- 562              	Motor_Drvier_Fault:
- 563              	.LFB338:
+ 656              		.loc 1 161 1
+ 657 0044 00BF     		nop
+ 658 0046 2037     		adds	r7, r7, #32
+ 659              	.LCFI20:
+ 660              		.cfi_def_cfa_offset 8
+ 661 0048 BD46     		mov	sp, r7
+ 662              	.LCFI21:
+ 663              		.cfi_def_cfa_register 13
+ 664              		@ sp needed
+ 665 004a 80BD     		pop	{r7, pc}
+ 666              	.L35:
+ 667              		.align	2
+ 668              	.L34:
+ 669 004c 00040258 		.word	1476527104
+ 670              		.cfi_endproc
+ 671              	.LFE337:
+ 673              		.section	.text.Motor_Drvier_Fault,"ax",%progbits
+ 674              		.align	1
+ 675              		.syntax unified
+ 676              		.thumb
+ 677              		.thumb_func
+ 679              	Motor_Drvier_Fault:
+ 680              	.LFB338:
  162:Core/Src/motor_driver.c **** 
  163:Core/Src/motor_driver.c **** static void Motor_Drvier_Fault(void)
  164:Core/Src/motor_driver.c **** {
- 564              		.loc 1 164 1 is_stmt 1 view -0
- 565              		.cfi_startproc
- 566              		@ args = 0, pretend = 0, frame = 0
- 567              		@ frame_needed = 0, uses_anonymous_args = 0
- 568 0000 08B5     		push	{r3, lr}
- 569              	.LCFI5:
- 570              		.cfi_def_cfa_offset 8
- 571              		.cfi_offset 3, -8
- 572              		.cfi_offset 14, -4
+ 681              		.loc 1 164 1
+ 682              		.cfi_startproc
+ 683              		@ args = 0, pretend = 0, frame = 0
+ 684              		@ frame_needed = 1, uses_anonymous_args = 0
+ 685 0000 80B5     		push	{r7, lr}
+ 686              	.LCFI22:
+ 687              		.cfi_def_cfa_offset 8
+ 688              		.cfi_offset 7, -8
+ 689              		.cfi_offset 14, -4
+ 690 0002 00AF     		add	r7, sp, #0
+ 691              	.LCFI23:
+ 692              		.cfi_def_cfa_register 7
  165:Core/Src/motor_driver.c ****     Motor_Driver_Fault = HAL_GPIO_ReadPin(MOTOR_DRIVER_FAULT_MODULE,MOTOR_DRIVER_FAULT_PIN);
- 573              		.loc 1 165 5 view .LVU156
- 574              		.loc 1 165 26 is_stmt 0 view .LVU157
- 575 0002 4FF48051 		mov	r1, #4096
- 576 0006 0348     		ldr	r0, .L34
- 577 0008 FFF7FEFF 		bl	HAL_GPIO_ReadPin
- 578              	.LVL60:
- 579              		.loc 1 165 24 view .LVU158
- 580 000c 024B     		ldr	r3, .L34+4
- 581 000e 1870     		strb	r0, [r3]
+ 693              		.loc 1 165 26
+ 694 0004 4FF48051 		mov	r1, #4096
+ 695 0008 0448     		ldr	r0, .L37
+ 696 000a FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 697 000e 0346     		mov	r3, r0
+ 698 0010 1A46     		mov	r2, r3
+ 699              		.loc 1 165 24
+ 700 0012 034B     		ldr	r3, .L37+4
+ 701 0014 1A70     		strb	r2, [r3]
  166:Core/Src/motor_driver.c **** }
- 582              		.loc 1 166 1 view .LVU159
- 583 0010 08BD     		pop	{r3, pc}
- 584              	.L35:
- 585 0012 00BF     		.align	2
- 586              	.L34:
- 587 0014 00040258 		.word	1476527104
- 588 0018 00000000 		.word	.LANCHOR2
- 589              		.cfi_endproc
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 16
+ 702              		.loc 1 166 1
+ 703 0016 00BF     		nop
+ 704 0018 80BD     		pop	{r7, pc}
+ 705              	.L38:
+ 706 001a 00BF     		.align	2
+ 707              	.L37:
+ 708 001c 00040258 		.word	1476527104
+ 709 0020 00000000 		.word	Motor_Driver_Fault
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 16
 
 
- 590              	.LFE338:
- 592              		.section	.text.Motor_Driver_Init,"ax",%progbits
- 593              		.align	1
- 594              		.global	Motor_Driver_Init
- 595              		.syntax unified
- 596              		.thumb
- 597              		.thumb_func
- 599              	Motor_Driver_Init:
- 600              	.LFB333:
-  14:Core/Src/motor_driver.c ****     //HAL_GPIO_WritePin(MOTOR_DRIVER_ENABLE_MODULE,MOTOR_DRIVER_ENABLE_PIN,GPIO_PIN_SET);
- 601              		.loc 1 14 1 is_stmt 1 view -0
- 602              		.cfi_startproc
- 603              		@ args = 0, pretend = 0, frame = 0
- 604              		@ frame_needed = 0, uses_anonymous_args = 0
- 605              		@ link register save eliminated.
-  16:Core/Src/motor_driver.c **** 
- 606              		.loc 1 16 1 view .LVU161
- 607 0000 7047     		bx	lr
- 608              		.cfi_endproc
- 609              	.LFE333:
- 611              		.section	.text.Motor_Drvier_Control,"ax",%progbits
- 612              		.align	1
- 613              		.global	Motor_Drvier_Control
- 614              		.syntax unified
- 615              		.thumb
- 616              		.thumb_func
- 618              	Motor_Drvier_Control:
- 619              	.LFB334:
-  19:Core/Src/motor_driver.c ****     Motor_Driver_Output_Step(AS5048_Angle);
- 620              		.loc 1 19 1 view -0
- 621              		.cfi_startproc
- 622              		@ args = 0, pretend = 0, frame = 0
- 623              		@ frame_needed = 0, uses_anonymous_args = 0
- 624 0000 08B5     		push	{r3, lr}
- 625              	.LCFI6:
- 626              		.cfi_def_cfa_offset 8
- 627              		.cfi_offset 3, -8
- 628              		.cfi_offset 14, -4
-  20:Core/Src/motor_driver.c ****     Motor_Driver_Output_Duty(Motor_Driver_Duty);
- 629              		.loc 1 20 5 view .LVU163
- 630 0002 054B     		ldr	r3, .L39
- 631 0004 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
- 632 0006 FFF7FEFF 		bl	Motor_Driver_Output_Step
- 633              	.LVL61:
-  21:Core/Src/motor_driver.c ****     Motor_Drvier_Fault();
- 634              		.loc 1 21 5 view .LVU164
- 635 000a 044B     		ldr	r3, .L39+4
- 636 000c 1868     		ldr	r0, [r3]
- 637 000e FFF7FEFF 		bl	Motor_Driver_Output_Duty
- 638              	.LVL62:
-  22:Core/Src/motor_driver.c **** }
- 639              		.loc 1 22 5 view .LVU165
- 640 0012 FFF7FEFF 		bl	Motor_Drvier_Fault
- 641              	.LVL63:
-  23:Core/Src/motor_driver.c **** 
- 642              		.loc 1 23 1 is_stmt 0 view .LVU166
- 643 0016 08BD     		pop	{r3, pc}
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 17
-
-
- 644              	.L40:
- 645              		.align	2
- 646              	.L39:
- 647 0018 00000000 		.word	.LANCHOR3
- 648 001c 00000000 		.word	.LANCHOR4
- 649              		.cfi_endproc
- 650              	.LFE334:
- 652              		.global	AS5048_Angle
- 653              		.global	Motor_Driver_Fault
- 654              		.global	Motor_Angle_Offset
- 655              		.global	Motor_Driver_Step
- 656              		.global	Motor_Driver_Duty
- 657              		.section	.bss.AS5048_Angle,"aw",%nobits
- 658              		.set	.LANCHOR3,. + 0
- 661              	AS5048_Angle:
- 662 0000 00       		.space	1
- 663              		.section	.bss.Motor_Angle_Offset,"aw",%nobits
- 664              		.align	2
- 665              		.set	.LANCHOR0,. + 0
- 668              	Motor_Angle_Offset:
- 669 0000 00000000 		.space	4
- 670              		.section	.bss.Motor_Driver_Fault,"aw",%nobits
- 671              		.set	.LANCHOR2,. + 0
- 674              	Motor_Driver_Fault:
- 675 0000 00       		.space	1
- 676              		.section	.bss.Motor_Driver_Step,"aw",%nobits
- 677              		.set	.LANCHOR1,. + 0
- 680              	Motor_Driver_Step:
- 681 0000 00       		.space	1
- 682              		.section	.data.Motor_Driver_Duty,"aw"
- 683              		.align	2
- 684              		.set	.LANCHOR4,. + 0
- 687              	Motor_Driver_Duty:
- 688 0000 1E000000 		.word	30
- 689              		.text
- 690              	.Letext0:
- 691              		.file 2 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\machine\\_default_types.h"
- 692              		.file 3 "d:\\3.tools\\arm_gcc_toolchain\\arm-none-eabi\\include\\sys\\_stdint.h"
- 693              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h"
- 694              		.file 5 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h"
- 695              		.file 6 "Core/Inc/vardef.h"
-ARM GAS  C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s 			page 18
+ 710              		.cfi_endproc
+ 711              	.LFE338:
+ 713              		.text
+ 714              	.Letext0:
+ 715              		.file 2 "/Users/seojisu/Library/Arm-GCC-xPack/arm-none-eabi/include/machine/_default_types.h"
+ 716              		.file 3 "/Users/seojisu/Library/Arm-GCC-xPack/arm-none-eabi/include/sys/_stdint.h"
+ 717              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h"
+ 718              		.file 5 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h"
+ 719              		.file 6 "Core/Inc/vardef.h"
+ARM GAS  /var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s 			page 17
 
 
 DEFINED SYMBOLS
-                            *ABS*:00000000 motor_driver.c
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:19     .text.Motor_Driver_Output_Step:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:24     .text.Motor_Driver_Output_Step:00000000 Motor_Driver_Output_Step
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:136    .text.Motor_Driver_Output_Step:00000068 $d
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:147    .text.Motor_Driver_Port_Set_Mode:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:152    .text.Motor_Driver_Port_Set_Mode:00000000 Motor_Driver_Port_Set_Mode
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:220    .text.Motor_Driver_Port_Set_Mode:00000034 $d
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:225    .text.Motor_Driver_Output_Duty:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:230    .text.Motor_Driver_Output_Duty:00000000 Motor_Driver_Output_Duty
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:264    .text.Motor_Driver_Output_Duty:0000001a $d
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:270    .text.Motor_Driver_Output_Duty:00000020 $t
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:550    .text.Motor_Driver_Output_Duty:00000194 $d
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:557    .text.Motor_Drvier_Fault:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:562    .text.Motor_Drvier_Fault:00000000 Motor_Drvier_Fault
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:587    .text.Motor_Drvier_Fault:00000014 $d
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:593    .text.Motor_Driver_Init:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:599    .text.Motor_Driver_Init:00000000 Motor_Driver_Init
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:612    .text.Motor_Drvier_Control:00000000 $t
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:618    .text.Motor_Drvier_Control:00000000 Motor_Drvier_Control
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:647    .text.Motor_Drvier_Control:00000018 $d
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:661    .bss.AS5048_Angle:00000000 AS5048_Angle
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:674    .bss.Motor_Driver_Fault:00000000 Motor_Driver_Fault
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:668    .bss.Motor_Angle_Offset:00000000 Motor_Angle_Offset
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:680    .bss.Motor_Driver_Step:00000000 Motor_Driver_Step
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:687    .data.Motor_Driver_Duty:00000000 Motor_Driver_Duty
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:662    .bss.AS5048_Angle:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:664    .bss.Motor_Angle_Offset:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:675    .bss.Motor_Driver_Fault:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:681    .bss.Motor_Driver_Step:00000000 $d
-C:\Users\jisu8\AppData\Local\Temp\ccL7NuDl.s:683    .data.Motor_Driver_Duty:00000000 $d
+                            *ABS*:0000000000000000 motor_driver.c
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:23     .data.Motor_Driver_Duty:0000000000000000 Motor_Driver_Duty
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:20     .data.Motor_Driver_Duty:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:29     .bss.Motor_Driver_Step:0000000000000000 Motor_Driver_Step
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:30     .bss.Motor_Driver_Step:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:36     .bss.Motor_Angle_Offset:0000000000000000 Motor_Angle_Offset
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:33     .bss.Motor_Angle_Offset:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:42     .bss.Motor_Driver_Fault:0000000000000000 Motor_Driver_Fault
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:43     .bss.Motor_Driver_Fault:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:48     .bss.AS5048_Angle:0000000000000000 AS5048_Angle
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:49     .bss.AS5048_Angle:0000000000000000 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:51     .text.Motor_Driver_Init:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:57     .text.Motor_Driver_Init:0000000000000000 Motor_Driver_Init
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:87     .text.Motor_Drvier_Control:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:93     .text.Motor_Drvier_Control:0000000000000000 Motor_Drvier_Control
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:136    .text.Motor_Driver_Output_Step:0000000000000000 Motor_Driver_Output_Step
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:291    .text.Motor_Driver_Output_Duty:0000000000000000 Motor_Driver_Output_Duty
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:679    .text.Motor_Drvier_Fault:0000000000000000 Motor_Drvier_Fault
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:125    .text.Motor_Drvier_Control:0000000000000020 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:131    .text.Motor_Driver_Output_Step:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:280    .text.Motor_Driver_Output_Step:00000000000000cc $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:286    .text.Motor_Driver_Output_Duty:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:326    .text.Motor_Driver_Output_Duty:0000000000000028 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:332    .text.Motor_Driver_Output_Duty:0000000000000040 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:601    .text.Motor_Driver_Port_Set_Mode:0000000000000000 Motor_Driver_Port_Set_Mode
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:589    .text.Motor_Driver_Output_Duty:00000000000001e8 $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:596    .text.Motor_Driver_Port_Set_Mode:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:669    .text.Motor_Driver_Port_Set_Mode:000000000000004c $d
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:674    .text.Motor_Drvier_Fault:0000000000000000 $t
+/var/folders/d0/cymppscj10lcmm48h781wrc80000gn/T//ccQtlxYZ.s:708    .text.Motor_Drvier_Fault:000000000000001c $d
 
 UNDEFINED SYMBOLS
-HAL_GPIO_Init
 HAL_GPIO_WritePin
+HAL_GPIO_Init
 HAL_GPIO_ReadPin
