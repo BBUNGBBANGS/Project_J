@@ -52,14 +52,7 @@ void TIM17_Handler(void)
 {
     HAL_TIM_IRQHandler(&htim17);
 }
-void FDCAN1_0_IRQHandler(void)
-{
-    HAL_FDCAN_IRQHandler(&hfdcan1);
-}
-void FDCAN1_1_IRQHandler(void)
-{
-    HAL_FDCAN_IRQHandler(&hfdcan1);
-}
+
 void SystemTick_Handler(void)
 {
     /* USER CODE BEGIN SysTick_IRQn 0 */
@@ -98,9 +91,9 @@ __weak void DMA1_Stream4_IRQHandler(void)                                 {Defau
 __weak void DMA1_Stream5_IRQHandler(void)                                 {Default_Handler();}
 __weak void DMA1_Stream6_IRQHandler(void)                                 {Default_Handler();}
 __weak void ADC_IRQHandler(void)                                          {Default_Handler();}
-__weak void FDCAN1_IT0_IRQHandler(void)                                   {FDCAN1_0_IRQHandler();}
+__weak void FDCAN1_IT0_IRQHandler(void)                                   {Default_Handler();}
 __weak void FDCAN2_IT0_IRQHandler(void)                                   {Default_Handler();}
-__weak void FDCAN1_IT1_IRQHandler(void)                                   {FDCAN1_1_IRQHandler();}
+__weak void FDCAN1_IT1_IRQHandler(void)                                   {Default_Handler();}
 __weak void FDCAN2_IT1_IRQHandler(void)                                   {Default_Handler();}
 __weak void EXTI9_5_IRQHandler(void)                                      {Default_Handler();}
 __weak void TIM1_BRK_IRQHandler(void)                                     {Default_Handler();}

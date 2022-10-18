@@ -1,3 +1,4 @@
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    stm32h7xx_hal_conf.h
@@ -6,17 +7,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
-
+/* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef STM32H7xx_HAL_CONF_H
 #define STM32H7xx_HAL_CONF_H
@@ -35,7 +35,7 @@
 #define HAL_MODULE_ENABLED
 
   #define HAL_ADC_MODULE_ENABLED
-  #define HAL_FDCAN_MODULE_ENABLED
+/* #define HAL_FDCAN_MODULE_ENABLED   */
 /* #define HAL_FMAC_MODULE_ENABLED   */
 /* #define HAL_CEC_MODULE_ENABLED   */
 /* #define HAL_COMP_MODULE_ENABLED   */
@@ -65,16 +65,17 @@
 /* #define HAL_LPTIM_MODULE_ENABLED   */
 /* #define HAL_LTDC_MODULE_ENABLED   */
 /* #define HAL_QSPI_MODULE_ENABLED   */
+/* #define HAL_RAMECC_MODULE_ENABLED   */
 /* #define HAL_RNG_MODULE_ENABLED   */
 /* #define HAL_RTC_MODULE_ENABLED   */
 /* #define HAL_SAI_MODULE_ENABLED   */
 /* #define HAL_SD_MODULE_ENABLED   */
 /* #define HAL_MMC_MODULE_ENABLED   */
 /* #define HAL_SPDIFRX_MODULE_ENABLED   */
-#define HAL_SPI_MODULE_ENABLED
+/* #define HAL_SPI_MODULE_ENABLED   */
 /* #define HAL_SWPMI_MODULE_ENABLED   */
 #define HAL_TIM_MODULE_ENABLED
-/* #define HAL_UART_MODULE_ENABLED   */
+#define HAL_UART_MODULE_ENABLED
 /* #define HAL_USART_MODULE_ENABLED   */
 /* #define HAL_IRDA_MODULE_ENABLED   */
 /* #define HAL_SMARTCARD_MODULE_ENABLED   */
@@ -181,7 +182,7 @@
 #define  USE_HAL_DSI_REGISTER_CALLBACKS     0U /* DSI register callback disabled     */
 #define  USE_HAL_DTS_REGISTER_CALLBACKS     0U /* DTS register callback disabled     */
 #define  USE_HAL_ETH_REGISTER_CALLBACKS     0U /* ETH register callback disabled     */
-#define  USE_HAL_FDCAN_REGISTER_CALLBACKS   1U /* FDCAN register callback disabled   */
+#define  USE_HAL_FDCAN_REGISTER_CALLBACKS   0U /* FDCAN register callback disabled   */
 #define  USE_HAL_FMAC_REGISTER_CALLBACKS    0U /* FMAC register callback disabled  */
 #define  USE_HAL_NAND_REGISTER_CALLBACKS    0U /* NAND register callback disabled    */
 #define  USE_HAL_NOR_REGISTER_CALLBACKS     0U /* NOR register callback disabled     */
@@ -213,8 +214,8 @@
 #define  USE_HAL_SMBUS_REGISTER_CALLBACKS   0U /* SMBUS register callback disabled   */
 #define  USE_HAL_SPI_REGISTER_CALLBACKS     0U /* SPI register callback disabled     */
 #define  USE_HAL_SWPMI_REGISTER_CALLBACKS   0U /* SWPMI register callback disabled   */
-#define  USE_HAL_TIM_REGISTER_CALLBACKS     1U /* TIM register callback disabled     */
-#define  USE_HAL_UART_REGISTER_CALLBACKS    1U /* UART register callback disabled    */
+#define  USE_HAL_TIM_REGISTER_CALLBACKS     0U /* TIM register callback disabled     */
+#define  USE_HAL_UART_REGISTER_CALLBACKS    0U /* UART register callback disabled    */
 #define  USE_HAL_USART_REGISTER_CALLBACKS   0U /* USART register callback disabled   */
 #define  USE_HAL_WWDG_REGISTER_CALLBACKS    0U /* WWDG register callback disabled    */
 
@@ -507,5 +508,3 @@
 #endif
 
 #endif /* STM32H7xx_HAL_CONF_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

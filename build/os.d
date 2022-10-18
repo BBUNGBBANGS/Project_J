@@ -21,7 +21,6 @@ build/os.o: Core/Src/os.c Core/Inc/os.h Core/Inc/vardef.h Core/Inc/led.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_adc.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_adc_ex.h \
- Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_fdcan.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h \
@@ -29,11 +28,11 @@ build/os.o: Core/Src/os.c Core/Inc/os.h Core/Inc/vardef.h Core/Inc/led.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c_ex.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h \
- Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h \
- Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h \
- Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h Core/Inc/imu.h \
- Core/Inc/adc.h Core/Inc/lcd.h Core/Inc/uart.h Core/Inc/can.h
+ Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
+ Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
+ Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h Core/Inc/imu.h \
+ Core/Inc/adc.h Core/Inc/lcd.h Core/Inc/uart.h
 Core/Inc/os.h:
 Core/Inc/vardef.h:
 Core/Inc/led.h:
@@ -62,7 +61,6 @@ Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_adc.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_adc.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_adc_ex.h:
-Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_fdcan.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash_ex.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h:
@@ -70,12 +68,11 @@ Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c_ex.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h:
-Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h:
-Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h:
 Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h:
+Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
+Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
 Core/Inc/imu.h:
 Core/Inc/adc.h:
 Core/Inc/lcd.h:
 Core/Inc/uart.h:
-Core/Inc/can.h:

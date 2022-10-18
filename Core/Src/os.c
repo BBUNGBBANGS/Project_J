@@ -4,7 +4,6 @@
 #include "adc.h"
 #include "lcd.h"
 #include "uart.h"
-#include "can.h"
 
 Os_Var_t Os_Var;
 
@@ -19,29 +18,22 @@ static void Os_Background_Task(void);
 
 void Os_Init_Task(void)
 {
-	LCD_Init();
-	Can_Init();
 }
 
 static void Os_1ms_Task(void)
 {
 	LED_Control();
-	IMU_Control();
-	LCD_Set_Clock();
-	LCD_Set_Color();
-	Motor_Drvier_Control();
 }
 
 static void Os_10ms_Task(void)
 {
-	IMU_FindAddress();
 	Adc_Read();
 	Adc_Calc();
 }
 
 static void Os_100ms_Task(void)
 {
-	Can_Transmit();
+
 }
 
 static void Os_Background_Task(void)
