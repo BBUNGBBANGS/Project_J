@@ -15,12 +15,12 @@
             "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-arm",
-            "compilerPath": "D:\\3.tools\\ARM_GCC_ToolChain\\bin\\arm-none-eabi-gcc.exe",
-            "compilerArgs": 
-                [
-                    "-mcpu=cortex-m7",
-                    "-mthumb"
-                ]            
+            "compilerPath": "/Users/seojisu/Library/Arm-GCC-xPack/bin/arm-none-eabi-gcc",
+            "compilerArgs": [
+                "-mcpu=cortex-m7",
+                "-mthumb"
+            ],
+            "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
     "version": 4
