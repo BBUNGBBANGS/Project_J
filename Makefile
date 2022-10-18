@@ -74,15 +74,21 @@ ASM_SOURCES =
 #######################################
 # binaries
 #######################################
-GCC_PATH = /Users/seojisu/Library/Arm-GCC-xPack/bin
 PREFIX = arm-none-eabi-
 # The gcc compiler bin path can be either defined in make command via GCC_PATH variable (> make GCC_PATH=xxx)
 # either it can be added to the PATH environment variable.
-
+ifeq ($(OS),Windows_NT)
+CC = $(PREFIX)gcc
+AS = $(PREFIX)gcc -x assembler-with-cpp
+CP = $(PREFIX)objcopy
+SZ = $(PREFIX)size
+else
+GCC_PATH = /Users/seojisu/Library/Arm-GCC-xPack/bin #for mac
 CC = $(GCC_PATH)/$(PREFIX)gcc
 AS = $(GCC_PATH)/$(PREFIX)gcc -x assembler-with-cpp
 CP = $(GCC_PATH)/$(PREFIX)objcopy
 SZ = $(GCC_PATH)/$(PREFIX)size
+endif
 
 HEX = $(CP) -O ihex
 BIN = $(CP) -O binary -S
@@ -192,7 +198,11 @@ clean:
 # OpenOCD
 #######################################
 flash: all
+	ifeq ($(OS),Windows_NT)
+	openocd -f interface/stlink.cfg -f target/stm32h7x.cfg -c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
+	else
 	/Users/seojisu/Library/xPacks/@xpack-dev-tools/openocd/0.11.0-4.1/.content/bin/openocd -f interface/stlink.cfg -f target/stm32h7x.cfg -c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
+	endif
 
 #######################################
 # dependencies
