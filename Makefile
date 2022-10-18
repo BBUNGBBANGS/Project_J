@@ -197,12 +197,13 @@ clean:
 #######################################
 # OpenOCD
 #######################################
+ifeq ($(OS),Windows_NT)
 flash: all
-	ifeq ($(OS),Windows_NT)
 	openocd -f interface/stlink.cfg -f target/stm32h7x.cfg -c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
-	else
+else
+flash: all
 	/Users/seojisu/Library/xPacks/@xpack-dev-tools/openocd/0.11.0-4.1/.content/bin/openocd -f interface/stlink.cfg -f target/stm32h7x.cfg -c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
-	endif
+endif
 
 #######################################
 # dependencies
