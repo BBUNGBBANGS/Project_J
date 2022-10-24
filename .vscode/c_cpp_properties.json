@@ -3,7 +3,12 @@
         {
             "name": "STM32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "Core/Inc/**",
+                "Drivers/CMSIS/Device/ST/STM32H7xx/Include/**",
+                "Drivers/CMSIS/Include/**",
+                "Drivers/STM32H7xx_HAL_Driver/Inc/**",
+                "Drivers/STM32H7xx_HAL_Driver/Inc/Legacy/**"
             ],
             "defines": [
                 "_DEBUG",
@@ -15,7 +20,7 @@
             "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-arm",
-            "compilerPath": "/Users/seojisu/Library/Arm-GCC-xPack/bin/arm-none-eabi-gcc",
+            "compilerPath": "D:\\3.TOOLS\\ARM_GCC_TOOLCHAIN\\BIN\\ARM-NONE-EABI-GCC.EXE",
             "compilerArgs": [
                 "-mcpu=cortex-m7",
                 "-mthumb"

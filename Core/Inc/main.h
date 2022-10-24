@@ -38,6 +38,9 @@ extern TIM_HandleTypeDef htim15;
 extern TIM_HandleTypeDef htim16;
 extern TIM_HandleTypeDef htim17;
 
+extern UART_HandleTypeDef huart4;
+extern UART_HandleTypeDef huart1;
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

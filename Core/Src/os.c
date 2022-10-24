@@ -1,9 +1,7 @@
 #include "os.h"
 #include "led.h"
-#include "imu.h"
 #include "adc.h"
-#include "lcd.h"
-#include "uart.h"
+#include "esp8266.h"
 
 Os_Var_t Os_Var;
 
@@ -18,6 +16,8 @@ static void Os_Background_Task(void);
 
 void Os_Init_Task(void)
 {
+	HAL_Delay(2000);
+	ESP8266_Init();
 }
 
 static void Os_1ms_Task(void)
@@ -33,7 +33,7 @@ static void Os_10ms_Task(void)
 
 static void Os_100ms_Task(void)
 {
-
+	ESP8266_ConnectWifi();
 }
 
 static void Os_Background_Task(void)
@@ -223,4 +223,20 @@ static void Os_Calc_Runtime_Stop(uint8 idx)
 	}
 
 	return;
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+    if(htim->Instance == TIM15)
+    {
+        Os_Handler_10ms();
+    }
+    if(htim->Instance == TIM16)
+    {
+        Os_Time_Handler();
+    }
+    if(htim->Instance == TIM17)
+    {
+        Os_Handler_1ms();
+    }
 }

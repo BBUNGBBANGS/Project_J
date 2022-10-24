@@ -184,21 +184,7 @@ void PendSV_Handler(void)
 /******************************************************************************/
 
 /* USER CODE BEGIN 1 */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-    if(htim->Instance == TIM15)
-    {
-        Os_Handler_10ms();
-    }
-    if(htim->Instance == TIM16)
-    {
-        Os_Time_Handler();
-    }
-    if(htim->Instance == TIM17)
-    {
-        Os_Handler_1ms();
-    }
-}
+
 
 
 /* USER CODE END 1 */

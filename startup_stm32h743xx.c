@@ -53,6 +53,16 @@ void TIM17_Handler(void)
     HAL_TIM_IRQHandler(&htim17);
 }
 
+void USART1_Handler(void)
+{
+    HAL_UART_IRQHandler(&huart1);
+}
+
+void UART4_Handler(void)
+{
+    HAL_UART_IRQHandler(&huart4);
+}
+
 void SystemTick_Handler(void)
 {
     /* USER CODE BEGIN SysTick_IRQn 0 */
@@ -109,7 +119,7 @@ __weak void I2C2_EV_IRQHandler(void)                                      {Defau
 __weak void I2C2_ER_IRQHandler(void)                                      {Default_Handler();}
 __weak void SPI1_IRQHandler(void)                                         {Default_Handler();}
 __weak void SPI2_IRQHandler(void)                                         {Default_Handler();}
-__weak void USART1_IRQHandler(void)                                       {Default_Handler();}
+__weak void USART1_IRQHandler(void)                                       {USART1_Handler();}
 __weak void USART2_IRQHandler(void)                                       {Default_Handler();}
 __weak void USART3_IRQHandler(void)                                       {Default_Handler();}
 __weak void EXTI15_10_IRQHandler(void)                                    {Default_Handler();}
@@ -123,7 +133,7 @@ __weak void FMC_IRQHandler(void)                                          {Defau
 __weak void SDMMC1_IRQHandler(void)                                       {Default_Handler();}
 __weak void TIM5_IRQHandler(void)                                         {Default_Handler();}
 __weak void SPI3_IRQHandler(void)                                         {Default_Handler();}
-__weak void UART4_IRQHandler(void)                                        {Default_Handler();}
+__weak void UART4_IRQHandler(void)                                        {UART4_Handler();}
 __weak void UART5_IRQHandler(void)                                        {Default_Handler();}
 __weak void TIM6_DAC_IRQHandler(void)                                     {Default_Handler();}
 __weak void TIM7_IRQHandler(void)                                         {Default_Handler();}

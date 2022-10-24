@@ -1,6 +1,8 @@
 {
-    "cortex-debug.armToolchainPath": "/Users/seojisu/Library/Arm-GCC-xPack/bin/",
-    "cortex-debug.openocdPath": "/Users/seojisu/Library/xPacks/@xpack-dev-tools/openocd/0.11.0-4.1/.content/bin/openocd",
-    "cortex-debug.showRTOS": false,
-    "stm32-for-vscode.armToolchainPath": false
+    "cortex-debug.armToolchainPath": "D:\\3.TOOLS\\ARM_GCC_TOOLCHAIN\\BIN",
+    "cortex-debug.openocdPath": "D:\\3.tools\\openocd-20210625\\OpenOCD-20210625-0.11.0\\bin\\OPENOCD.EXE",
+    "files.associations": {
+        "stm32h7xx_hal.h": "c",
+        "vardef.h": "c"
+    },
 }

@@ -42,6 +42,7 @@ Core/Src/stm32h7xx_hal_msp.c \
 Core/Src/os.c \
 Core/Src/led.c \
 Core/Src/adc.c \
+Core/Src/esp8266.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c \
