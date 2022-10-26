@@ -17,7 +17,6 @@ static void Os_Background_Task(void);
 void Os_Init_Task(void)
 {
 	MQTT_InitTask();
-	HAL_Delay(500);
 }
 
 static void Os_1ms_Task(void)
@@ -33,32 +32,33 @@ static void Os_10ms_Task(void)
 }
 uint16_t test1_100ms;
 uint16_t test2_100ms;
+uint16_t test_5000ms_flag;
 uint16_t test_2000ms_flag;
-uint16_t test_3000ms_flag;
 static void Os_100ms_Task(void)
 {
 	test1_100ms++;
 	test2_100ms++;
-	if(test1_100ms>=30)
+	if(test1_100ms>=20)
 	{
 		test1_100ms = 0;
-		test_3000ms_flag=1;
+		test_2000ms_flag=1;
 	}
-	if(test2_100ms>=20)
+	if(test2_100ms>=50)
 	{
 		test2_100ms = 0;
-		test_2000ms_flag=1;
+		test_5000ms_flag=1;
 	}
 	if(test_2000ms_flag == 1)
 	{
 		MQTT_Client_Pub_Task();
 		test_2000ms_flag = 0;
 	}
-	if(test_3000ms_flag == 1)
+	if(test_5000ms_flag == 1)
 	{
 		MQTT_Client_Sub_Task();
-		test_3000ms_flag = 0;
+		test_5000ms_flag = 0;
 	}
+	
 }
 
 static void Os_Background_Task(void)

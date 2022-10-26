@@ -73,6 +73,7 @@ static void MX_USART1_UART_Init(void);
 
 /* USER CODE END 0 */
 
+char dummy[1];
 /**
   * @brief  The application entry point.
   * @retval int
@@ -121,8 +122,16 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim15);
   HAL_TIM_Base_Start_IT(&htim16);
   HAL_TIM_Base_Start_IT(&htim17);
-
-    Os_Init_Task();
+  
+  HAL_GPIO_WritePin(GPIOF,GPIO_PIN_0,GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOF,GPIO_PIN_1,GPIO_PIN_SET);
+  HAL_Delay(100);
+  HAL_UART_Receive_IT(&huart1, dummy, 1);
+  HAL_UART_Receive_IT(&huart4, dummy, 1);
+  HAL_UART_Receive_IT(&huart1, dummy, 1);
+  HAL_UART_Receive_IT(&huart4, dummy, 1);
+  HAL_Delay(1000);
+  Os_Init_Task();
     /* USER CODE END 2 */
     /* Infinite loop */
     while (1)

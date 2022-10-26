@@ -1,48 +1,48 @@
 #include "mqtt_interface.h"
 #include "MQTTClient.h"
-#include "esp8266.h"
-#include <string.h>
-
-#define MQTT_SSID  "BBUNGBBANGWORLD"
-#define MQTT_PASSWORD  "jisu8730"
-#define BROKER_IP	"192.168.0.30"
-#define MQTT_PORT	1883
-#define MQTT_BUFFER_SIZE	1024
 
 uint32_t MilliTimer;
 
 MQTTClient mqttClient;
 Network net; //mqtt network
 
-
 uint8_t sndBuffer[MQTT_BUFFER_SIZE]; //mqtt send buffer
 uint8_t rcvBuffer[MQTT_BUFFER_SIZE]; //mqtt receive buffer
 uint8_t msgBuffer[MQTT_BUFFER_SIZE]; //mqtt message buffer
-
 void MqttMessageArrived(MessageData* msg);
-int MqttConnectBroker(void);
+
+static void MQTT_Connect_Broker(void);
+static void Clear_Tx_Buffer(uint8_t *buf,uint16_t length);
+static void Uart_Transmit(uint8_t * buffer, uint16_t length);
+static void ESP8266_SetModeStation(uint8_t mode);
+static void ESP8266_Connect(uint8_t *ssid, uint8_t *passwd);
+static void ESP8266_SetMUX(uint8_t mux);
+static void ESP8266_SetServer(uint8_t set, uint16_t port);
+static void ESP8266_StartTCPClient(uint8_t * ip,uint16_t port);
+static uint8_t ESP8266_SendData(uint8_t * buffer,uint16_t Length);
+static uint8_t ESP8266_ReceiveData(uint8_t * buffer,int *Length);
+static uint8_t CheckStatus(uint8_t status);
 
 void MQTT_InitTask(void)
 {
-	ESP8266_Init();
-	HAL_Delay(2000);
-    ESP8266_Connect(MQTT_SSID,MQTT_PASSWORD);
-	HAL_Delay(2000);
+	while(!ReadyFlag);
+	ESP8266_SetModeStation(ESP8266_MODE_ALL);
+    ESP8266_Connect((uint8_t *)MQTT_SSID,(uint8_t *)MQTT_PASSWORD);
     ESP8266_SetMUX(1);
-	HAL_Delay(2000);
 	ESP8266_SetServer(1,333);
-	HAL_Delay(2000);
-	MqttConnectBroker();
+	ESP8266_StartTCPClient((uint8_t *)MQTT_BROKER_IP,MQTT_PORT);
+	MQTT_Connect_Broker();
 }
 
 void MQTT_Client_Sub_Task(void)
 {
-	MQTTYield(&mqttClient, 3000);
+	MQTTYield(&mqttClient, 5000);
 }
 
 void MQTT_Client_Pub_Task(void)
 {
-	const char* str = "MQTT message from STM32";
+	const char str[] = "MQTT Test Message Transmit\n";
+
 	MQTTMessage message;
 
 	if(mqttClient.isconnected)
@@ -50,44 +50,30 @@ void MQTT_Client_Pub_Task(void)
 		message.payload = (void*)str;
 		message.payloadlen = strlen(str);
 
-		MQTTPublish(&mqttClient, "mytopic", &message); //publish a message
+		MQTTPublish(&mqttClient, "test", &message); //publish a message
 	}
 }
 
-int MqttConnectBroker(void)
+static void MQTT_Connect_Broker(void)
 {
 	int ret;
 
 	NewNetwork(&net);
-	ConnectNetwork(&net, BROKER_IP, MQTT_PORT);
 
 	MQTTClientInit(&mqttClient, &net, 1000, sndBuffer, sizeof(sndBuffer), rcvBuffer, sizeof(rcvBuffer));
 
 	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
 	data.willFlag = 0;
 	data.MQTTVersion = 3;
-	data.clientID.cstring = "STM32F4";
+	data.clientID.cstring = "LED_RELAY_192.168.0.248";
 	data.username.cstring = "";
 	data.password.cstring = "";
 	data.keepAliveInterval = 60;
 	data.cleansession = 1;
 
 	ret = MQTTConnect(&mqttClient, &data);
-	if(ret != MQTT_SUCCESS)
-	{
-		printf("MQTTConnect failed.\n");
-		return ret;
-	}
 
 	ret = MQTTSubscribe(&mqttClient, "test", QOS0, MqttMessageArrived);
-	if(ret != MQTT_SUCCESS)
-	{
-		printf("MQTTSubscribe failed.\n");
-		return ret;
-	}
-
-	printf("MQTT_ConnectBroker O.K.\n");
-	return MQTT_SUCCESS;
 }
 
 void MqttMessageArrived(MessageData* msg)
@@ -129,7 +115,6 @@ void TimerInit(Timer *timer)
 	timer->end_time = 0;
 }
 
-#ifdef MQTT_LWIP_SOCKET
 void NewNetwork(Network *n) 
 {
 	n->socket = 0; //clear
@@ -138,22 +123,13 @@ void NewNetwork(Network *n)
 	n->disconnect = net_disconnect; //disconnection function
 }
 
-int ConnectNetwork(Network *n, char *ip, int port) 
-{
-	ESP8266_SetServer(1,333);
-	ESP8266_StartTCP(ip,port);
-
-	return 0;
-}
-
 int net_read(Network *n, unsigned char *buffer, int len, int timeout_ms) 
 {
-	unsigned char connect;	
-	bool status;
+	uint8_t status = STATUS_FAIL;
 
-	status = ESP8266_Receive(connect,&len,buffer);
+	status = ESP8266_ReceiveData(buffer,&len);
 	
-	if(status == TRUE)
+	if(status == STATUS_SUCCESS)
 	{
 		return MQTT_SUCCESS;
 	}
@@ -165,11 +141,11 @@ int net_read(Network *n, unsigned char *buffer, int len, int timeout_ms)
 
 int net_write(Network *n, unsigned char *buffer, int len, int timeout_ms) 
 {
-	unsigned char connect;
-	bool status;
-	status = ESP8266_Send(connect,len,buffer);
+	uint8_t status = STATUS_FAIL;
 
-	if(status == TRUE)
+	status = ESP8266_SendData(buffer,len);
+
+	if(status == STATUS_SUCCESS)
 	{
 		return MQTT_SUCCESS;
 	}
@@ -187,92 +163,119 @@ void net_disconnect(Network *n)
 	#endif
 }
 
-#elif MQTT_LWIP_NETCONN
-void NewNetwork(Network *n) 
+static void Clear_Tx_Buffer(uint8_t *buf,uint16_t length)
 {
-	n->conn = NULL;
-	n->buf = NULL;
-	n->offset = 0;
-
-	n->mqttread = net_read;
-	n->mqttwrite = net_write;
-	n->disconnect = net_disconnect;
+    for(uint16_t i = 0; i < length; i++)
+    {
+        buf[i] = 0;
+    }
 }
 
-int ConnectNetwork(Network *n, char *ip, int port) 
+static void Uart_Transmit(uint8_t * buffer, uint16_t length)
 {
-	err_t err;
-	ip_addr_t server_ip;
+	IPDFlag = 0;
+	OKFlag = 0;
+	UARTFlag = 0;	
+	//for (uint16_t i = 0; i < length; i++) 
+	//{
+		HAL_UART_Transmit(&huart4,buffer,length,10);
+	//}	
+	/* NL/CR 전송 */
+	HAL_UART_Transmit(&huart4,"\r\n",2,10);
+	HAL_UART_Transmit(&huart1,buffer,length,10);
+	HAL_UART_Transmit(&huart1,"\r\n",2,10);
+	while(!UARTFlag);
+}
 
-	ipaddr_aton(ip, &server_ip);
+static void ESP8266_SetModeStation(uint8_t mode)
+{
+	uint8_t buffer[64] = {0,};
+	
+	sprintf((char *)buffer,"AT+CWMODE_CUR=%d",mode);
+	Uart_Transmit(buffer,strlen((char *)buffer));
+}
 
-	n->conn = netconn_new(NETCONN_TCP);
-	if (n->conn != NULL) {
-		err = netconn_connect(n->conn, &server_ip, port);
+static void ESP8266_Connect(uint8_t *ssid, uint8_t *passwd)
+{
+    uint8_t buffer[64] = {0,};
 
-		if (err != ERR_OK) {
-			netconn_delete(n->conn); //free memory
-			return -1;
-		}
+	sprintf((char *)buffer, "AT+CWJAP=\"%s\",\"%s\"", ssid, passwd);
+	Uart_Transmit(buffer,strlen((char *)buffer));
+}
+
+static void ESP8266_SetMUX(uint8_t mux)
+{
+	uint8_t buffer[64] = {0,};
+
+	sprintf((char *)buffer, "AT+CIPMUX=%d", mux);
+	Uart_Transmit(buffer,strlen((char *)buffer));
+}
+
+static void ESP8266_SetServer(uint8_t set, uint16_t port)
+{
+	uint8_t buffer[64] = {0,};
+
+	sprintf((char *)buffer, "AT+CIPSERVER=%d,%d", set, port);
+	Uart_Transmit(buffer,strlen((char *)buffer));
+}
+
+static void ESP8266_StartTCPClient(uint8_t * ip,uint16_t port)
+{
+	uint8_t buffer[128] = {0,};
+
+	sprintf((char *)buffer, "AT+CIPSTART=0,\"TCP\",\"%s\",%d",ip,port);
+	Uart_Transmit(buffer,strlen((char *)buffer));
+}
+
+static uint8_t ESP8266_SendData(uint8_t * buffer,uint16_t Length)
+{
+	uint8_t buffer_internal[64]={0,};
+	uint8_t status = 0;
+	
+	/* AT Command Transmit */
+	sprintf((char *)buffer_internal, "AT+CIPSEND=0,%d", Length);
+	Uart_Transmit(buffer_internal,strlen((char *)buffer_internal));
+	status = CheckStatus(OKFlag);
+
+	/* Data Transmit*/
+	Uart_Transmit(buffer,Length);
+	status = CheckStatus(OKFlag);	
+	HAL_Delay(100);
+	return status;
+}
+
+static uint8_t ESP8266_ReceiveData(uint8_t * buffer,int * Length)
+{
+	uint8_t buffer_internal[64]={0,};
+	uint8_t status = 0;
+	/* Data Receive*/
+	status = CheckStatus(IPDFlag);	
+	if(receiver_buffer[3]>'0')
+	{
+		*Length = receiver_buffer[3] - '0';
+	}
+	else
+	{
+		*Length = 0;
+	}
+	for(uint16_t i = 0;i < *Length;i++)
+	{
+		*(buffer+i) = (uint16_t)receiver_buffer[5+i];
 	}
 
-	return 0;
+	//memset(receiver_buffer,0x00,sizeof(receiver_buffer));
+	//rxcount = 0;
+	return status;
 }
 
-int net_read(Network *n, unsigned char *buffer, int len, int timeout_ms) 
+static uint8_t CheckStatus(uint8_t status)
 {
-	int rc;
-	struct netbuf *inbuf;
-	int offset = 0;
-	int bytes = 0;
-
-	while(bytes < len) {
-		if(n->buf != NULL) {
-			inbuf = n->buf;
-			offset = n->offset;
-			rc = ERR_OK;
-		} else {
-			rc = netconn_recv(n->conn, &inbuf);
-			offset = 0;
-		}
-
-		if(rc != ERR_OK) {
-			if(rc != ERR_TIMEOUT) {
-				bytes = -1;
-			}
-			break;
-		} else {
-			int nblen = netbuf_len(inbuf) - offset;
-			if((bytes+nblen) > len) {
-				netbuf_copy_partial(inbuf, buffer+bytes, len-bytes,offset);
-				n->buf = inbuf;
-				n->offset = offset + len - bytes;
-				bytes = len;
-			} else {
-				netbuf_copy_partial(inbuf, buffer+bytes, nblen, offset);
-				bytes += nblen;
-				netbuf_delete(inbuf);
-				n->buf = NULL;
-				n->offset = 0;
-			}
-		}
+	if(status == 1)
+	{
+		return STATUS_SUCCESS;
 	}
-	return bytes;
+	else
+	{
+		return STATUS_FAIL;
+	}
 }
-
-int net_write(Network *n, unsigned char *buffer, int len, int timeout_ms) 
-{
-	int rc = netconn_write(n->conn, buffer, len, NETCONN_NOCOPY);
-	if(rc != ERR_OK) return -1;
-	return len;
-}
-
-void net_disconnect(Network *n) 
-{
-	netconn_close(n->conn); //close session
-	netconn_delete(n->conn); //free memory
-	n->conn = NULL;
-}
-#endif
-
-

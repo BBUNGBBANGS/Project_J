@@ -326,7 +326,7 @@ int cycle(MQTTClient* c, Timer* timer)
 exit:
     if (rc == MQTT_SUCCESS)
         rc = packet_type;
-    else if (c->isconnected)
+    //else if (c->isconnected)
         //MQTTCloseSession(c); //왜 close 하는거지?
     return rc;
 }
