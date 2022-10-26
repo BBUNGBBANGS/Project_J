@@ -14,8 +14,6 @@ IPStruct_t ESP8266_Ip;
 //uint8 Ret, Conn, FlagConn = 0;
 //uint8 Buffer[QUEUE_BUFFER_LENGTH];
 
-uint8 ESP8266_SSID[SSID_PW_LENGTH]   = "BBUNGBBANGWORLD";
-uint8 ESP8266_PASSWORD[SSID_PW_LENGTH] = "jisu8730";
 
 uint8 ESP8266_flagConnect;
 
@@ -25,7 +23,6 @@ static void Uart_Transmit(char *buf,uint16 length);
 static void Clear_Tx_Buffer(char *buf,unsigned int length);
 static void PutDataQueue(Uart_Queue_t *pQueue, uint8_t data);
 static uint8_t GetDataQueue(Uart_Queue_t *pQueue);
-static void ESP8266_ReplyWifi(uint8_t Connect, uint16_t Length, uint8_t *pBuffer);
 static void ESP8266_Init_value(void);
 static void ESP8266_SetHandle(UART_HandleTypeDef *pUart);
 static bool ESP8266_SetIp(IPStruct_t * pIp);
@@ -43,13 +40,8 @@ static bool ESP8266_FindSkipStringInqueue(uint8_t *pConn, uint8_t *pStr);
 static void ESP8266_SendString(uint8_t *pStr);
 static bool ESP8266_WaitForOK(void);
 static bool ESP8266_SetModeStation(uint8 mode);
-static bool ESP8266_Connect(uint8_t *ssid, uint8_t *passwd);
-static bool ESP8266_SetMUX(uint8_t value);
-static bool ESP8266_SetServer(uint8_t set, uint16_t port);
 static bool ESP8266_CheckConnect(uint8_t *pConn);
 static bool ESP8266_CheckClosed(uint8_t *pConn);
-static bool ESP8266_Send(uint8_t Conn, uint16_t Length, uint8_t *pSend);
-static bool ESP8266_Receive(uint8_t *pConn, uint16_t *pLength, uint8_t *pReceive);
 static bool ESP8266_Close(uint8_t Conn);
 
 void ESP8266_Init(void)
@@ -79,11 +71,7 @@ void ESP8266_Init(void)
 			break;
 		}
 	}
-	
     ESP8266_SetModeStation(ESP8266_MODE_ALL);
-    ESP8266_Connect(&ESP8266_SSID,&ESP8266_PASSWORD);
-    //ESP8266_SetMUX(1);
-    //ESP8266_SetServer(1,15598);
 }
 
 void ESP8266_ConnectWifi(void)
@@ -170,15 +158,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
         else{}
 }
 
-static void ESP8266_ReplyWifi(uint8_t Connect, uint16_t Length, uint8_t *pBuffer)
-{
-	uint8_t imsiBuff[1024];
-
-	*(pBuffer + Length) = 0;
-	sprintf((char *)imsiBuff, "From Server: %s", pBuffer);
-	ESP8266_Send(Connect, strlen((char *)imsiBuff), imsiBuff);
-}
-
 static void ESP8266_Init_value(void)
 {
 	ESP8266_LastError = NO_ERROR;
@@ -203,19 +182,18 @@ static bool ESP8266_SetIp(IPStruct_t * pIp)
 	return ESP8266_WaitForOK();
 }
 
+bool ESP8266_StartTCP(char * ip,unsigned int port)
+{
+	uint8_t Buffer[128];
+
+	sprintf((char *)Buffer, "AT+CIPSTART=0,\"TCP\",\"%s\",%d",ip,port);
+	ESP8266_SendString(Buffer);
+	return ESP8266_WaitForOK();
+}
+
 static UART_HandleTypeDef * ESP8266_GetHandle(void)
 {
 	return ESP8266_pHandle;
-}
-
-static uint8_t * ESP8266_GetSSID(void)
-{
-	return ESP8266_SSID;
-}
-
-static uint8_t * ESP8266_GetPassword(void)
-{
-	return ESP8266_PASSWORD;
 }
 
 static IPStruct_t * ESP8266_GetIp(void)
@@ -379,10 +357,11 @@ static bool ESP8266_SetModeStation(uint8 mode)
 	return ESP8266_WaitForOK();
 }
 
-static bool ESP8266_Connect(uint8_t *ssid, uint8_t *passwd)
+bool ESP8266_Connect(uint8_t *ssid, uint8_t *passwd)
 {
     uint8_t Buffer[64] = {0,};
 	uint8_t Buffer1[64] = {0,};
+	uint8_t status = 0;
 
 	sprintf((char *)Buffer1,"WiFi Connect\n");
 	Uart_Transmit(Buffer1,strlen(Buffer1));
@@ -393,7 +372,9 @@ static bool ESP8266_Connect(uint8_t *ssid, uint8_t *passwd)
 		ESP8266_SendString(Buffer);
 		sprintf((char *)Buffer1,"..");
 		Uart_Transmit(Buffer1,strlen(Buffer1));
-		if(ESP8266_WaitForOK() == TRUE)
+		HAL_Delay(10000);
+		status = ESP8266_WaitForOK();
+		if(status == TRUE)
 		{
 			break;
 		}
@@ -405,7 +386,7 @@ static bool ESP8266_Connect(uint8_t *ssid, uint8_t *passwd)
 	return TRUE;
 }
 
-static bool ESP8266_SetMUX(uint8_t value)
+bool ESP8266_SetMUX(uint8_t value)
 {
 	uint8_t Buffer[64] = {0,};
 
@@ -414,7 +395,7 @@ static bool ESP8266_SetMUX(uint8_t value)
 	return ESP8266_WaitForOK();
 }
 
-static bool ESP8266_SetServer(uint8_t set, uint16_t port)
+bool ESP8266_SetServer(uint8_t set, uint16_t port)
 {
 	uint8_t Buffer[64] = {0,};
 
@@ -433,24 +414,27 @@ static bool ESP8266_CheckClosed(uint8_t *pConn)		// 0,CLOSED\x0D\x0A return conn
 	return ESP8266_FindSkipStringInqueue(pConn, (uint8_t *)"CLOSED\x0D\x0A");
 }
 
-static bool ESP8266_Send(uint8_t Conn, uint16_t Length, uint8_t *pSend)
+bool ESP8266_Send(uint8_t Conn, uint16_t Length, uint8_t *pSend)
 {
 	uint8_t Buffer[64];
 	uint16_t i;
 
-	sprintf((char *)Buffer, "AT+CIPSEND=%c,%d", Conn, Length);
+	sprintf((char *)Buffer, "AT+CIPSEND=0,%d", Length);
 	ESP8266_SendString(Buffer);
-	HAL_Delay(10);
+	Clear_Tx_Buffer(Buffer,64);
+	ESP8266_WaitForOK();
+
 	for(i = 0;i < Length;i++)
     {
 		HAL_UART_Transmit(ESP8266_pHandle, pSend + i, 1, 10);
 		HAL_UART_Transmit(&huart1, pSend + i, 1, 10);
     }
 
+	HAL_UART_Transmit(ESP8266_pHandle, (uint8_t *)"\x0D\x0A", 2, 10);
 	return ESP8266_WaitForOK();
 }
 
-static bool ESP8266_Receive(uint8_t *pConn, uint16_t *pLength, uint8_t *pReceive)
+bool ESP8266_Receive(uint8_t *pConn, uint16_t *pLength, uint8_t *pReceive)
 {
 	uint8_t *p;
 	uint16_t i;					// +IPD,0,n:xxxx

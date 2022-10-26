@@ -16,24 +16,49 @@ static void Os_Background_Task(void);
 
 void Os_Init_Task(void)
 {
-	HAL_Delay(2000);
-	ESP8266_Init();
+	MQTT_InitTask();
+	HAL_Delay(500);
 }
 
 static void Os_1ms_Task(void)
 {
-	LED_Control();
+	
 }
 
 static void Os_10ms_Task(void)
 {
+	LED_Control();
 	Adc_Read();
 	Adc_Calc();
 }
-
+uint16_t test1_100ms;
+uint16_t test2_100ms;
+uint16_t test_2000ms_flag;
+uint16_t test_3000ms_flag;
 static void Os_100ms_Task(void)
 {
-	ESP8266_ConnectWifi();
+	test1_100ms++;
+	test2_100ms++;
+	if(test1_100ms>=30)
+	{
+		test1_100ms = 0;
+		test_3000ms_flag=1;
+	}
+	if(test2_100ms>=20)
+	{
+		test2_100ms = 0;
+		test_2000ms_flag=1;
+	}
+	if(test_2000ms_flag == 1)
+	{
+		MQTT_Client_Pub_Task();
+		test_2000ms_flag = 0;
+	}
+	if(test_3000ms_flag == 1)
+	{
+		MQTT_Client_Sub_Task();
+		test_3000ms_flag = 0;
+	}
 }
 
 static void Os_Background_Task(void)

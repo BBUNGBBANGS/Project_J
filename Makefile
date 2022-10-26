@@ -43,6 +43,17 @@ Core/Src/os.c \
 Core/Src/led.c \
 Core/Src/adc.c \
 Core/Src/esp8266.c \
+Core/Src/mqtt_interface.c \
+MQTT/MQTTClient.c \
+MQTT/MQTTConnectClient.c \
+MQTT/MQTTConnectServer.c \
+MQTT/MQTTDeserializePublish.c \
+MQTT/MQTTFormat.c \
+MQTT/MQTTPacket.c \
+MQTT/MQTTSerializePublish.c \
+MQTT/MQTTSubscribeClient.c \
+MQTT/MQTTUnsubscribeClient.c \
+MQTT/MQTTUnsubscribeServer.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c \
@@ -128,7 +139,8 @@ C_INCLUDES =  \
 -IDrivers/STM32H7xx_HAL_Driver/Inc \
 -IDrivers/STM32H7xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32H7xx/Include \
--IDrivers/CMSIS/Include
+-IDrivers/CMSIS/Include \
+-IMQTT
 
 
 # compile gcc flags

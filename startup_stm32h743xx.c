@@ -1,6 +1,7 @@
 #include "stdint.h"
 #include "main.h"
 #include "os.h"
+#include "mqtt_interface.h"
 
 extern uint32_t _sidata;
 extern uint32_t _sdata;
@@ -69,8 +70,8 @@ void SystemTick_Handler(void)
 
     /* USER CODE END SysTick_IRQn 0 */
     HAL_IncTick();
+    MilliTimer++;
     /* USER CODE BEGIN SysTick_IRQn 1 */
-    //Os_Handler();
     /* USER CODE END SysTick_IRQn 1 */
 }
 __weak void NMI_Handler(void)                                             {Default_Handler();}

@@ -1,6 +1,7 @@
 #include "led.h"
 
 uint8 LED_Control_time;
+
 void LED_Control(void)
 {
     LED_Control_time++;

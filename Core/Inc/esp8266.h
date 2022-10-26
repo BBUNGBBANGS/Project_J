@@ -46,5 +46,11 @@ typedef struct
 
 extern void ESP8266_Init(void);
 extern void ESP8266_ConnectWifi(void);
+extern bool ESP8266_Connect(uint8_t *ssid, uint8_t *passwd);
+extern bool ESP8266_SetMUX(uint8_t value);
+extern bool ESP8266_StartTCP(char * ip,unsigned int port);
+extern bool ESP8266_SetServer(uint8_t set, uint16_t port);
+extern bool ESP8266_Send(uint8_t Conn, uint16_t Length, uint8_t *pSend);
+extern bool ESP8266_Receive(uint8_t *pConn, uint16_t *pLength, uint8_t *pReceive);
 
 #endif
