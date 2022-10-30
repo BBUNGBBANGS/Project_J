@@ -126,10 +126,6 @@ typedef struct MQTTClient
 
     Network* ipstack;
     Timer last_sent, last_received;
-#if defined(MQTT_TASK)
-    Mutex mutex;
-    Thread thread;
-#endif
 } MQTTClient;
 
 #define DefaultClient {0, 0, 0, 0, NULL, NULL, 0, 0, 0}
@@ -218,14 +214,6 @@ DLLExport int MQTTYield(MQTTClient* client, int time);
  *  @return truth value indicating whether the client is connected to the server
  */
 DLLExport int MQTTIsConnected(MQTTClient* client);
-
-#if defined(MQTT_TASK)
-/** MQTT start background thread for a client.  After this, MQTTYield should not be called.
-*  @param client - the client object to use
-*  @return success code
-*/
-DLLExport int MQTTStartTask(MQTTClient* client);
-#endif
 
 #if defined(__cplusplus)
      }

@@ -68,9 +68,6 @@ void MQTTClientInit(MQTTClient* c, Network* network, unsigned int command_timeou
 	  c->next_packetid = 1;
     TimerInit(&c->last_sent);
     TimerInit(&c->last_received);
-#if defined(MQTT_TASK)
-	  MutexInit(&c->mutex);
-#endif
 }
 
 
@@ -366,25 +363,10 @@ void MQTTRun(void* parm)
 
 	while (1)
 	{
-#if defined(MQTT_TASK)
-		MutexLock(&c->mutex);
-#endif
 		TimerCountdownMS(&timer, 500); /* Don't wait too long if no traffic is incoming */
 		cycle(c, &timer);
-#if defined(MQTT_TASK)
-		MutexUnlock(&c->mutex);
-#endif
 	}
 }
-
-
-#if defined(MQTT_TASK)
-int MQTTStartTask(MQTTClient* client)
-{
-	return ThreadStart(&client->thread, &MQTTRun, client);
-}
-#endif
-
 
 int waitfor(MQTTClient* c, int packet_type, Timer* timer)
 {
@@ -400,9 +382,6 @@ int waitfor(MQTTClient* c, int packet_type, Timer* timer)
 
     return rc;
 }
-
-
-
 
 int MQTTConnectWithResults(MQTTClient* c, MQTTPacket_connectData* options, MQTTConnackData* data)
 {
@@ -527,9 +506,6 @@ int MQTTSubscribeWithResults(MQTTClient* c, const char* topicFilter, enum QoS qo
     MQTTString topic = MQTTString_initializer;
     topic.cstring = (char *)topicFilter;
 
-#if defined(MQTT_TASK)
-	  MutexLock(&c->mutex);
-#endif
 	  if (!c->isconnected)
 		    goto exit;
 
@@ -559,9 +535,6 @@ int MQTTSubscribeWithResults(MQTTClient* c, const char* topicFilter, enum QoS qo
 exit:
     if (rc == MQTT_FAILURE)
         MQTTCloseSession(c);
-#if defined(MQTT_TASK)
-	  MutexUnlock(&c->mutex);
-#endif
     return rc;
 }
 
@@ -582,9 +555,6 @@ int MQTTUnsubscribe(MQTTClient* c, const char* topicFilter)
     topic.cstring = (char *)topicFilter;
     int len = 0;
 
-#if defined(MQTT_TASK)
-	  MutexLock(&c->mutex);
-#endif
 	  if (!c->isconnected)
 		  goto exit;
 
@@ -611,9 +581,6 @@ int MQTTUnsubscribe(MQTTClient* c, const char* topicFilter)
 exit:
     if (rc == MQTT_FAILURE)
         MQTTCloseSession(c);
-#if defined(MQTT_TASK)
-	  MutexUnlock(&c->mutex);
-#endif
     return rc;
 }
 
@@ -626,14 +593,14 @@ int MQTTPublish(MQTTClient* c, const char* topicName, MQTTMessage* message)
     topic.cstring = (char *)topicName;
     int len = 0;
 
-#if defined(MQTT_TASK)
-	  MutexLock(&c->mutex);
-#endif
 	  if (!c->isconnected)
 		    goto exit;
 
     TimerInit(&timer);
     TimerCountdownMS(&timer, c->command_timeout_ms);
+
+    message->qos = QOS1;
+    message->id = 5420;
 
     if (message->qos == QOS1 || message->qos == QOS2)
         message->id = getNextPacketId(c);
@@ -673,9 +640,6 @@ int MQTTPublish(MQTTClient* c, const char* topicName, MQTTMessage* message)
 exit:
     if (rc == MQTT_FAILURE)
         MQTTCloseSession(c);
-#if defined(MQTT_TASK)
-	  MutexUnlock(&c->mutex);
-#endif
     return rc;
 }
 
@@ -686,9 +650,6 @@ int MQTTDisconnect(MQTTClient* c)
     Timer timer;     // we might wait for incomplete incoming publishes to complete
     int len = 0;
 
-#if defined(MQTT_TASK)
-	MutexLock(&c->mutex);
-#endif
     TimerInit(&timer);
     TimerCountdownMS(&timer, c->command_timeout_ms);
 
@@ -697,8 +658,5 @@ int MQTTDisconnect(MQTTClient* c)
         rc = sendPacket(c, len, &timer);            // send the disconnect packet
     MQTTCloseSession(c);
 
-#if defined(MQTT_TASK)
-	  MutexUnlock(&c->mutex);
-#endif
     return rc;
 }
