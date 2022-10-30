@@ -41,16 +41,21 @@ void MQTT_Client_Sub_Task(void)
 
 void MQTT_Client_Pub_Task(void)
 {
-	const char str[] = "MQTT Test Message Transmit\n";
+	const char str[60] = {0,};
+	static uint16_t counter;
 
 	MQTTMessage message;
+
+	counter++;
+
+	sprintf(str,"MQTT Test Message Transmit - %d\n",counter);
 
 	if(mqttClient.isconnected)
 	{
 		message.payload = (void*)str;
 		message.payloadlen = strlen(str);
 
-		MQTTPublish(&mqttClient, "test", &message); //publish a message
+		MQTTPublish(&mqttClient, "mytopic", &message); //publish a message
 	}
 }
 
@@ -73,7 +78,7 @@ static void MQTT_Connect_Broker(void)
 
 	ret = MQTTConnect(&mqttClient, &data);
 
-	ret = MQTTSubscribe(&mqttClient, "test", QOS0, MqttMessageArrived);
+	ret = MQTTSubscribe(&mqttClient, "mytopic", QOS0, MqttMessageArrived);
 }
 
 void MqttMessageArrived(MessageData* msg)
@@ -250,7 +255,6 @@ static uint8_t ESP8266_SendData(uint8_t * buffer,uint16_t Length)
 	/* Data Transmit*/
 	Uart_Transmit(buffer,Length);
 	status = CheckStatus(OKFlag);	
-	HAL_Delay(100);
 	return status;
 }
 
@@ -273,8 +277,9 @@ static uint8_t ESP8266_ReceiveData(uint8_t * buffer,int * Length)
 		*(buffer+i) = (uint16_t)receiver_buffer[5+i];
 	}
 
-	//memset(receiver_buffer,0x00,sizeof(receiver_buffer));
-	//rxcount = 0;
+	memset(receiver_buffer,0x00,sizeof(receiver_buffer));
+	rxcount = 0;
+	IPDFlag = 0;
 	return status;
 }
 
