@@ -20,14 +20,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 			receiver_buffer[rxcount] = huart->Instance->RDR;
 			rxcount++;
 			// ok\r\n, esp module���� ���
-			if((rxcount>=7)&&(receiver_buffer[rxcount-7] == 'r')&&(receiver_buffer[rxcount-6] == 'e')&&(receiver_buffer[rxcount-5] == 'a')&&(receiver_buffer[rxcount-4] == 'd')&&(receiver_buffer[rxcount-3] == 'y')&&(receiver_buffer[rxcount-2] == 0x0D)&&(receiver_buffer[rxcount-1] == 0x0A) )
+			if((rxcount>=7)&&(receiver_buffer[rxcount-7] == 'r')&&(receiver_buffer[rxcount-6] == 'e')&&(receiver_buffer[rxcount-5] == 'a')&&(receiver_buffer[rxcount-4] == 'd')&&(receiver_buffer[rxcount-3] == 'y')&&(receiver_buffer[rxcount-2] == '\r')&&(receiver_buffer[rxcount-1] == '\n'))
 			{
 				ReadyFlag = 1;	
 				rxcount = 0;	
 				UARTFlag = 1;
 				memset(receiver_buffer,0x00,sizeof(receiver_buffer));
 			}		
-			else if( (receiver_buffer[rxcount-4] == 0x4F ) && (receiver_buffer[rxcount-3] == 0x4B ) && (receiver_buffer[rxcount-2] == 0x0D ) && (receiver_buffer[rxcount-1] == 0x0A) )
+			else if((rxcount>=4)&&(receiver_buffer[rxcount-4] == 'O')&&(receiver_buffer[rxcount-3] == 'K')&&(receiver_buffer[rxcount-2] == '\r')&&(receiver_buffer[rxcount-1] == '\n'))
 			{
 				OKFlag = 1;	
 				rxcount = 0;	
@@ -35,11 +35,17 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 				memset(receiver_buffer,0x00,sizeof(receiver_buffer));
 			}					
 			// \r\n, App���� ���, Data Receiver +IPD ~....~ \r\n
-			else if( (receiver_buffer[2] == 0x2B ) && (receiver_buffer[3] == 0x49 ) && (receiver_buffer[4] == 0x50 ) && (receiver_buffer[5] == 0x44 ) && (receiver_buffer[0] == 0x0D ) && (receiver_buffer[1] == 0x0A) ) 
+			else if((rxcount>=6)&&(receiver_buffer[rxcount-6] == '\r')&&(receiver_buffer[rxcount-5] == '\n')&&(receiver_buffer[rxcount-4] == '+')&&(receiver_buffer[rxcount-3] == 'I')&&(receiver_buffer[rxcount-2] == 'P')&&(receiver_buffer[rxcount-1] == 'D')) 
 			{	// \r\nok, esp module���� ���
 				IPDFlag = 1;	
 				rxcount = 0;	
 				UARTFlag = 1;
+			}
+			else if((rxcount>=6)&&(receiver_buffer[rxcount-6] == 'F')&&(receiver_buffer[rxcount-5] == 'A')&&(receiver_buffer[rxcount-4] == 'I')&&(receiver_buffer[rxcount-3] == 'L')&&(receiver_buffer[rxcount-2] == '\r')&&(receiver_buffer[rxcount-1] == '\n'))
+			{
+				UARTFlag = 1;
+				rxcount = 0;	
+				memset(receiver_buffer,0x00,sizeof(receiver_buffer));
 			}
             HAL_UART_Receive_IT(&huart4, dummy, 1);
 			HAL_UART_Transmit(&huart1,&huart->Instance->RDR,1,10);

@@ -173,13 +173,8 @@ static void Clear_Tx_Buffer(uint8_t *buf,uint16_t length)
 
 static void Uart_Transmit(uint8_t * buffer, uint16_t length)
 {
-	IPDFlag = 0;
-	OKFlag = 0;
 	UARTFlag = 0;	
-	//for (uint16_t i = 0; i < length; i++) 
-	//{
-		HAL_UART_Transmit(&huart4,buffer,length,10);
-	//}	
+	HAL_UART_Transmit(&huart4,buffer,length,10);
 	/* NL/CR 전송 */
 	HAL_UART_Transmit(&huart4,"\r\n",2,10);
 	HAL_UART_Transmit(&huart1,buffer,length,10);
@@ -190,41 +185,56 @@ static void Uart_Transmit(uint8_t * buffer, uint16_t length)
 static void ESP8266_SetModeStation(uint8_t mode)
 {
 	uint8_t buffer[64] = {0,};
-	
-	sprintf((char *)buffer,"AT+CWMODE_CUR=%d",mode);
-	Uart_Transmit(buffer,strlen((char *)buffer));
+	OKFlag = 0;
+	while(!OKFlag)
+	{
+		sprintf((char *)buffer,"AT+CWMODE_CUR=%d",mode);
+		Uart_Transmit(buffer,strlen((char *)buffer));
+	}
 }
 
 static void ESP8266_Connect(uint8_t *ssid, uint8_t *passwd)
 {
     uint8_t buffer[64] = {0,};
-
-	sprintf((char *)buffer, "AT+CWJAP=\"%s\",\"%s\"", ssid, passwd);
-	Uart_Transmit(buffer,strlen((char *)buffer));
+	OKFlag = 0;
+	while(!OKFlag)
+	{
+		sprintf((char *)buffer, "AT+CWJAP=\"%s\",\"%s\"", ssid, passwd);
+		Uart_Transmit(buffer,strlen((char *)buffer));
+	}
 }
 
 static void ESP8266_SetMUX(uint8_t mux)
 {
 	uint8_t buffer[64] = {0,};
-
-	sprintf((char *)buffer, "AT+CIPMUX=%d", mux);
-	Uart_Transmit(buffer,strlen((char *)buffer));
+	OKFlag = 0;
+	while(!OKFlag)
+	{
+		sprintf((char *)buffer, "AT+CIPMUX=%d", mux);
+		Uart_Transmit(buffer,strlen((char *)buffer));
+	}
 }
 
 static void ESP8266_SetServer(uint8_t set, uint16_t port)
 {
 	uint8_t buffer[64] = {0,};
-
-	sprintf((char *)buffer, "AT+CIPSERVER=%d,%d", set, port);
-	Uart_Transmit(buffer,strlen((char *)buffer));
+	OKFlag = 0;
+	while(!OKFlag)
+	{
+		sprintf((char *)buffer, "AT+CIPSERVER=%d,%d", set, port);
+		Uart_Transmit(buffer,strlen((char *)buffer));
+	}
 }
 
 static void ESP8266_StartTCPClient(uint8_t * ip,uint16_t port)
 {
 	uint8_t buffer[128] = {0,};
-
-	sprintf((char *)buffer, "AT+CIPSTART=0,\"TCP\",\"%s\",%d",ip,port);
-	Uart_Transmit(buffer,strlen((char *)buffer));
+	OKFlag = 0;
+	while(!OKFlag)
+	{
+		sprintf((char *)buffer, "AT+CIPSTART=0,\"TCP\",\"%s\",%d",ip,port);
+		Uart_Transmit(buffer,strlen((char *)buffer));
+	}
 }
 
 static uint8_t ESP8266_SendData(uint8_t * buffer,uint16_t Length)
